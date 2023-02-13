@@ -4270,3 +4270,8 @@ u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
+
+bool8 IsHiddenItemArchipelago(void)
+{
+    return gSpecialVar_0x8005 == ITEM_ARCHIPELAGO_PROGRESSION;
+}

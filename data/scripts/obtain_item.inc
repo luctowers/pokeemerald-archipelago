@@ -145,6 +145,8 @@ EventScript_NoRoomToPickUpItem::
 EventScript_HiddenItemScript::
 	lockall
 	waitse
+	specialvar VAR_RESULT, IsHiddenItemArchipelago
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PickUpHiddenArchipelagoItem
 	additem VAR_0x8005
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural STR_VAR_2, VAR_0x8005, 1
@@ -188,5 +190,22 @@ EventScript_NoRoomForHiddenItem::
 	msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
+	releaseall
+	end
+
+EventScript_PickUpHiddenArchipelagoItem::
+	call EventScript_PlayFanfareObtainedItem
+	goto EventScript_FoundHiddenArchipelagoItem
+
+EventScript_FoundHiddenArchipelagoItem::
+	message gText_PlayerFoundArchipelagoItem
+	goto EventScript_SendHiddenArchipelagoItem
+	end
+
+EventScript_SendHiddenArchipelagoItem::
+	waitmessage
+	waitfanfare
+	msgbox gText_SentArchipelagoItemToOwner, MSGBOX_DEFAULT
+	special SetHiddenItemFlag
 	releaseall
 	end
