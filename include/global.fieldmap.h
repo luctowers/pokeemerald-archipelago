@@ -339,10 +339,18 @@ struct Camera
     s32 y;
 };
 
+struct ArchipelagoReceivedItem
+{
+    u8 archipelagoFlagId; // The flag marking the item has been received
+    u8 itemId; // The id of the item to be received
+};
+
 extern struct ObjectEvent gObjectEvents[OBJECT_EVENTS_COUNT];
 extern u8 gSelectedObjectEvent;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 extern struct Camera gCamera;
+
+extern struct ArchipelagoReceivedItem gArchipelagoReceivedItem;
 
 #endif // GUARD_GLOBAL_FIELDMAP_H

@@ -135,6 +135,10 @@
 #define NUM_FLAG_BYTES ROUND_BITS_TO_BYTES(FLAGS_COUNT)
 #define NUM_ADDITIONAL_PHRASE_BYTES ROUND_BITS_TO_BYTES(NUM_ADDITIONAL_PHRASES)
 
+// Archipelago size of buffer for tracking received items
+#define ARCHIPELAGO_FLAGS_COUNT 128
+#define NUM_ARCHIPELAGO_FLAG_BYTES ROUND_BITS_TO_BYTES(ARCHIPELAGO_FLAGS_COUNT)
+
 // This produces an error at compile-time if expr is zero.
 // It looks like file.c:line: size of array `id' is negative
 #define STATIC_ASSERT(expr, id) typedef char id[(expr) ? 1 : -1];
@@ -1055,7 +1059,9 @@ struct SaveBlock1
     /*0x3D5A*/ u8 unused_3D5A[10];
     /*0x3D64*/ struct TrainerHillSave trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
-    // sizeof: 0x3D88
+
+    /*0x3D88*/ u8 archipelagoFlags[NUM_ARCHIPELAGO_FLAG_BYTES]; // Buffer for flags for tracking received items
+    // sizeof: 0x3D98
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
@@ -1065,6 +1071,11 @@ struct MapPosition
     s16 x;
     s16 y;
     s8 elevation;
+};
+
+struct ArchipelagoFlags
+{
+    u8 flags[NUM_ARCHIPELAGO_FLAG_BYTES];
 };
 
 #endif // GUARD_GLOBAL_H
