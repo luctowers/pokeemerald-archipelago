@@ -1048,7 +1048,7 @@ struct SaveBlock1
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
     /*0x322C*/ struct MysteryGiftSave mysteryGift;
-    /*0x3598*/ u8 unused_3598[0x180];
+    /*0x3598*/ u8 archipelagoFlags[0x180]; // Previously unused block, now flags for received items (capacity for 3072 flags)
     /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
@@ -1059,9 +1059,7 @@ struct SaveBlock1
     /*0x3D5A*/ u8 unused_3D5A[10];
     /*0x3D64*/ struct TrainerHillSave trainerHill;
     /*0x3D70*/ struct WaldaPhrase waldaPhrase;
-
-    /*0x3D88*/ u8 archipelagoFlags[NUM_ARCHIPELAGO_FLAG_BYTES]; // Buffer for flags for tracking received items
-    // sizeof: 0x3D98
+    // sizeof: 0x3D88
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
@@ -1071,11 +1069,6 @@ struct MapPosition
     s16 x;
     s16 y;
     s8 elevation;
-};
-
-struct ArchipelagoFlags
-{
-    u8 flags[NUM_ARCHIPELAGO_FLAG_BYTES];
 };
 
 #endif // GUARD_GLOBAL_H

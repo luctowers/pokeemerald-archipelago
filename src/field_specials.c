@@ -4271,7 +4271,24 @@ u8 Script_TryGainNewFanFromCounter(void)
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
 
+// Archipelago
 bool8 IsHiddenItemArchipelago(void)
 {
     return gSpecialVar_0x8005 == ITEM_ARCHIPELAGO_PROGRESSION;
+}
+
+bool8 IsItemArchipelago(void)
+{
+    return gSpecialVar_0x8004 == ITEM_ARCHIPELAGO_PROGRESSION;
+}
+
+u8 GetArchipelagoItemId(void)
+{
+    return gArchipelagoReceivedItem.itemId;
+}
+
+void SetArchipelagoFlag(void)
+{
+    FlagSet(gArchipelagoReceivedItem.archipelagoFlagId);
+    gArchipelagoReceivedItem.dirty = FALSE;
 }

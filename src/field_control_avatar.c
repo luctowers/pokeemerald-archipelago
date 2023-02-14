@@ -147,6 +147,9 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     if (CheckForTrainersWantingBattle() == TRUE)
         return TRUE;
 
+    if (Archipelago_CheckReceivedItem() == TRUE)
+        return TRUE;
+
     if (TryRunOnFrameMapScript() == TRUE)
         return TRUE;
 
@@ -1002,4 +1005,14 @@ int SetCableClubWarp(void)
     MapGridGetMetatileBehaviorAt(position.x, position.y);  //unnecessary
     SetupWarp(&gMapHeader, GetWarpEventAtMapPosition(&gMapHeader, &position), &position);
     return 0;
+}
+
+
+bool8 Archipelago_CheckReceivedItem()
+{
+    if (gArchipelagoReceivedItem.dirty) {
+        ScriptContext_SetupScript(EventScript_ReceiveArchipelagoItem);
+        return TRUE;
+    }
+    return FALSE;
 }

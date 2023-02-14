@@ -98,6 +98,8 @@ Std_FindItem::
 	waitse
 	copyvar VAR_0x8004, ITEMID
 	copyvar VAR_0x8005, AMOUNT
+	specialvar VAR_RESULT, IsItemArchipelago
+	goto_if_eq VAR_RESULT, TRUE, EventScript_PickUpArchipelagoItem
 	checkitemspace ITEMID, AMOUNT
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
@@ -193,16 +195,26 @@ EventScript_NoRoomForHiddenItem::
 	releaseall
 	end
 
-EventScript_PickUpHiddenArchipelagoItem::
-	call EventScript_PlayFanfareObtainedItem
-	goto EventScript_FoundHiddenArchipelagoItem
-
-EventScript_FoundHiddenArchipelagoItem::
-	message gText_PlayerFoundArchipelagoItem
-	goto EventScript_SendHiddenArchipelagoItem
+EventScript_ReceiveArchipelagoItem::
+	specialvar VAR_RESULT, GetArchipelagoItemId
+	giveitem VAR_RESULT
+	special SetArchipelagoFlag
+	releaseall
 	end
 
-EventScript_SendHiddenArchipelagoItem::
+EventScript_PickUpArchipelagoItem::
+	removeobject VAR_LAST_TALKED
+	call EventScript_PlayFanfareObtainedItem
+	message gText_PlayerFoundArchipelagoItem
+	waitmessage
+	waitfanfare
+	msgbox gText_SentArchipelagoItemToOwner, MSGBOX_DEFAULT
+	releaseall
+	end
+
+EventScript_PickUpHiddenArchipelagoItem::
+	call EventScript_PlayFanfareObtainedItem
+	message gText_PlayerFoundArchipelagoItem
 	waitmessage
 	waitfanfare
 	msgbox gText_SentArchipelagoItemToOwner, MSGBOX_DEFAULT

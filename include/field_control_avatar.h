@@ -35,4 +35,6 @@ const u8 *GetInteractedLinkPlayerScript(struct MapPosition *position, u8 metatil
 u8 *GetCoordEventScriptAtMapPosition(struct MapPosition *position);
 void ClearPoisonStepCounter(void);
 
+bool8 Archipelago_CheckReceivedItem(void);
+
 #endif // GUARD_FIELDCONTROLAVATAR_H
