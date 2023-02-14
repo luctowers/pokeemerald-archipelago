@@ -4289,6 +4289,6 @@ u8 GetArchipelagoItemId(void)
 
 void SetArchipelagoFlag(void)
 {
-    FlagSet(gArchipelagoReceivedItem.archipelagoFlagId);
-    gArchipelagoReceivedItem.dirty = FALSE;
+    ArchipelagoFlagSet(gArchipelagoReceivedItem.archipelagoFlagId);
+    gArchipelagoReceivedItem.itemId = 0;
 }

@@ -1010,7 +1010,7 @@ int SetCableClubWarp(void)
 
 bool8 Archipelago_CheckReceivedItem()
 {
-    if (gArchipelagoReceivedItem.dirty) {
+    if (gArchipelagoReceivedItem.itemId != 0) {
         ScriptContext_SetupScript(EventScript_ReceiveArchipelagoItem);
         return TRUE;
     }

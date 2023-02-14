@@ -348,8 +348,7 @@ extern struct Camera gCamera;
 // Archipelago
 struct ArchipelagoReceivedItem
 {
-    bool8 dirty;
-    u8 archipelagoFlagId; // The flag marking the item has been received
+    u16 archipelagoFlagId; // The flag marking the item has been received
     u8 itemId; // The id of the item to be received
     u8 itemType;
 };
