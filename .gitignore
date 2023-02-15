@@ -38,4 +38,4 @@ prefabs.json
 *.sna
 *.diff
 *.sym
-*.js
+*.json
