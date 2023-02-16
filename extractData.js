@@ -1,12 +1,13 @@
 const fs = require('fs')
 const path = require('path')
 
-const extractFlagValues = async () => {
+// "Parses" flag values from include/constants/flags.h
+const extractFlagValues = async (output) => {
   let lines = await fs.promises.readFile(path.join('.', 'include', 'constants', 'flags.h'), 'utf-8')
   lines = lines.split('\n')
 
   const flagNameToValue = {
-    MAX_TRAINERS_COUNT: 864
+    MAX_TRAINERS_COUNT: 864 // From include/opponents.h
   }
 
   lines.forEach((line) => {
@@ -14,11 +15,13 @@ const extractFlagValues = async () => {
     if (match !== null) {
       let [_m, flagName, valueString, _comment] = match
 
+      // Match things that look like variable names and replace them with already found values
       const symbols = valueString.matchAll(/(?<![A-Zx_0-9])(?<![0-9x])[A-Zx_][A-Z0-9x_]+/g)
       ;[...symbols].forEach(([symbol]) => {
         valueString = valueString.replace(symbol, flagNameToValue[symbol])
       })
 
+      // At this point valueString should only hold arithmetic with number written in decimal or hex
       const result = eval(valueString)
       if (Number.isNaN(result) || result === undefined) {
         throw new Error(`Failed to eval string: "${line}"`)
@@ -28,12 +31,16 @@ const extractFlagValues = async () => {
     }
   })
 
-  delete MAX_TRAINERS_COUNT
+  delete flagNameToValue.MAX_TRAINERS_COUNT
 
-  return flagNameToValue
+  return {
+    ...output,
+    flagNameToValue
+  }
 }
 
-const extractItemValues = async () => {
+// "Parses" item values from include/constants/items.h
+const extractItemValues = async (output) => {
   let lines = await fs.promises.readFile(path.join('.', 'include', 'constants', 'items.h'), 'utf-8')
   lines = lines.split('\n')
 
@@ -44,11 +51,13 @@ const extractItemValues = async () => {
     if (match !== null) {
       let [_m, itemName, valueString, _comment] = match
 
+      // Match things that look like variable names and replace them with already found values
       const symbols = valueString.matchAll(/(?<![A-Zx_0-9])(?<![0-9x])[A-Zx_][A-Z0-9x_]+/g)
       ;[...symbols].forEach(([symbol]) => {
         valueString = valueString.replace(symbol, itemNameToValue[symbol])
       })
 
+      // At this point valueString should only hold arithmetic with number written in decimal or hex
       const result = eval(valueString)
       if (Number.isNaN(result) || result === undefined) {
         throw new Error(`Failed to eval string: "${line}"`)
@@ -58,88 +67,112 @@ const extractItemValues = async () => {
     }
   })
 
-  return itemNameToValue
+  return {
+    ...output,
+    itemNameToValue
+  }
 }
 
-const extractMapData = async () => {
+// Pulls map data from the map.json files in data/maps/ for info about ball items and hidden items
+// This method should ignore unused item flags or scripts
+const extractMapData = async (output) => {
   const mapFilePaths = (await fs.promises.readdir(path.join('.', 'data', 'maps'), { withFileTypes: true }))
     .filter((dirent) => dirent.isDirectory())
     .map((dirent) => path.join('.', 'data', 'maps', dirent.name, 'map.json'))
   
-  const ballItems = {}
-  const hiddenItems = {}
+  const ballItems = []
+  const hiddenItems = []
   for (const mapFilePath of mapFilePaths) {
-    const data = JSON.parse(await fs.promises.readFile(mapFilePath, 'utf-8'))
+    const mapData = JSON.parse(await fs.promises.readFile(mapFilePath, 'utf-8'))
 
     // Ball Items
     // Filter against graphics_id for voltorb traps?
-    data.object_events?.filter((event) => event.flag.match(/^FLAG_ITEM.+/) !== null)
-      ?.forEach((event) => ballItems[event.flag.substring('FLAG_'.length)] = { flagName: event.flag, scriptSymbol: event.script })
+    mapData.object_events
+      ?.filter((event) => event.flag.match(/^FLAG_ITEM.+/) !== null)
+      ?.forEach((event) => ballItems.push({ 
+        locationName: event.flag.substring('FLAG_'.length),
+        flagName: event.flag,
+        scriptSymbol: event.script
+      }))
 
     // Hidden Items
-    data.bg_events?.filter((event) => event.type === 'hidden_item')
-      ?.forEach((event) => hiddenItems[event.flag.substring('FLAG_'.length)] = { flagName: event.flag, itemName: event.item })
+    mapData.bg_events
+      ?.filter((event) => event.type === 'hidden_item')
+      ?.forEach((event) => hiddenItems.push({
+        locationName: event.flag.substring('FLAG_'.length),
+        flagName: event.flag,
+        defaultValue: output.itemNameToValue[event.item]
+      }))
   }
 
   return {
+    ...output,
     ballItems,
     hiddenItems
   }
 }
 
-const globalVariables = [
-  'gSaveBlock1Ptr',
-  'gArchipelagoReceivedItem'
-]
+// Creates a regex for capturing the address of a particular symbol in the symbol map
 const createSymbolLocationRegex = (symbol) => new RegExp(`^[ ]*(0x[0-9a-fA-F]+)[ ]+${symbol}.*$`, 'm')
 
-const extractSymbolAddresses = async (ballItems, hiddenItems) => {
-  const output = {
-    globals: {}
-  }
-
+// Finds addresses of symbols using pokeemerald.map file
+const extractSymbolAddresses = async (output, miscSymbols) => {
   let lines = await fs.promises.readFile('./pokeemerald.map', 'utf-8')
 
   // Find ball item script addresses
-  for (const locationName in ballItems) {
-    const symbol = ballItems[locationName].scriptSymbol
+  for (const item of output.ballItems) {
+    const symbol = item.scriptSymbol
     const match = lines.match(createSymbolLocationRegex(symbol))
     if (match === null) throw new Error(`Could not find symbol for string: ${symbol}`)
-    ballItems[locationName].scriptAddress = Number.parseInt(match[1], 16) + 3
-    delete ballItems.scriptSymbol
+    item.ramAddress = Number.parseInt(match[1], 16) + 3
+    item.romAddress = item.ramAddress - 0x8000000
+    delete item.scriptSymbol
   }
 
   // Find hidden item addresses from injected symbols
-  for (const locationName in hiddenItems) {
-    const symbol = 'Archipelago_Target_' + hiddenItems[locationName].flagName
+  for (const item of output.hiddenItems) {
+    const symbol = 'Archipelago_Target_' + item.flagName
     const match = lines.match(createSymbolLocationRegex(symbol))
     if (match === null) throw new Error(`Could not find symbol for string: ${symbol}`)
-    hiddenItems[locationName].itemAddress = Number.parseInt(match[1], 16) + 8
+    item.ramAddress = Number.parseInt(match[1], 16) + 8
+    item.romAddress = item.ramAddress - (0x8000000 + 0x30) // Not sure why there's an extra 0x30 offset
   }
 
-  // Find addresses of specified symbols
-  globalVariables.forEach((symbol) => {
+  // Find addresses of specified miscellaneous symbols
+  output.misc = {}
+  miscSymbols.forEach((symbol) => {
     const match = lines.match(createSymbolLocationRegex(symbol))
     if (match === null) throw new Error(`Could not find symbol for string: ${symbol}`)
-    output.globals[symbol] = Number.parseInt(match[1], 16)
+    output.misc[symbol] = Number.parseInt(match[1], 16)
   })
 
   return output
 }
 
-;(async () => {
-  const flagNameToValue = await extractFlagValues()
-  const itemNameToValue = await extractItemValues()
-  const { ballItems, hiddenItems } = await extractMapData()
-  const { globals } = await extractSymbolAddresses(ballItems, hiddenItems)
+// Gets values directly from the rom file
+const extractRomValues = async (output) => {
+  const rom = await fs.promises.readFile('./pokeemerald.gba')
 
-  const output = {
-    globals,
-    ballItems,
-    hiddenItems,
-    flagNameToValue,
-    itemNameToValue
+  // Ball item values
+  for (const item of output.ballItems) {
+    item.defaultValue = rom[item.romAddress]
   }
+
+  return output
+}
+
+;(async () => {
+  const miscSymbols = [
+    'gSaveBlock1Ptr',
+    'gArchipelagoReceivedItem'
+  ]
+
+  let output = {}
+  output = await extractFlagValues(output)
+  output = await extractItemValues(output)
+  output = await extractMapData(output)
+  output = await extractSymbolAddresses(output, miscSymbols)
+  output = await extractRomValues(output)
 
   await fs.promises.writeFile('./romData.json', JSON.stringify(output), 'utf-8')
 })()
