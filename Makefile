@@ -227,7 +227,7 @@ ifeq ($(COMPARE),1)
 	@$(SHA1) rom.sha1
 endif
 
-extract:
+extract: syms
 	$(EXTRACTOR)
 
 # For contributors to make sure a change didn't affect the contents of the ROM.

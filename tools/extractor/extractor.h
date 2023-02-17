@@ -3,6 +3,10 @@
 
 #include <string>
 
+#define NUM_LAND_ENCOUNTER_SLOTS 12
+#define NUM_WATER_ENCOUNTER_SLOTS 5
+#define NUM_FISHING_ENCOUNTER_SLOTS 10
+
 struct ItemInfo {
     uint32_t ram_address;
     uint32_t rom_address;
@@ -17,19 +21,17 @@ struct EncounterSlotInfo {
 };
 
 struct EncounterTableInfo {
+    uint32_t ram_address;
+    uint32_t rom_address;
+    bool exists;
+    EncounterSlotInfo encounter_slots[NUM_LAND_ENCOUNTER_SLOTS];
+};
+
+struct MapEncounterInfo {
     std::string map_name;
-    uint32_t land_pokemon_ram_address;
-    uint32_t land_pokemon_rom_address;
-    uint32_t water_pokemon_ram_address;
-    uint32_t water_pokemon_rom_address;
-    uint32_t fishing_pokemon_ram_address;
-    uint32_t fishing_pokemon_rom_address;
-    bool land_encounters_exist;
-    bool water_encounters_exist;
-    bool fishing_encounters_exist;
-    EncounterSlotInfo land_encounters[12];
-    EncounterSlotInfo water_encounters[5];
-    EncounterSlotInfo fishing_encounters[10];
+    EncounterTableInfo land_encounters;
+    EncounterTableInfo water_encounters;
+    EncounterTableInfo fishing_encounters;
 };
 
 #endif

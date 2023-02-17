@@ -27,9 +27,9 @@ int main (int argc, char *argv[])
         exit(1);
     }
 
-    std::vector<std::shared_ptr<ItemInfo>> ball_items;
-    std::vector<std::shared_ptr<ItemInfo>> hidden_items;
-
+    // ------------------------------------------------------------------------
+    // Getting macros
+    // ------------------------------------------------------------------------
     std::ifstream macro_file(root_dir / "tools/extractor/macros.json");
     if (macro_file.fail())
     {
@@ -38,11 +38,13 @@ int main (int argc, char *argv[])
     }
     json macros_json = json::parse(macro_file);
 
-    std::cout << "Looking up symbols..." << std::endl;
-
+    // ------------------------------------------------------------------------
+    // Reading symbols
+    // ------------------------------------------------------------------------
     std::ifstream symbol_map_file(root_dir / "pokeemerald.sym");
-    std::map<std::string, uint32_t> symbol_map;
     std::regex symbol_map_regex("^([0-9a-fA-F]+) [lg] [0-9a-fA-F]+ ([a-zA-Z0-9_]+)$");
+    std::map<std::string, uint32_t> symbol_map;
+
     std::string line;
     while (std::getline(symbol_map_file, line))
     {
@@ -53,7 +55,16 @@ int main (int argc, char *argv[])
         }
     }
 
-    std::cout << "Reading map files..." << std::endl;
+    std::map<std::string, uint32_t> misc_ram_addresses = {
+        { "gSaveblock1", symbol_map["gSaveblock1"] },
+        { "gArchipelagoReceivedItem", symbol_map["gArchipelagoReceivedItem"] },
+    };
+
+    // ------------------------------------------------------------------------
+    // Reading map.json files
+    // ------------------------------------------------------------------------
+    std::vector<std::shared_ptr<ItemInfo>> ball_items;
+    std::vector<std::shared_ptr<ItemInfo>> hidden_items;
 
     for(const auto& entry: std::filesystem::directory_iterator(root_dir / "data/maps/"))
     {
@@ -89,35 +100,40 @@ int main (int argc, char *argv[])
         }
     }
 
-    std::cout << "Reading wild encounters..." << std::endl;
-
-    std::vector<std::shared_ptr<EncounterTableInfo>> encounter_tables;
+    // ------------------------------------------------------------------------
+    // Reading encounter tables
+    // ------------------------------------------------------------------------
+    std::vector<std::shared_ptr<MapEncounterInfo>> encounter_tables;
 
     std::ifstream wild_encounters_file(root_dir / "src/data/wild_encounters.json");
     json wild_encounters_json = json::parse(wild_encounters_file);
     
-    for (const auto& table_json: wild_encounters_json["wild_encounter_groups"][0]["encounters"]) {
-        std::shared_ptr<EncounterTableInfo> table(new EncounterTableInfo());
-        std::string base_symbol = table_json["base_label"];
+    for (const auto& map_json: wild_encounters_json["wild_encounter_groups"][0]["encounters"]) {
+        std::shared_ptr<MapEncounterInfo> map(new MapEncounterInfo());
 
-        table->land_pokemon_ram_address = symbol_map[base_symbol + "_LandMons"];
-        table->water_pokemon_ram_address = symbol_map[base_symbol + "_WaterMons"];
-        table->fishing_pokemon_ram_address = symbol_map[base_symbol + "_FishingMons"];
+        std::string base_symbol = map_json["base_label"];
 
-        table->map_name = table_json["map"];
+        map->land_encounters.ram_address = symbol_map[base_symbol + "_LandMons"];
+        map->land_encounters.rom_address = map->land_encounters.ram_address - 0x8000000;
+        map->water_encounters.ram_address = symbol_map[base_symbol + "_WaterMons"];
+        map->water_encounters.rom_address = map->water_encounters.ram_address - 0x8000000;
+        map->fishing_encounters.ram_address = symbol_map[base_symbol + "_FishingMons"];
+        map->fishing_encounters.rom_address = map->fishing_encounters.ram_address - 0x8000000;
+
+        map->map_name = map_json["map"];
 
         uint i;
 
         i = 0;
         try
         {
-            for (const auto& encounter_slot_json: table_json.at("land_mons")["mons"]) {
-                table->land_encounters[i].default_species = macros_json["species"][encounter_slot_json["species"].get<std::string>()];
-                table->land_encounters[i].min_level = encounter_slot_json["min_level"];
-                table->land_encounters[i].max_level = encounter_slot_json["max_level"];
+            for (const auto& encounter_slot_json: map_json.at("land_mons")["mons"]) {
+                map->land_encounters.encounter_slots[i].default_species = macros_json["species"][encounter_slot_json["species"].get<std::string>()];
+                map->land_encounters.encounter_slots[i].min_level = encounter_slot_json["min_level"];
+                map->land_encounters.encounter_slots[i].max_level = encounter_slot_json["max_level"];
                 ++i;
             }
-            table->land_encounters_exist = true;
+            map->land_encounters.exists = true;
         }
         catch (const json::exception &e)
         {
@@ -129,14 +145,13 @@ int main (int argc, char *argv[])
         i = 0;
         try
         {
-            table_json.at("water_mons");
-            for (const auto& encounter_slot_json: table_json.at("water_mons")["mons"]) {
-                table->water_encounters[i].default_species = macros_json["species"][encounter_slot_json["species"].get<std::string>()];
-                table->water_encounters[i].min_level = encounter_slot_json["min_level"];
-                table->water_encounters[i].max_level = encounter_slot_json["max_level"];
+            for (const auto& encounter_slot_json: map_json.at("water_mons")["mons"]) {
+                map->water_encounters.encounter_slots[i].default_species = macros_json["species"][encounter_slot_json["species"].get<std::string>()];
+                map->water_encounters.encounter_slots[i].min_level = encounter_slot_json["min_level"];
+                map->water_encounters.encounter_slots[i].max_level = encounter_slot_json["max_level"];
                 ++i;
             }
-            table->water_encounters_exist = true;
+            map->water_encounters.exists = true;
         }
         catch (const json::exception &e)
         {
@@ -148,13 +163,13 @@ int main (int argc, char *argv[])
         i = 0;
         try
         {
-            for (const auto& encounter_slot_json: table_json.at("fishing_mons")["mons"]) {
-                table->fishing_encounters[i].default_species = macros_json["species"][encounter_slot_json["species"].get<std::string>()];
-                table->fishing_encounters[i].min_level = encounter_slot_json["min_level"];
-                table->fishing_encounters[i].max_level = encounter_slot_json["max_level"];
+            for (const auto& encounter_slot_json: map_json.at("fishing_mons")["mons"]) {
+                map->fishing_encounters.encounter_slots[i].default_species = macros_json["species"][encounter_slot_json["species"].get<std::string>()];
+                map->fishing_encounters.encounter_slots[i].min_level = encounter_slot_json["min_level"];
+                map->fishing_encounters.encounter_slots[i].max_level = encounter_slot_json["max_level"];
                 ++i;
             }
-            table->fishing_encounters_exist = true;
+            map->fishing_encounters.exists = true;
         }
         catch (const json::exception &e)
         {
@@ -163,11 +178,12 @@ int main (int argc, char *argv[])
             }
         }
 
-        encounter_tables.push_back(table);
+        encounter_tables.push_back(map);
     }
 
-    std::cout << "Reading ROM..." << std::endl;
-
+    // ------------------------------------------------------------------------
+    // Reading ROM
+    // ------------------------------------------------------------------------
     std::ifstream rom(root_dir / "pokeemerald.gba", std::ios::binary);
     
     for (const auto& item: ball_items)
@@ -176,71 +192,81 @@ int main (int argc, char *argv[])
         rom >> item->default_item;
     }
 
-    std::cout << "Creating JSON..." << std::endl;
-
+    // ------------------------------------------------------------------------
+    // Creating output
+    // ------------------------------------------------------------------------
     json ball_items_json;
     for (const auto& item: ball_items)
     {
-        ball_items_json.push_back({
-            { "flag", item->flag_name },
+        ball_items_json[item->flag_name.substr(5)] = {
+            { "flag", macros_json["flags"][item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
             { "default_item", item->default_item },
-        });
+        };
     }
 
     json hidden_items_json;
     for (const auto& item: hidden_items)
     {
-        hidden_items_json.push_back({
-            { "flag", item->flag_name },
+        hidden_items_json[item->flag_name.substr(5)] = {
+            { "flag", macros_json["flags"][item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
             { "default_item", item->default_item },
-        });
+        };
     }
 
     json encounter_tables_json;
-    uint i = 0;
     for (const auto& table: encounter_tables)
     {
-        encounter_tables_json.push_back({
-            { "map_name", table->map_name },
-        });
+        json map = {};
         
-        if (table->land_encounters_exist) {
-            encounter_tables_json[i]["land_pokemon_ram_address"] = table->land_pokemon_ram_address;
-            encounter_tables_json[i]["land_encounters"] = json::array();
-            for (uint j = 0; j < 12; ++j) {
-                encounter_tables_json[i]["land_encounters"].push_back(table->land_encounters[j].default_species);
+        if (table->land_encounters.exists) {
+            map["land_encounters"] = {
+                { "ram_address", table->land_encounters.ram_address },
+                { "rom_address", table->land_encounters.rom_address },
+                { "encounter_slots", json::array() },
+            };
+            for (uint j = 0; j < NUM_LAND_ENCOUNTER_SLOTS; ++j) {
+                map["land_encounters"]["encounter_slots"].push_back(table->land_encounters.encounter_slots[j].default_species);
+            }
+        }
+        
+        if (table->water_encounters.exists) {
+            map["water_encounters"] = {
+                { "ram_address", table->water_encounters.ram_address },
+                { "rom_address", table->water_encounters.rom_address },
+                { "encounter_slots", json::array() },
+            };
+            for (uint j = 0; j < NUM_WATER_ENCOUNTER_SLOTS; ++j) {
+                map["water_encounters"]["encounter_slots"].push_back(table->water_encounters.encounter_slots[j].default_species);
+            }
+        }
+        
+        if (table->fishing_encounters.exists) {
+            map["fishing_encounters"] = {
+                { "ram_address", table->fishing_encounters.ram_address },
+                { "rom_address", table->fishing_encounters.rom_address },
+                { "encounter_slots", json::array() },
+            };
+            for (uint j = 0; j < NUM_FISHING_ENCOUNTER_SLOTS; ++j) {
+                map["fishing_encounters"]["encounter_slots"].push_back(table->fishing_encounters.encounter_slots[j].default_species);
             }
         }
 
-        if (table->water_encounters_exist) {
-            encounter_tables_json[i]["water_pokemon_ram_address"] = table->water_pokemon_ram_address;
-            encounter_tables_json[i]["water_encounters"] = json::array();
-            for (uint j = 0; j < 5; ++j) {
-                encounter_tables_json[i]["water_encounters"].push_back(table->water_encounters[j].default_species);
-            }
-        }
-
-        if (table->fishing_encounters_exist) {
-            encounter_tables_json[i]["fishing_pokemon_ram_address"] = table->fishing_pokemon_ram_address;
-            encounter_tables_json[i]["fishing_encounters"] = json::array();
-            for (uint j = 0; j < 10; ++j) {
-                encounter_tables_json[i]["fishing_encounters"].push_back(table->fishing_encounters[j].default_species);
-            }
-        }
-
-        ++i;
+        encounter_tables_json[table->map_name] = map;
     }
 
     json output_json = {
+        { "misc_ram_addresses", misc_ram_addresses },
         { "ball_items", ball_items_json },
         { "hidden_items", hidden_items_json },
         { "encounter_tables", encounter_tables_json },
-        { "items", macros_json["items"] },
-        { "flags", macros_json["flags"] },
+        { "constants", {
+            { "items", macros_json["items"] },
+            { "flags", macros_json["flags"] },
+        }},
     };
 
     std::ofstream outfile(root_dir / "data.json");
