@@ -3,6 +3,7 @@
 *.i
 *.elf
 *.gba
+*.bsdiff4
 !data/*.gba
 *.sgm
 *.sa1

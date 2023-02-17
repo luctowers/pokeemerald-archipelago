@@ -230,6 +230,9 @@ endif
 extract: syms
 	$(EXTRACTOR)
 
+patch: $(ROM)
+	bsdiff pokeemerald-vanilla.gba $(ROM) base_patch.bsdiff4
+
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: all
 
