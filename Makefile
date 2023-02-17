@@ -131,6 +131,7 @@ RAMSCRGEN := tools/ramscrgen/ramscrgen$(EXE)
 FIX := tools/gbafix/gbafix$(EXE)
 MAPJSON := tools/mapjson/mapjson$(EXE)
 JSONPROC := tools/jsonproc/jsonproc$(EXE)
+EXTRACTOR := tools/extractor/extractor$(EXE)
 
 PERL := perl
 
@@ -225,6 +226,9 @@ rom: $(ROM)
 ifeq ($(COMPARE),1)
 	@$(SHA1) rom.sha1
 endif
+
+extract:
+	$(EXTRACTOR)
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: all
