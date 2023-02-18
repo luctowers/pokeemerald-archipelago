@@ -58,13 +58,12 @@ LavaridgeTown_Gym_1F_EventScript_Flannery::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
-	message LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge
-	waitmessage
-	call Common_EventScript_PlayGymBadgeFanfare
+	setvar VAR_UNUSED_0x8014, 3
+	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
+	giveitem VAR_RESULT
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_WHITEOUT_TO_LAVARIDGE
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM
-	setflag FLAG_BADGE04_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 4
@@ -331,8 +330,7 @@ LavaridgeTown_Gym_1F_Text_FlanneryDefeat:
 	.string "For that, you deserve this.$"
 
 LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
-	.string "{PLAYER} received the HEAT BADGE\n"
-	.string "from FLANNERY.$"
+	.string "{PLAYER} received the HEAT BADGE.$"
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
 	.string "If you have a HEAT BADGE, all POKéMON\n"

@@ -25,12 +25,11 @@ FortreeCity_Gym_EventScript_Winona::
 	end
 
 FortreeCity_Gym_EventScript_WinonaDefeated::
-	message FortreeCity_Gym_Text_ReceivedFeatherBadge
-	waitmessage
-	call Common_EventScript_PlayGymBadgeFanfare
+	setvar VAR_UNUSED_0x8014, 5
+	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
+	giveitem VAR_RESULT
 	msgbox FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_FORTREE_GYM
-	setflag FLAG_BADGE06_GET
 	setvar VAR_0x8008, 6
 	call Common_EventScript_SetGymTrainers
 	call FortreeCity_Gym_EventScript_GiveAerialAce
@@ -248,8 +247,7 @@ FortreeCity_Gym_Text_WinonaDefeat:
 	.string "I present to you this GYM BADGE.$"
 
 FortreeCity_Gym_Text_ReceivedFeatherBadge:
-	.string "{PLAYER} received the FEATHER BADGE\n"
-	.string "from WINONA.$"
+	.string "{PLAYER} received the FEATHER BADGE.$"
 
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
 	.string "With the FEATHER BADGE, all POKéMON up\n"

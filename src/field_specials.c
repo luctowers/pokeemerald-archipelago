@@ -4273,17 +4273,18 @@ u8 Script_TryGainNewFanFromCounter(void)
 }
 
 // Archipelago
-bool8 ArchipelagoSpecial_ShouldHandle(void)
-{
-    return gSpecialVar_Unused_0x8014 == ITEM_ARCHIPELAGO_PROGRESSION;
-}
-
 bool8 ArchipelagoSpecial_IsItemBadge(void)
 {
     return gSpecialVar_Unused_0x8014 >= ITEM_BADGE_1 && gSpecialVar_Unused_0x8014 <= ITEM_BADGE_8;
 }
 
-u8 ArchipelagoSpecial_GetArchipelagoItemId(void)
+bool8 ArchipelagoSpecial_ShouldHandle(void)
+{
+    return gSpecialVar_Unused_0x8014 == ITEM_ARCHIPELAGO_PROGRESSION ||
+        ArchipelagoSpecial_IsItemBadge();
+}
+
+u16 ArchipelagoSpecial_GetReceivedItemId(void)
 {
     return gArchipelagoReceivedItem.itemId;
 }
@@ -4292,4 +4293,9 @@ void ArchipelagoSpecial_SetArchipelagoFlag(void)
 {
     ArchipelagoFlagSet(gArchipelagoReceivedItem.archipelagoFlagId);
     gArchipelagoReceivedItem.full = FALSE;
+}
+
+u16 ArchipelagoSpecial_GetItemAtBadge(void)
+{
+    return gGymBadgeItems[gSpecialVar_Unused_0x8014];
 }

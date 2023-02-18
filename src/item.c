@@ -18,7 +18,7 @@
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 
-EWRAM_DATA u16 gGymBadgeItems[8] = {
+const u16 gGymBadgeItems[8] = {
     ITEM_BADGE_1, ITEM_BADGE_2,
     ITEM_BADGE_3, ITEM_BADGE_4,
     ITEM_BADGE_5, ITEM_BADGE_6,

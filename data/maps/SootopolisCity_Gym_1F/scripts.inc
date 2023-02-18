@@ -90,12 +90,11 @@ SootopolisCity_Gym_1F_EventScript_Juan::
 	end
 
 SootopolisCity_Gym_1F_EventScript_JuanDefeated::
-	message SootopolisCity_Gym_1F_Text_ReceivedRainBadge
-	waitmessage
-	call Common_EventScript_PlayGymBadgeFanfare
+	setvar VAR_UNUSED_0x8014, 7
+	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
+	giveitem VAR_RESULT
 	msgbox SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
-	setflag FLAG_BADGE08_GET
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_STEVEN
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
@@ -233,8 +232,7 @@ SootopolisCity_Gym_1F_Text_JuanDefeat:
 	.string "you with this, the RAIN BADGE!$"
 
 SootopolisCity_Gym_1F_Text_ReceivedRainBadge:
-	.string "{PLAYER} received the RAIN BADGE\n"
-	.string "from JUAN.$"
+	.string "{PLAYER} received the RAIN BADGE.$"
 
 SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
 	.string "Having the RAIN BADGE shall assure you\n"

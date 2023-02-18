@@ -58,12 +58,11 @@ MossdeepCity_Gym_EventScript_TateAndLiza::
 	end
 
 MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
-	message MossdeepCity_Gym_Text_ReceivedMindBadge
-	waitmessage
-	call Common_EventScript_PlayGymBadgeFanfare
+	setvar VAR_UNUSED_0x8014, 6
+	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
+	giveitem VAR_RESULT
 	msgbox MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
-	setflag FLAG_BADGE07_GET
 	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
 	clearflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
 	clearflag FLAG_UNKNOWN_0x393
@@ -566,8 +565,7 @@ MossdeepCity_Gym_Text_TateAndLizaDefeat:
 	.string "LIZA: So, in recognition, take this.$"
 
 MossdeepCity_Gym_Text_ReceivedMindBadge:
-	.string "{PLAYER} received the MIND BADGE\n"
-	.string "from TATE and LIZA.$"
+	.string "{PLAYER} received the MIND BADGE.$"
 
 MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis:
 	.string "TATE: The MIND BADGE enhances the\n"

@@ -84,14 +84,13 @@ MauvilleCity_Gym_EventScript_Wattson::
 	end
 
 MauvilleCity_Gym_EventScript_WattsonDefeated::
-	message MauvilleCity_Gym_Text_ReceivedDynamoBadge
-	waitmessage
-	call Common_EventScript_PlayGymBadgeFanfare
+	setvar VAR_UNUSED_0x8014, 2
+	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
+	giveitem VAR_RESULT
 	msgbox MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
-	setflag FLAG_BADGE03_GET
 	addvar VAR_PETALBURG_GYM_STATE, 1
 	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
 	setvar VAR_0x8008, 3
@@ -352,8 +351,7 @@ MauvilleCity_Gym_Text_WattsonDefeat:
 	.string "Take this BADGE!$"
 
 MauvilleCity_Gym_Text_ReceivedDynamoBadge:
-	.string "{PLAYER} received the DYNAMO BADGE\n"
-	.string "from WATTSON.$"
+	.string "{PLAYER} received the DYNAMO BADGE.$"
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
 	.string "With the DYNAMO BADGE, POKéMON can\n"

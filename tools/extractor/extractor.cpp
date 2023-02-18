@@ -58,6 +58,7 @@ int main (int argc, char *argv[])
     std::map<std::string, uint32_t> misc_ram_addresses = {
         { "gSaveblock1", symbol_map["gSaveblock1"] },
         { "gArchipelagoReceivedItem", symbol_map["gArchipelagoReceivedItem"] },
+        { "gGymBadgeItems", symbol_map["gGymBadgeItems"] },
     };
 
     // ------------------------------------------------------------------------

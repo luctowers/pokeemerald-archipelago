@@ -29,11 +29,6 @@ struct BagPocket
     u8 capacity;
 };
 
-enum {
-    ARCHIPELAGO_RECEIVED_ITEM,
-    ARCHIPELAGO_RECEIVED_BADGE
-};
-
 struct ArchipelagoReceivedItem
 {
     u16 archipelagoFlagId;  // The flag marking the item has been received
@@ -41,7 +36,7 @@ struct ArchipelagoReceivedItem
     bool8 full;                // Whether the item in this structure has yet to be received
 };
 
-extern u16 gGymBadgeItems[];
+extern const u16 gGymBadgeItems[];
 extern struct ArchipelagoReceivedItem gArchipelagoReceivedItem;
 
 extern const struct Item gItems[];
