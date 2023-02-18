@@ -4283,13 +4283,13 @@ bool8 ArchipelagoSpecial_IsItemBadge(void)
     return gSpecialVar_Unused_0x8014 >= ITEM_BADGE_1 && gSpecialVar_Unused_0x8014 <= ITEM_BADGE_8;
 }
 
-u8 GetArchipelagoItemId(void)
+u8 ArchipelagoSpecial_GetArchipelagoItemId(void)
 {
     return gArchipelagoReceivedItem.itemId;
 }
 
-void SetArchipelagoFlag(void)
+void ArchipelagoSpecial_SetArchipelagoFlag(void)
 {
     ArchipelagoFlagSet(gArchipelagoReceivedItem.archipelagoFlagId);
-    gArchipelagoReceivedItem.itemId = 0;
+    gArchipelagoReceivedItem.full = FALSE;
 }

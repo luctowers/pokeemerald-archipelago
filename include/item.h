@@ -38,7 +38,7 @@ struct ArchipelagoReceivedItem
 {
     u16 archipelagoFlagId;  // The flag marking the item has been received
     u16 itemId;             // The id of the item to be received
-    u8 itemType;
+    bool8 full;                // Whether the item in this structure has yet to be received
 };
 
 extern u16 gGymBadgeItems[];

@@ -538,5 +538,5 @@ gSpecials::
 
 	def_special ArchipelagoSpecial_ShouldHandle
 	def_special ArchipelagoSpecial_IsItemBadge
-	def_special GetArchipelagoItemId
-	def_special SetArchipelagoFlag
+	def_special ArchipelagoSpecial_GetArchipelagoItemId
+	def_special ArchipelagoSpecial_SetArchipelagoFlag
