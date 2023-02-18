@@ -266,6 +266,7 @@ int main (int argc, char *argv[])
         { "constants", {
             { "items", macros_json["items"] },
             { "flags", macros_json["flags"] },
+            { "species", macros_json["species"] },
         }},
     };
 

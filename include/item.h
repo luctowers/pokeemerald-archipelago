@@ -29,6 +29,21 @@ struct BagPocket
     u8 capacity;
 };
 
+enum {
+    ARCHIPELAGO_RECEIVED_ITEM,
+    ARCHIPELAGO_RECEIVED_BADGE
+};
+
+struct ArchipelagoReceivedItem
+{
+    u16 archipelagoFlagId;  // The flag marking the item has been received
+    u16 itemId;             // The id of the item to be received
+    u8 itemType;
+};
+
+extern u16 gGymBadgeItems[];
+extern struct ArchipelagoReceivedItem gArchipelagoReceivedItem;
+
 extern const struct Item gItems[];
 extern struct BagPocket gBagPockets[];
 

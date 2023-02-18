@@ -2,6 +2,13 @@
 .set AMOUNT, VAR_0x8001
 
 Std_ObtainItem::
+	copyvar VAR_UNUSED_0x8014 ITEMID
+	specialvar VAR_RESULT, ArchipelagoSpecial_ShouldHandle
+	goto_if_eq VAR_RESULT, TRUE, ArchipelagoScript_ObtainItem
+	goto_if_eq VAR_RESULT, FALSE, Std_ObtainItem_Rest
+	return
+
+Std_ObtainItem_Rest::
 	additem ITEMID, AMOUNT
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainItemMessage
@@ -98,8 +105,13 @@ Std_FindItem::
 	waitse
 	copyvar VAR_0x8004, ITEMID
 	copyvar VAR_0x8005, AMOUNT
-	specialvar VAR_RESULT, IsItemArchipelago
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PickUpArchipelagoItem
+	copyvar VAR_UNUSED_0x8014 ITEMID
+	specialvar VAR_RESULT, ArchipelagoSpecial_ShouldHandle
+	goto_if_eq VAR_RESULT, TRUE, ArchipelagoScript_FindItem
+	goto_if_eq VAR_RESULT, FALSE, Std_FindItem_Rest
+	return
+
+Std_FindItem_Rest::
 	checkitemspace ITEMID, AMOUNT
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
@@ -147,8 +159,9 @@ EventScript_NoRoomToPickUpItem::
 EventScript_HiddenItemScript::
 	lockall
 	waitse
-	specialvar VAR_RESULT, IsHiddenItemArchipelago
-	goto_if_eq VAR_RESULT, TRUE, EventScript_PickUpHiddenArchipelagoItem
+	copyvar VAR_UNUSED_0x8014 VAR_0x8005
+	specialvar VAR_RESULT, ArchipelagoSpecial_ShouldHandle
+	goto_if_eq VAR_RESULT, TRUE, ArchipelagoScript_FindHiddenItem
 	additem VAR_0x8005
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural STR_VAR_2, VAR_0x8005, 1
@@ -192,32 +205,5 @@ EventScript_NoRoomForHiddenItem::
 	msgbox gText_PlayerFoundOneItem, MSGBOX_DEFAULT
 	msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
 	setvar VAR_RESULT, 0
-	releaseall
-	end
-
-EventScript_ReceiveArchipelagoItem::
-	specialvar VAR_RESULT, GetArchipelagoItemId
-	giveitem VAR_RESULT
-	special SetArchipelagoFlag
-	releaseall
-	end
-
-EventScript_PickUpArchipelagoItem::
-	removeobject VAR_LAST_TALKED
-	call EventScript_PlayFanfareObtainedItem
-	message gText_PlayerFoundArchipelagoItem
-	waitmessage
-	waitfanfare
-	msgbox gText_SentArchipelagoItemToOwner, MSGBOX_DEFAULT
-	releaseall
-	end
-
-EventScript_PickUpHiddenArchipelagoItem::
-	call EventScript_PlayFanfareObtainedItem
-	message gText_PlayerFoundArchipelagoItem
-	waitmessage
-	waitfanfare
-	msgbox gText_SentArchipelagoItemToOwner, MSGBOX_DEFAULT
-	special SetHiddenItemFlag
 	releaseall
 	end

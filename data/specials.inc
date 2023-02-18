@@ -536,7 +536,7 @@ gSpecials::
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
 
-	def_special IsItemArchipelago
-	def_special IsHiddenItemArchipelago
+	def_special ArchipelagoSpecial_ShouldHandle
+	def_special ArchipelagoSpecial_IsItemBadge
 	def_special GetArchipelagoItemId
 	def_special SetArchipelagoFlag

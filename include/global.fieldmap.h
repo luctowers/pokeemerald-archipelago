@@ -345,14 +345,4 @@ extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
 extern struct Camera gCamera;
 
-// Archipelago
-struct ArchipelagoReceivedItem
-{
-    u16 archipelagoFlagId; // The flag marking the item has been received
-    u8 itemId; // The id of the item to be received
-    u8 itemType;
-};
-
-extern struct ArchipelagoReceivedItem gArchipelagoReceivedItem;
-
 #endif // GUARD_GLOBAL_FIELDMAP_H

@@ -29,9 +29,3 @@ gText_NoRoomLeftForAnother::
 gText_TheDecorWasTransferredToThePC::
 	.string "The {STR_VAR_2} was transferred\n"
 	.string "to the PC.$"
-
-gText_PlayerFoundArchipelagoItem::
-	.string "{PLAYER} found an ARCHIPELAGO ITEM!$"
-
-gText_SentArchipelagoItemToOwner::
-	.string "{PLAYER} sent the item to its owner.$"

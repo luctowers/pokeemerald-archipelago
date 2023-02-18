@@ -18,6 +18,7 @@
 #include "field_weather.h"
 #include "graphics.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "item_icon.h"
 #include "link.h"
 #include "list_menu.h"
@@ -4272,14 +4273,14 @@ u8 Script_TryGainNewFanFromCounter(void)
 }
 
 // Archipelago
-bool8 IsHiddenItemArchipelago(void)
+bool8 ArchipelagoSpecial_ShouldHandle(void)
 {
-    return gSpecialVar_0x8005 == ITEM_ARCHIPELAGO_PROGRESSION;
+    return gSpecialVar_Unused_0x8014 == ITEM_ARCHIPELAGO_PROGRESSION;
 }
 
-bool8 IsItemArchipelago(void)
+bool8 ArchipelagoSpecial_IsItemBadge(void)
 {
-    return gSpecialVar_0x8004 == ITEM_ARCHIPELAGO_PROGRESSION;
+    return gSpecialVar_Unused_0x8014 >= ITEM_BADGE_1 && gSpecialVar_Unused_0x8014 <= ITEM_BADGE_8;
 }
 
 u8 GetArchipelagoItemId(void)

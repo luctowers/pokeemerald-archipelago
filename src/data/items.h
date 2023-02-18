@@ -2774,90 +2774,90 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E2] =
+    [ITEM_BADGE_1] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("BADGE 1"),
+        .itemId = ITEM_BADGE_1,
         .price = 0,
         .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E3] =
+    [ITEM_BADGE_2] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("BADGE 2"),
+        .itemId = ITEM_BADGE_2,
         .price = 0,
         .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E4] =
+    [ITEM_BADGE_3] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("BADGE 3"),
+        .itemId = ITEM_BADGE_3,
         .price = 0,
         .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E5] =
+    [ITEM_BADGE_4] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("BADGE 4"),
+        .itemId = ITEM_BADGE_4,
         .price = 0,
         .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E6] =
+    [ITEM_BADGE_5] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("BADGE 5"),
+        .itemId = ITEM_BADGE_5,
         .price = 0,
         .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E7] =
+    [ITEM_BADGE_6] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("BADGE 6"),
+        .itemId = ITEM_BADGE_6,
         .price = 0,
         .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E8] =
+    [ITEM_BADGE_7] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("BADGE 7"),
+        .itemId = ITEM_BADGE_7,
         .price = 0,
         .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E9] =
+    [ITEM_BADGE_8] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("BADGE 8"),
+        .itemId = ITEM_BADGE_8,
         .price = 0,
         .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
