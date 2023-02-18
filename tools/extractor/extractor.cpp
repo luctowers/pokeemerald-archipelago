@@ -41,7 +41,7 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Reading symbols
     // ------------------------------------------------------------------------
-    std::ifstream symbol_map_file(root_dir / "pokeemerald.sym");
+    std::ifstream symbol_map_file(root_dir / "pokeemerald-archipelago.sym");
     std::regex symbol_map_regex("^([0-9a-fA-F]+) [lg] [0-9a-fA-F]+ ([a-zA-Z0-9_]+)$");
     std::map<std::string, uint32_t> symbol_map;
 

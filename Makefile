@@ -63,7 +63,7 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-ROM_NAME := pokeemerald.gba
+ROM_NAME := pokeemerald-archipelago.gba
 ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
 OBJ_DIR_NAME := build/emerald
@@ -231,7 +231,7 @@ extract: syms
 	$(EXTRACTOR)
 
 patch: $(ROM)
-	bsdiff pokeemerald-vanilla.gba $(ROM) base_patch.bsdiff4
+	bsdiff pokeemerald.gba $(ROM) base_patch.bsdiff4
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: all
