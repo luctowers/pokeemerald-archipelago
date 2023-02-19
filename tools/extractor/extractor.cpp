@@ -75,6 +75,10 @@ int main (int argc, char *argv[])
         { "gGymBadgeItems", symbol_map["gGymBadgeItems"] },
     };
 
+    std::map<std::string, uint32_t> misc_rom_addresses = {
+        { "gGymBadgeItems", symbol_map["gGymBadgeItems"] - 0x8000000 },
+    };
+
     // ------------------------------------------------------------------------
     // Reading map.json files
     // ------------------------------------------------------------------------
@@ -135,7 +139,7 @@ int main (int argc, char *argv[])
                     item->flag_name = event_json["flag"];
                     item->name = item->flag_name.substr(5);
                     item->map_name = map->name;
-                    item->ram_address = symbol_map["Archipelago_Target_Hidden_Item" + item->flag_name] + 8;
+                    item->ram_address = symbol_map["Archipelago_Target_Hidden_Item_" + item->flag_name] + 8;
                     item->rom_address = item->ram_address - 0x8000000;
                     item->default_item = macros_json["items"][event_json["item"].get<std::string>()];
                     hidden_items.push_back(item);
@@ -348,6 +352,7 @@ int main (int argc, char *argv[])
         { "_comment", "DO NOT MODIFY. This file was auto-generated. Your changes will likely be overwritten." },
         { "maps", maps_json },
         { "misc_ram_addresses", misc_ram_addresses },
+        { "misc_rom_addresses", misc_rom_addresses },
         { "npc_gifts", npc_gifts_json },
         { "ball_items", ball_items_json },
         { "hidden_items", hidden_items_json },
