@@ -55,6 +55,19 @@ int main (int argc, char *argv[])
         }
     }
 
+    std::vector<std::shared_ptr<ItemInfo>> npc_gifts;
+    for (auto const& [symbol, address] : symbol_map)
+    {
+        if (symbol.substr(0, 28) == "Archipelago_Target_NPC_Gift_")
+        {
+            std::shared_ptr<ItemInfo> item(new ItemInfo());
+            item->ram_address = address + 3;
+            item->rom_address = item->ram_address - 0x8000000;
+            item->flag_name = symbol.substr(28);
+            npc_gifts.push_back(item);
+        }
+    }
+
     std::map<std::string, uint32_t> misc_ram_addresses = {
         { "gSaveblock1", symbol_map["gSaveblock1"] },
         { "gArchipelagoReceivedItem", symbol_map["gArchipelagoReceivedItem"] },
@@ -92,7 +105,7 @@ int main (int argc, char *argv[])
                 {
                     std::shared_ptr<ItemInfo> item(new ItemInfo());
                     item->flag_name = event_json["flag"];
-                    item->ram_address = symbol_map["Archipelago_Target_" + item->flag_name] + 8;
+                    item->ram_address = symbol_map["Archipelago_Target_Hidden_Item" + item->flag_name] + 8;
                     item->rom_address = item->ram_address - 0x8000000;
                     item->default_item = macros_json["items"][event_json["item"].get<std::string>()];
                     hidden_items.push_back(item);
@@ -185,17 +198,39 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Reading ROM
     // ------------------------------------------------------------------------
-    std::ifstream rom(root_dir / "pokeemerald.gba", std::ios::binary);
+    std::ifstream rom(root_dir / "pokeemerald-archipelago.gba", std::ios::binary);
+    if (rom.fail())
+    {
+        fprintf(stderr, "Could not open rom file\n");
+        exit(1);
+    }
     
     for (const auto& item: ball_items)
     {
+        rom.seekg(item->rom_address, rom.beg);
+        rom.read((char*)&(item->default_item), 2);
+    }
+
+    for (const auto& item: npc_gifts)
+    {
         rom.seekg(item->rom_address, std::ios::beg);
-        rom >> item->default_item;
+        rom.read((char*)&(item->default_item), 2);
     }
 
     // ------------------------------------------------------------------------
     // Creating output
     // ------------------------------------------------------------------------
+    json npc_gifts_json;
+    for (const auto& item: npc_gifts)
+    {
+        npc_gifts_json[item->flag_name.substr(5)] = {
+            { "flag", macros_json["flags"][item->flag_name] },
+            { "ram_address", item->ram_address },
+            { "rom_address", item->rom_address },
+            { "default_item", item->default_item },
+        };
+    }
+
     json ball_items_json;
     for (const auto& item: ball_items)
     {
@@ -261,6 +296,7 @@ int main (int argc, char *argv[])
 
     json output_json = {
         { "misc_ram_addresses", misc_ram_addresses },
+        { "npc_gifts", npc_gifts_json },
         { "ball_items", ball_items_json },
         { "hidden_items", hidden_items_json },
         { "encounter_tables", encounter_tables_json },

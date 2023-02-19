@@ -267,7 +267,7 @@ string generate_map_events_text(Json map_data) {
             }
             else if (bg_event["type"] == "hidden_item") {
                 // Injecting a symbol so we can mark all hidden items and extract/edit their values
-                text << "Archipelago_Target_" << json_to_string(bg_event, "flag") << "::\n";
+                text << "Archipelago_Target_Hidden_Item" << json_to_string(bg_event, "flag") << "::\n";
                 text << "\tbg_hidden_item_event "
                      << json_to_string(bg_event, "x") << ", "
                      << json_to_string(bg_event, "y") << ", "

@@ -227,7 +227,7 @@ ifeq ($(COMPARE),1)
 	@$(SHA1) rom.sha1
 endif
 
-extract: syms
+extract: syms tools
 	$(EXTRACTOR)
 
 patch: $(ROM)
