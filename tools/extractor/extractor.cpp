@@ -80,6 +80,7 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     std::vector<std::shared_ptr<ItemInfo>> ball_items;
     std::vector<std::shared_ptr<ItemInfo>> hidden_items;
+    std::vector<std::shared_ptr<MapInfo>> maps;
 
     for(const auto& entry: std::filesystem::directory_iterator(root_dir / "data/maps/"))
     {
@@ -87,6 +88,28 @@ int main (int argc, char *argv[])
         {
             std::ifstream map_file(entry.path() / "map.json");
             json map_data_json = json::parse(map_file);
+
+            std::shared_ptr<MapInfo> map(new MapInfo());
+            map->name = map_data_json["id"];
+
+            json warp_events_json = map_data_json["warp_events"];
+            for (const auto& warp_json: warp_events_json)
+            {
+                // MAP_DYNAMIC is used mostly by secret base exits and online/stats rooms
+                // with the exception of the Terra Cave, Marine Cave, and Dept. Store Elevator
+
+                // TODO: Handle Terra Cave, Marine Cave, and Dept. Store Elevator
+                // in case of shop rando and/or warp rando (possibly in combination with static pokemon rando)
+                if (warp_json["dest_map"] == "MAP_DYNAMIC") continue;
+
+                map->warps.push_back(warp_json["dest_map"]);
+            }
+
+            json connections_json = map_data_json["connections"];
+            for (const auto& connection_json: connections_json)
+            {
+                map->connections.push_back(connection_json["map"]);
+            }
 
             json object_events_json = map_data_json["object_events"];
             for (const auto& event_json: object_events_json)
@@ -96,6 +119,7 @@ int main (int argc, char *argv[])
                     std::shared_ptr<ItemInfo> item(new ItemInfo());
                     item->flag_name = event_json["flag"];
                     item->name = item->flag_name.substr(5);
+                    item->map_name = map->name;
                     item->ram_address = symbol_map[event_json["script"]] + 3;
                     item->rom_address = item->ram_address - 0x8000000;
                     ball_items.push_back(item);
@@ -110,12 +134,15 @@ int main (int argc, char *argv[])
                     std::shared_ptr<ItemInfo> item(new ItemInfo());
                     item->flag_name = event_json["flag"];
                     item->name = item->flag_name.substr(5);
+                    item->map_name = map->name;
                     item->ram_address = symbol_map["Archipelago_Target_Hidden_Item" + item->flag_name] + 8;
                     item->rom_address = item->ram_address - 0x8000000;
                     item->default_item = macros_json["items"][event_json["item"].get<std::string>()];
                     hidden_items.push_back(item);
                 }
             }
+
+            maps.push_back(map);
         }
     }
 
@@ -225,11 +252,21 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Creating output
     // ------------------------------------------------------------------------
+    json maps_json;
+    for (const auto& map: maps)
+    {
+        maps_json.push_back({
+            { "name", map->name },
+            { "connections", map->connections },
+            { "warps", map->warps },
+        });
+    }
+
     json npc_gifts_json;
     for (const auto& item: npc_gifts)
     {
         npc_gifts_json.push_back({
-            { "name",item->name },
+            { "name", item->name },
             { "flag", macros_json["flags"][item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
@@ -241,7 +278,8 @@ int main (int argc, char *argv[])
     for (const auto& item: ball_items)
     {
         ball_items_json.push_back({
-            { "name",item->name },
+            { "name", item->name },
+            { "map_name", item->map_name },
             { "flag", macros_json["flags"][item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
@@ -253,7 +291,8 @@ int main (int argc, char *argv[])
     for (const auto& item: hidden_items)
     {
         hidden_items_json.push_back({
-            { "name",item->name },
+            { "name", item->name },
+            { "map_name", item->map_name },
             { "flag", macros_json["flags"][item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
@@ -307,6 +346,7 @@ int main (int argc, char *argv[])
 
     json output_json = {
         { "_comment", "DO NOT MODIFY. This file was auto-generated. Your changes will likely be overwritten." },
+        { "maps", maps_json },
         { "misc_ram_addresses", misc_ram_addresses },
         { "npc_gifts", npc_gifts_json },
         { "ball_items", ball_items_json },

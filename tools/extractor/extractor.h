@@ -2,16 +2,24 @@
 #define EXTRACTOR_H
 
 #include <string>
+#include <vector>
 
 #define NUM_LAND_ENCOUNTER_SLOTS 12
 #define NUM_WATER_ENCOUNTER_SLOTS 5
 #define NUM_FISHING_ENCOUNTER_SLOTS 10
+
+struct MapInfo {
+    std::string name;
+    std::vector<std::string> connections;
+    std::vector<std::string> warps;
+};
 
 struct ItemInfo {
     uint32_t ram_address;
     uint32_t rom_address;
     std::string flag_name;
     std::string name;
+    std::string map_name;
     uint16_t default_item;
 };
 
