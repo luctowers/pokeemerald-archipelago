@@ -11,6 +11,7 @@ struct ItemInfo {
     uint32_t ram_address;
     uint32_t rom_address;
     std::string flag_name;
+    std::string name;
     uint16_t default_item;
 };
 

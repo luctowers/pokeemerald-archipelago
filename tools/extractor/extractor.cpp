@@ -64,6 +64,7 @@ int main (int argc, char *argv[])
             item->ram_address = address + 3;
             item->rom_address = item->ram_address - 0x8000000;
             item->flag_name = symbol.substr(28);
+            item->name = item->flag_name.substr(5);
             npc_gifts.push_back(item);
         }
     }
@@ -88,11 +89,13 @@ int main (int argc, char *argv[])
             json map_data_json = json::parse(map_file);
 
             json object_events_json = map_data_json["object_events"];
-            for (const auto& event_json: object_events_json) {
+            for (const auto& event_json: object_events_json)
+            {
                 if (event_json["flag"].get<std::string>().substr(0, 9) == "FLAG_ITEM")
                 {
                     std::shared_ptr<ItemInfo> item(new ItemInfo());
                     item->flag_name = event_json["flag"];
+                    item->name = item->flag_name.substr(5);
                     item->ram_address = symbol_map[event_json["script"]] + 3;
                     item->rom_address = item->ram_address - 0x8000000;
                     ball_items.push_back(item);
@@ -100,11 +103,13 @@ int main (int argc, char *argv[])
             }
 
             json bg_events_json = map_data_json["bg_events"];
-            for (const auto& event_json: bg_events_json) {
+            for (const auto& event_json: bg_events_json)
+            {
                 if (event_json["type"] == "hidden_item")
                 {
                     std::shared_ptr<ItemInfo> item(new ItemInfo());
                     item->flag_name = event_json["flag"];
+                    item->name = item->flag_name.substr(5);
                     item->ram_address = symbol_map["Archipelago_Target_Hidden_Item" + item->flag_name] + 8;
                     item->rom_address = item->ram_address - 0x8000000;
                     item->default_item = macros_json["items"][event_json["item"].get<std::string>()];
@@ -223,34 +228,37 @@ int main (int argc, char *argv[])
     json npc_gifts_json;
     for (const auto& item: npc_gifts)
     {
-        npc_gifts_json[item->flag_name.substr(5)] = {
+        npc_gifts_json.push_back({
+            { "name",item->name },
             { "flag", macros_json["flags"][item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
             { "default_item", item->default_item },
-        };
+        });
     }
 
     json ball_items_json;
     for (const auto& item: ball_items)
     {
-        ball_items_json[item->flag_name.substr(5)] = {
+        ball_items_json.push_back({
+            { "name",item->name },
             { "flag", macros_json["flags"][item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
             { "default_item", item->default_item },
-        };
+        });
     }
 
     json hidden_items_json;
     for (const auto& item: hidden_items)
     {
-        hidden_items_json[item->flag_name.substr(5)] = {
+        hidden_items_json.push_back({
+            { "name",item->name },
             { "flag", macros_json["flags"][item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
             { "default_item", item->default_item },
-        };
+        });
     }
 
     json encounter_tables_json;
@@ -264,7 +272,8 @@ int main (int argc, char *argv[])
                 { "rom_address", table->land_encounters.rom_address },
                 { "encounter_slots", json::array() },
             };
-            for (uint j = 0; j < NUM_LAND_ENCOUNTER_SLOTS; ++j) {
+            for (uint j = 0; j < NUM_LAND_ENCOUNTER_SLOTS; ++j)
+            {
                 map["land_encounters"]["encounter_slots"].push_back(table->land_encounters.encounter_slots[j].default_species);
             }
         }
@@ -275,7 +284,8 @@ int main (int argc, char *argv[])
                 { "rom_address", table->water_encounters.rom_address },
                 { "encounter_slots", json::array() },
             };
-            for (uint j = 0; j < NUM_WATER_ENCOUNTER_SLOTS; ++j) {
+            for (uint j = 0; j < NUM_WATER_ENCOUNTER_SLOTS; ++j)
+            {
                 map["water_encounters"]["encounter_slots"].push_back(table->water_encounters.encounter_slots[j].default_species);
             }
         }
@@ -286,7 +296,8 @@ int main (int argc, char *argv[])
                 { "rom_address", table->fishing_encounters.rom_address },
                 { "encounter_slots", json::array() },
             };
-            for (uint j = 0; j < NUM_FISHING_ENCOUNTER_SLOTS; ++j) {
+            for (uint j = 0; j < NUM_FISHING_ENCOUNTER_SLOTS; ++j)
+            {
                 map["fishing_encounters"]["encounter_slots"].push_back(table->fishing_encounters.encounter_slots[j].default_species);
             }
         }
@@ -295,6 +306,7 @@ int main (int argc, char *argv[])
     }
 
     json output_json = {
+        { "_comment", "DO NOT MODIFY. This file was auto-generated. Your changes will likely be overwritten." },
         { "misc_ram_addresses", misc_ram_addresses },
         { "npc_gifts", npc_gifts_json },
         { "ball_items", ball_items_json },
@@ -304,7 +316,7 @@ int main (int argc, char *argv[])
             { "items", macros_json["items"] },
             { "flags", macros_json["flags"] },
             { "species", macros_json["species"] },
-        }},
+        } },
     };
 
     std::ofstream outfile(root_dir / "data.json");
