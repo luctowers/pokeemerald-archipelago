@@ -12,7 +12,7 @@ ArchipelagoScript_FoundArchipelagoItem::
 	message gText_PlayerFoundArchipelagoItem
 	waitfanfare
 	waitmessage
-  return
+	return
 
 ArchipelagoScript_ObtainItem::
 	specialvar VAR_RESULT, ArchipelagoSpecial_IsItemBadge
@@ -25,14 +25,14 @@ ArchipelagoScript_FindItem::
 	removeobject VAR_LAST_TALKED
 	specialvar VAR_RESULT, ArchipelagoSpecial_IsItemBadge
 	goto_if_eq VAR_RESULT, TRUE, ArchipelagoScript_HandleBadgeItem
-  call ArchipelagoScript_FoundArchipelagoItem
+	call ArchipelagoScript_FoundArchipelagoItem
 	release
 	return
 
 ArchipelagoScript_FindHiddenItem::
 	specialvar VAR_RESULT, ArchipelagoSpecial_IsItemBadge
 	goto_if_eq VAR_RESULT, TRUE, ArchipelagoScript_HandleBadgeItem
-  call ArchipelagoScript_FoundArchipelagoItem
+	call ArchipelagoScript_FoundArchipelagoItem
 	special SetHiddenItemFlag
 	releaseall
 	end
@@ -47,7 +47,7 @@ ArchipelagoScript_HandleBadgeItem::
 	case ITEM_BADGE_6, ArchipelagoScript_ReceiveFeatherBadge
 	case ITEM_BADGE_7, ArchipelagoScript_ReceiveMindBadge
 	case ITEM_BADGE_8, ArchipelagoScript_ReceiveRainBadge
-  return
+	return
 
 ArchipelagoScript_ReceiveStoneBadge::
 	message RustboroCity_Gym_Text_ReceivedStoneBadge
@@ -55,7 +55,7 @@ ArchipelagoScript_ReceiveStoneBadge::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE01_GET
 	release
-  return
+	return
 
 ArchipelagoScript_ReceiveKnuckleBadge::
 	message DewfordTown_Gym_Text_ReceivedKnuckleBadge
@@ -63,7 +63,7 @@ ArchipelagoScript_ReceiveKnuckleBadge::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE02_GET
 	release
-  return
+	return
 
 ArchipelagoScript_ReceiveDynamoBadge::
 	message MauvilleCity_Gym_Text_ReceivedDynamoBadge
@@ -71,7 +71,7 @@ ArchipelagoScript_ReceiveDynamoBadge::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE03_GET
 	release
-  return
+	return
 
 ArchipelagoScript_ReceiveHeatBadge::
 	message LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge
@@ -79,7 +79,7 @@ ArchipelagoScript_ReceiveHeatBadge::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE04_GET
 	release
-  return
+	return
 
 ArchipelagoScript_ReceiveBalanceBadge::
 	message PetalburgCity_Gym_Text_ReceivedBalanceBadge
@@ -87,7 +87,7 @@ ArchipelagoScript_ReceiveBalanceBadge::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE05_GET
 	release
-  return
+	return
 
 ArchipelagoScript_ReceiveFeatherBadge::
 	message FortreeCity_Gym_Text_ReceivedFeatherBadge
@@ -95,7 +95,7 @@ ArchipelagoScript_ReceiveFeatherBadge::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE06_GET
 	release
-  return
+	return
 
 ArchipelagoScript_ReceiveMindBadge::
 	message MossdeepCity_Gym_Text_ReceivedMindBadge
@@ -103,7 +103,7 @@ ArchipelagoScript_ReceiveMindBadge::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE07_GET
 	release
-  return
+	return
 
 ArchipelagoScript_ReceiveRainBadge::
 	message SootopolisCity_Gym_1F_Text_ReceivedRainBadge
@@ -111,4 +111,4 @@ ArchipelagoScript_ReceiveRainBadge::
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE08_GET
 	release
-  return
+	return
