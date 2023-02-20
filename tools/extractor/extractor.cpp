@@ -65,6 +65,7 @@ int main (int argc, char *argv[])
             item->rom_address = item->ram_address - 0x8000000;
             item->flag_name = symbol.substr(28);
             item->name = item->flag_name.substr(5);
+            item->map_name = "-";
             npc_gifts.push_back(item);
         }
     }
@@ -97,16 +98,36 @@ int main (int argc, char *argv[])
             map->name = map_data_json["id"];
 
             json warp_events_json = map_data_json["warp_events"];
+            std::string previous_destination = "";
+            std::string collected_indices = "";
+            uint i = 0;
             for (const auto& warp_json: warp_events_json)
             {
-                // MAP_DYNAMIC is used mostly by secret base exits and online/stats rooms
-                // with the exception of the Terra Cave, Marine Cave, and Dept. Store Elevator
-
-                // TODO: Handle Terra Cave, Marine Cave, and Dept. Store Elevator
-                // in case of shop rando and/or warp rando (possibly in combination with static pokemon rando)
-                if (warp_json["dest_map"] == "MAP_DYNAMIC") continue;
-
-                map->warps.push_back(warp_json["dest_map"]);
+                std::string destination = static_cast<std::string>(warp_json["dest_map"]) + ":" + static_cast<std::string>(warp_json["dest_warp_id"]);
+                if (destination != previous_destination && previous_destination != "")
+                {
+                    map->warps.push_back(
+                        map->name +
+                        ":" +
+                        collected_indices +
+                        "/" +
+                        previous_destination
+                    );
+                    collected_indices = "";
+                }
+                collected_indices += (collected_indices == "" ? "" : ",") + std::to_string(i);
+                previous_destination = destination;
+                ++i;
+            }
+            if (i > 0)
+            {
+                map->warps.push_back(
+                    map->name +
+                    ":" +
+                    collected_indices +
+                    "/" +
+                    previous_destination
+                );
             }
 
             json connections_json = map_data_json["connections"];
@@ -271,6 +292,7 @@ int main (int argc, char *argv[])
     {
         npc_gifts_json.push_back({
             { "name", item->name },
+            { "map_name", nullptr },
             { "flag", macros_json["flags"][item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
