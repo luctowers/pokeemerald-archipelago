@@ -29,15 +29,15 @@ int main (int argc, char *argv[])
     }
 
     // ------------------------------------------------------------------------
-    // Getting macros
+    // Getting constants
     // ------------------------------------------------------------------------
-    std::ifstream macro_file(root_dir / "tools/extractor/macros.json");
+    std::ifstream macro_file(root_dir / "tools/extractor/constants.json");
     if (macro_file.fail())
     {
-        fprintf(stderr, "Could not find macros.json\n");
+        fprintf(stderr, "Could not find constants.json\n");
         exit(1);
     }
-    json macros_json = json::parse(macro_file);
+    json constants_json = json::parse(macro_file);
 
     // ------------------------------------------------------------------------
     // Reading symbols
@@ -65,7 +65,7 @@ int main (int argc, char *argv[])
             item->ram_address = address + 3;
             item->rom_address = item->ram_address - 0x8000000;
             item->flag_name = symbol.substr(28);
-            item->name = item->flag_name.substr(5);
+            item->name = "NPC_GIFT_" + item->flag_name.substr(5);
             item->map_name = "-";
             npc_gifts.push_back(item);
         }
@@ -197,7 +197,7 @@ int main (int argc, char *argv[])
                     item->map_name = map->name;
                     item->ram_address = symbol_map["Archipelago_Target_Hidden_Item_" + item->flag_name] + 8;
                     item->rom_address = item->ram_address - 0x8000000;
-                    item->default_item = macros_json["items"][event_json["item"].get<std::string>()];
+                    item->default_item = constants_json[event_json["item"].get<std::string>()];
                     hidden_items.push_back(item);
                 }
             }
@@ -234,7 +234,7 @@ int main (int argc, char *argv[])
         try
         {
             for (const auto& encounter_slot_json: map_json.at("land_mons")["mons"]) {
-                map->land_encounters.encounter_slots[i].default_species = macros_json["species"][encounter_slot_json["species"].get<std::string>()];
+                map->land_encounters.encounter_slots[i].default_species = constants_json[encounter_slot_json["species"].get<std::string>()];
                 map->land_encounters.encounter_slots[i].min_level = encounter_slot_json["min_level"];
                 map->land_encounters.encounter_slots[i].max_level = encounter_slot_json["max_level"];
                 ++i;
@@ -252,7 +252,7 @@ int main (int argc, char *argv[])
         try
         {
             for (const auto& encounter_slot_json: map_json.at("water_mons")["mons"]) {
-                map->water_encounters.encounter_slots[i].default_species = macros_json["species"][encounter_slot_json["species"].get<std::string>()];
+                map->water_encounters.encounter_slots[i].default_species = constants_json[encounter_slot_json["species"].get<std::string>()];
                 map->water_encounters.encounter_slots[i].min_level = encounter_slot_json["min_level"];
                 map->water_encounters.encounter_slots[i].max_level = encounter_slot_json["max_level"];
                 ++i;
@@ -270,7 +270,7 @@ int main (int argc, char *argv[])
         try
         {
             for (const auto& encounter_slot_json: map_json.at("fishing_mons")["mons"]) {
-                map->fishing_encounters.encounter_slots[i].default_species = macros_json["species"][encounter_slot_json["species"].get<std::string>()];
+                map->fishing_encounters.encounter_slots[i].default_species = constants_json[encounter_slot_json["species"].get<std::string>()];
                 map->fishing_encounters.encounter_slots[i].min_level = encounter_slot_json["min_level"];
                 map->fishing_encounters.encounter_slots[i].max_level = encounter_slot_json["max_level"];
                 ++i;
@@ -328,7 +328,7 @@ int main (int argc, char *argv[])
         npc_gifts_json.push_back({
             { "name", item->name },
             { "map_name", nullptr },
-            { "flag", macros_json["flags"][item->flag_name] },
+            { "flag", constants_json[item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
             { "default_item", item->default_item },
@@ -341,7 +341,7 @@ int main (int argc, char *argv[])
         ball_items_json.push_back({
             { "name", item->name },
             { "map_name", item->map_name },
-            { "flag", macros_json["flags"][item->flag_name] },
+            { "flag", constants_json[item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
             { "default_item", item->default_item },
@@ -354,7 +354,7 @@ int main (int argc, char *argv[])
         hidden_items_json.push_back({
             { "name", item->name },
             { "map_name", item->map_name },
-            { "flag", macros_json["flags"][item->flag_name] },
+            { "flag", constants_json[item->flag_name] },
             { "ram_address", item->ram_address },
             { "rom_address", item->rom_address },
             { "default_item", item->default_item },
@@ -414,11 +414,7 @@ int main (int argc, char *argv[])
         { "ball_items", ball_items_json },
         { "hidden_items", hidden_items_json },
         { "encounter_tables", encounter_tables_json },
-        { "constants", {
-            { "items", macros_json["items"] },
-            { "flags", macros_json["flags"] },
-            { "species", macros_json["species"] },
-        } },
+        { "constants", constants_json },
     };
 
     std::ofstream outfile(root_dir / "data.json");

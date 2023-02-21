@@ -1,7 +1,9 @@
 const fs = require('fs')
 const path = require('path')
 
-// "Parses" flag values from include/constants/flags.h
+// "Parses" flag values from provided header file
+// I'd rather include this logic in extractor.cpp, but JS is so much better-
+// suited to grab these values in this way. Let me know if you have a better idea.
 const parseFile = async (filePath, startingDict = {}) => {
   let lines = await fs.promises.readFile(path.join(filePath), 'utf-8')
   lines = lines.split('\n')
@@ -40,10 +42,10 @@ const parseFile = async (filePath, startingDict = {}) => {
 
 ;(async () => {
   let output = {
-    items: await parseFile(path.join('..', '..', 'include', 'constants', 'items.h')),
-    flags: await parseFile(path.join('..', '..', 'include', 'constants', 'flags.h'), { MAX_TRAINERS_COUNT: 864 }),
-    species: await parseFile(path.join('..', '..', 'include', 'constants', 'species.h'))
+    ...await parseFile(path.join('..', '..', 'include', 'constants', 'items.h')),
+    ...await parseFile(path.join('..', '..', 'include', 'constants', 'flags.h'), { MAX_TRAINERS_COUNT: 864 }),
+    ...await parseFile(path.join('..', '..', 'include', 'constants', 'species.h'))
   }
 
-  await fs.promises.writeFile('./macros.json', JSON.stringify(output), 'utf-8')
+  await fs.promises.writeFile('./constants.json', JSON.stringify(output), 'utf-8')
 })()
