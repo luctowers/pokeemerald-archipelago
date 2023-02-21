@@ -1,5 +1,6 @@
 #include "extractor.h"
 
+#include <algorithm>
 #include <fstream>
 #include <filesystem>
 #include <iostream>
@@ -98,35 +99,69 @@ int main (int argc, char *argv[])
             map->name = map_data_json["id"];
 
             json warp_events_json = map_data_json["warp_events"];
-            std::string previous_destination = "";
-            std::string collected_indices = "";
+            std::vector<std::tuple<int, int, int, std::string>> warps;
             uint i = 0;
             for (const auto& warp_json: warp_events_json)
             {
                 std::string destination = static_cast<std::string>(warp_json["dest_map"]) + ":" + static_cast<std::string>(warp_json["dest_warp_id"]);
-                if (destination != previous_destination && previous_destination != "")
-                {
-                    map->warps.push_back(
-                        map->name +
-                        ":" +
-                        collected_indices +
-                        "/" +
-                        previous_destination
-                    );
-                    collected_indices = "";
-                }
-                collected_indices += (collected_indices == "" ? "" : ",") + std::to_string(i);
-                previous_destination = destination;
+                warps.push_back(std::tuple<int, int, int, std::string>(i, warp_json["x"], warp_json["y"], destination));
                 ++i;
             }
-            if (i > 0)
+            std::sort(
+                warps.begin(), warps.end(),
+                [](std::tuple<int, int, int, std::string> a, std::tuple<int, int, int, std::string> b)
+                {
+                    return std::get<1>(a) == std::get<1>(b) ? std::get<2>(a) < std::get<2>(a) : std::get<1>(a) < std::get<1>(b);
+                }
+            );
+            // Many warps are actually two events acting as one logical warp.
+            // Doorways, for example, are often 2 tiles wide indoors but
+            // only 1 tile wide outdoors. Both indoor warps point to the
+            // outdoor warp, and the outdoor warp points to only one of the
+            // indoor warps. This code combines adjacent warp events which
+            // go to the same destination into a single string
+            std::vector<std::tuple<std::vector<uint>, std::string>> groups;
+            std::vector<bool> is_collected(warps.size());
+            for (uint i = 0; i < warps.size(); ++i)
             {
+                if (is_collected[i]) continue;
+                const auto& warp = warps[i];
+
+                std::vector<uint> indices;
+                indices.push_back(std::get<0>(warp));
+                is_collected[i] = true;
+
+                uint previous_matched_warp_index = i;
+                for (uint j = i + 1; j < warps.size(); ++j)
+                {
+                    auto& other_warp = warps[j];
+                    // Check Destination
+                    if (std::get<3>(warp) != std::get<3>(other_warp)) continue;
+                    // Check Adjacency
+                    if (abs(std::get<1>(warps[previous_matched_warp_index]) - std::get<1>(other_warp)) + abs(std::get<2>(warps[previous_matched_warp_index]) - std::get<2>(other_warp)) > 1) continue;
+
+                    indices.push_back(std::get<0>(other_warp));
+                    is_collected[j] = true;
+                    previous_matched_warp_index = j;
+                }
+                groups.push_back({ indices, std::get<3>(warp) });
+            }
+
+            for (const auto& group: groups)
+            {
+                std::string indices_string = "";
+                for (const auto& index: std::get<0>(group))
+                {
+                    indices_string += std::to_string(index) + ",";
+                }
+                indices_string.pop_back(); // Remove last ","
+
                 map->warps.push_back(
                     map->name +
                     ":" +
-                    collected_indices +
+                    indices_string +
                     "/" +
-                    previous_destination
+                    std::get<1>(group)
                 );
             }
 
