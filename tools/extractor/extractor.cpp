@@ -56,17 +56,17 @@ int main (int argc, char *argv[])
         }
     }
 
-    std::vector<std::shared_ptr<ItemInfo>> npc_gifts;
+    std::vector<std::shared_ptr<LocationInfo>> npc_gifts;
     for (auto const& [symbol, address] : symbol_map)
     {
         if (symbol.substr(0, 28) == "Archipelago_Target_NPC_Gift_")
         {
-            std::shared_ptr<ItemInfo> item(new ItemInfo());
+            std::shared_ptr<LocationInfo> item(new LocationInfo());
+            item->name = "NPC_GIFT_" + symbol.substr(33);
+            item->type = NPC_GIFT;
+            item->flag = constants_json[symbol.substr(28)];
             item->ram_address = address + 3;
             item->rom_address = item->ram_address - 0x8000000;
-            item->flag_name = symbol.substr(28);
-            item->name = "NPC_GIFT_" + item->flag_name.substr(5);
-            item->map_name = "-";
             npc_gifts.push_back(item);
         }
     }
@@ -84,9 +84,10 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Reading map.json files
     // ------------------------------------------------------------------------
-    std::vector<std::shared_ptr<ItemInfo>> ball_items;
-    std::vector<std::shared_ptr<ItemInfo>> hidden_items;
-    std::vector<std::shared_ptr<MapInfo>> maps;
+    std::vector<std::shared_ptr<LocationInfo>> ball_items;
+    std::vector<std::shared_ptr<LocationInfo>> hidden_items;
+    std::map<std::string, std::shared_ptr<MapInfo>> maps;
+    std::vector<std::string> warps;
 
     for(const auto& entry: std::filesystem::directory_iterator(root_dir / "data/maps/"))
     {
@@ -97,48 +98,93 @@ int main (int argc, char *argv[])
 
             std::shared_ptr<MapInfo> map(new MapInfo());
             map->name = map_data_json["id"];
+            maps[map->name] = map;
+
+            // ----------------------------------------------------------------
+            // Warps
+            // ----------------------------------------------------------------
+
+            // Many warps are actually two or three events acting as one logical warp.
+            // Doorways, for example, are often 2 tiles wide indoors but
+            // only 1 tile wide outdoors. Both indoor warps point to the
+            // outdoor warp, and the outdoor warp points to only one of the
+            // indoor warps. We want to describe warps logically in a way that
+            // retains information about individual warp events.
+            //
+            // This is how warps are encoded:
+            //
+            // {source_map}:{source_warp_ids}/{dest_map}:{dest_warp_id}
+            //    source_map:       The map the warp events are located in
+            //    source_warp_ids:  The ids of all adjacent warp events in source_map
+            //                      (these must be in ascending order)
+            //    dest_map:         The map of the warp event to which this one is connected
+            //    dest_warp_id:     The id of the warp event in dest_map
+            //
+            // Example: MAP_LAVARIDGE_TOWN_HOUSE:0,1/MAP_LAVARIDGE_TOWN:4
+            //
+            // Note: A warp must have its destination set as another warp event.
+            // However, that does not guarantee that the destination warp event
+            // will warp back to the source. There are (few) one-way warps.
+            //
+            // Note2: Some warp destinations go to the map "MAP_DYNAMIC" and
+            // have a warp id which is not a number. These edge cases are:
+            //   - The Moving Truck
+            //   - Terra Cave
+            //   - Marine Cave
+            //   - The Department Store Elevator
+            //   - Secret Bases
+            //   - The Trade Center
+            //   - The Union Room
+            //   - The Record Corner
+            //   - 2P/4P Battle Colosseum
 
             json warp_events_json = map_data_json["warp_events"];
-            std::vector<std::tuple<int, int, int, std::string>> warps;
+            // (id, x, y, encoded_destination)
+            std::vector<std::tuple<int, int, int, std::string>> map_warps;
             uint i = 0;
             for (const auto& warp_json: warp_events_json)
             {
                 std::string destination = static_cast<std::string>(warp_json["dest_map"]) + ":" + static_cast<std::string>(warp_json["dest_warp_id"]);
-                warps.push_back(std::tuple<int, int, int, std::string>(i, warp_json["x"], warp_json["y"], destination));
+                map_warps.push_back(std::tuple<int, int, int, std::string>(i, warp_json["x"], warp_json["y"], destination));
                 ++i;
             }
+
+            // Sort so that adjacency checker only needs to check against the
+            // previously found matching warp. Otherwise would have to do a
+            // recursive flood of some sort.
             std::sort(
-                warps.begin(), warps.end(),
+                map_warps.begin(), map_warps.end(),
                 [](std::tuple<int, int, int, std::string> a, std::tuple<int, int, int, std::string> b)
                 {
-                    return std::get<1>(a) == std::get<1>(b) ? std::get<2>(a) < std::get<2>(a) : std::get<1>(a) < std::get<1>(b);
+                    return std::get<1>(a) == std::get<1>(b)
+                        ? std::get<2>(a) < std::get<2>(a)
+                        : std::get<1>(a) < std::get<1>(b);
                 }
             );
-            // Many warps are actually two events acting as one logical warp.
-            // Doorways, for example, are often 2 tiles wide indoors but
-            // only 1 tile wide outdoors. Both indoor warps point to the
-            // outdoor warp, and the outdoor warp points to only one of the
-            // indoor warps. This code combines adjacent warp events which
-            // go to the same destination into a single string
+
+            // Group warps by whether they're logically the same
             std::vector<std::tuple<std::vector<uint>, std::string>> groups;
-            std::vector<bool> is_collected(warps.size());
-            for (uint i = 0; i < warps.size(); ++i)
+            std::vector<bool> is_collected(map_warps.size());
+            for (uint i = 0; i < map_warps.size(); ++i)
             {
                 if (is_collected[i]) continue;
-                const auto& warp = warps[i];
 
+                const auto& warp = map_warps[i];
                 std::vector<uint> indices;
                 indices.push_back(std::get<0>(warp));
                 is_collected[i] = true;
 
                 uint previous_matched_warp_index = i;
-                for (uint j = i + 1; j < warps.size(); ++j)
+                for (uint j = i + 1; j < map_warps.size(); ++j)
                 {
-                    auto& other_warp = warps[j];
+                    auto& other_warp = map_warps[j];
                     // Check Destination
                     if (std::get<3>(warp) != std::get<3>(other_warp)) continue;
                     // Check Adjacency
-                    if (abs(std::get<1>(warps[previous_matched_warp_index]) - std::get<1>(other_warp)) + abs(std::get<2>(warps[previous_matched_warp_index]) - std::get<2>(other_warp)) > 1) continue;
+                    if (
+                        abs(std::get<1>(map_warps[previous_matched_warp_index]) - std::get<1>(other_warp)) +
+                        abs(std::get<2>(map_warps[previous_matched_warp_index]) - std::get<2>(other_warp)) > 1
+                    ) continue;
 
                     indices.push_back(std::get<0>(other_warp));
                     is_collected[j] = true;
@@ -147,16 +193,20 @@ int main (int argc, char *argv[])
                 groups.push_back({ indices, std::get<3>(warp) });
             }
 
+            // Encode and push warp
             for (const auto& group: groups)
             {
+                auto indices = std::get<0>(group);
+                std::sort(indices.begin(), indices.end());
+
                 std::string indices_string = "";
-                for (const auto& index: std::get<0>(group))
+                for (const auto& index: indices)
                 {
                     indices_string += std::to_string(index) + ",";
                 }
                 indices_string.pop_back(); // Remove last ","
 
-                map->warps.push_back(
+                warps.push_back(
                     map->name +
                     ":" +
                     indices_string +
@@ -165,21 +215,19 @@ int main (int argc, char *argv[])
                 );
             }
 
-            json connections_json = map_data_json["connections"];
-            for (const auto& connection_json: connections_json)
-            {
-                map->connections.push_back(connection_json["map"]);
-            }
-
+            // ----------------------------------------------------------------
+            // Items
+            // ----------------------------------------------------------------
             json object_events_json = map_data_json["object_events"];
             for (const auto& event_json: object_events_json)
             {
-                if (event_json["flag"].get<std::string>().substr(0, 9) == "FLAG_ITEM")
+                std::string flag_name = event_json["flag"].get<std::string>();
+                if (flag_name.substr(0, 9) == "FLAG_ITEM")
                 {
-                    std::shared_ptr<ItemInfo> item(new ItemInfo());
-                    item->flag_name = event_json["flag"];
-                    item->name = item->flag_name.substr(5);
-                    item->map_name = map->name;
+                    std::shared_ptr<LocationInfo> item(new LocationInfo());
+                    item->flag = constants_json[flag_name];
+                    item->name = flag_name.substr(5);
+                    item->type = GROUND_ITEM;
                     item->ram_address = symbol_map[event_json["script"]] + 3;
                     item->rom_address = item->ram_address - 0x8000000;
                     ball_items.push_back(item);
@@ -191,31 +239,33 @@ int main (int argc, char *argv[])
             {
                 if (event_json["type"] == "hidden_item")
                 {
-                    std::shared_ptr<ItemInfo> item(new ItemInfo());
-                    item->flag_name = event_json["flag"];
-                    item->name = item->flag_name.substr(5);
-                    item->map_name = map->name;
-                    item->ram_address = symbol_map["Archipelago_Target_Hidden_Item_" + item->flag_name] + 8;
+                    std::string flag_name = event_json["flag"].get<std::string>();
+                    std::shared_ptr<LocationInfo> item(new LocationInfo());
+                    item->flag = constants_json[flag_name];
+                    item->name = flag_name.substr(5);
+                    item->type = HIDDEN_ITEM;
+                    item->ram_address = symbol_map["Archipelago_Target_Hidden_Item_" + flag_name] + 8;
                     item->rom_address = item->ram_address - 0x8000000;
                     item->default_item = constants_json[event_json["item"].get<std::string>()];
                     hidden_items.push_back(item);
                 }
             }
-
-            maps.push_back(map);
         }
     }
 
     // ------------------------------------------------------------------------
     // Reading encounter tables
     // ------------------------------------------------------------------------
-    std::vector<std::shared_ptr<MapEncounterInfo>> encounter_tables;
-
     std::ifstream wild_encounters_file(root_dir / "src/data/wild_encounters.json");
     json wild_encounters_json = json::parse(wild_encounters_file);
     
     for (const auto& map_json: wild_encounters_json["wild_encounter_groups"][0]["encounters"]) {
-        std::shared_ptr<MapEncounterInfo> map(new MapEncounterInfo());
+        std::shared_ptr<MapInfo> map = maps[map_json["map"]];
+
+        // Altering Cave is the only map with multiple encounter tables.
+        // It is supposed to switch between them based on a value set by an unreleased event.
+        // The only vanilla table is the first one, with all Zubats.
+        if (map->name == "MAP_ALTERING_CAVE" && map_json["base_label"] != "gAlteringCave1") continue;
 
         std::string base_symbol = map_json["base_label"];
 
@@ -226,18 +276,14 @@ int main (int argc, char *argv[])
         map->fishing_encounters.ram_address = symbol_map[base_symbol + "_FishingMons"];
         map->fishing_encounters.rom_address = map->fishing_encounters.ram_address - 0x8000000;
 
-        map->map_name = map_json["map"];
-
-        uint i;
-
-        i = 0;
         try
         {
             for (const auto& encounter_slot_json: map_json.at("land_mons")["mons"]) {
-                map->land_encounters.encounter_slots[i].default_species = constants_json[encounter_slot_json["species"].get<std::string>()];
-                map->land_encounters.encounter_slots[i].min_level = encounter_slot_json["min_level"];
-                map->land_encounters.encounter_slots[i].max_level = encounter_slot_json["max_level"];
-                ++i;
+                auto slot = std::shared_ptr<EncounterSlotInfo>(new EncounterSlotInfo());
+                map->land_encounters.encounter_slots.push_back(slot);
+                slot->default_species = constants_json[encounter_slot_json["species"].get<std::string>()];
+                slot->min_level = encounter_slot_json["min_level"];
+                slot->max_level = encounter_slot_json["max_level"];
             }
             map->land_encounters.exists = true;
         }
@@ -248,14 +294,14 @@ int main (int argc, char *argv[])
             }
         }
 
-        i = 0;
         try
         {
             for (const auto& encounter_slot_json: map_json.at("water_mons")["mons"]) {
-                map->water_encounters.encounter_slots[i].default_species = constants_json[encounter_slot_json["species"].get<std::string>()];
-                map->water_encounters.encounter_slots[i].min_level = encounter_slot_json["min_level"];
-                map->water_encounters.encounter_slots[i].max_level = encounter_slot_json["max_level"];
-                ++i;
+                auto slot = std::shared_ptr<EncounterSlotInfo>(new EncounterSlotInfo());
+                map->water_encounters.encounter_slots.push_back(slot);
+                slot->default_species = constants_json[encounter_slot_json["species"].get<std::string>()];
+                slot->min_level = encounter_slot_json["min_level"];
+                slot->max_level = encounter_slot_json["max_level"];
             }
             map->water_encounters.exists = true;
         }
@@ -266,14 +312,14 @@ int main (int argc, char *argv[])
             }
         }
 
-        i = 0;
         try
         {
             for (const auto& encounter_slot_json: map_json.at("fishing_mons")["mons"]) {
-                map->fishing_encounters.encounter_slots[i].default_species = constants_json[encounter_slot_json["species"].get<std::string>()];
-                map->fishing_encounters.encounter_slots[i].min_level = encounter_slot_json["min_level"];
-                map->fishing_encounters.encounter_slots[i].max_level = encounter_slot_json["max_level"];
-                ++i;
+                auto slot = std::shared_ptr<EncounterSlotInfo>(new EncounterSlotInfo());
+                map->fishing_encounters.encounter_slots.push_back(slot);
+                slot->default_species = constants_json[encounter_slot_json["species"].get<std::string>()];
+                slot->min_level = encounter_slot_json["min_level"];
+                slot->max_level = encounter_slot_json["max_level"];
             }
             map->fishing_encounters.exists = true;
         }
@@ -283,8 +329,6 @@ int main (int argc, char *argv[])
                 throw e;
             }
         }
-
-        encounter_tables.push_back(map);
     }
 
     // ------------------------------------------------------------------------
@@ -313,96 +357,23 @@ int main (int argc, char *argv[])
     // Creating output
     // ------------------------------------------------------------------------
     json maps_json;
-    for (const auto& map: maps)
+    for (const auto& map_tuple: maps)
     {
-        maps_json.push_back({
-            { "name", map->name },
-            { "connections", map->connections },
-            { "warps", map->warps },
-        });
+        maps_json[map_tuple.first] = map_tuple.second->to_json();
     }
 
-    json npc_gifts_json;
-    for (const auto& item: npc_gifts)
+    json locations_json;
+    for (const auto& location: npc_gifts)
     {
-        npc_gifts_json.push_back({
-            { "name", item->name },
-            { "map_name", nullptr },
-            { "flag", constants_json[item->flag_name] },
-            { "ram_address", item->ram_address },
-            { "rom_address", item->rom_address },
-            { "default_item", item->default_item },
-        });
+        locations_json[location->name] = location->to_json();
     }
-
-    json ball_items_json;
-    for (const auto& item: ball_items)
+    for (const auto& location: ball_items)
     {
-        ball_items_json.push_back({
-            { "name", item->name },
-            { "map_name", item->map_name },
-            { "flag", constants_json[item->flag_name] },
-            { "ram_address", item->ram_address },
-            { "rom_address", item->rom_address },
-            { "default_item", item->default_item },
-        });
+        locations_json[location->name] = location->to_json();
     }
-
-    json hidden_items_json;
-    for (const auto& item: hidden_items)
+    for (const auto& location: hidden_items)
     {
-        hidden_items_json.push_back({
-            { "name", item->name },
-            { "map_name", item->map_name },
-            { "flag", constants_json[item->flag_name] },
-            { "ram_address", item->ram_address },
-            { "rom_address", item->rom_address },
-            { "default_item", item->default_item },
-        });
-    }
-
-    json encounter_tables_json;
-    for (const auto& table: encounter_tables)
-    {
-        json map = {};
-        
-        if (table->land_encounters.exists) {
-            map["land_encounters"] = {
-                { "ram_address", table->land_encounters.ram_address },
-                { "rom_address", table->land_encounters.rom_address },
-                { "encounter_slots", json::array() },
-            };
-            for (uint j = 0; j < NUM_LAND_ENCOUNTER_SLOTS; ++j)
-            {
-                map["land_encounters"]["encounter_slots"].push_back(table->land_encounters.encounter_slots[j].default_species);
-            }
-        }
-        
-        if (table->water_encounters.exists) {
-            map["water_encounters"] = {
-                { "ram_address", table->water_encounters.ram_address },
-                { "rom_address", table->water_encounters.rom_address },
-                { "encounter_slots", json::array() },
-            };
-            for (uint j = 0; j < NUM_WATER_ENCOUNTER_SLOTS; ++j)
-            {
-                map["water_encounters"]["encounter_slots"].push_back(table->water_encounters.encounter_slots[j].default_species);
-            }
-        }
-        
-        if (table->fishing_encounters.exists) {
-            map["fishing_encounters"] = {
-                { "ram_address", table->fishing_encounters.ram_address },
-                { "rom_address", table->fishing_encounters.rom_address },
-                { "encounter_slots", json::array() },
-            };
-            for (uint j = 0; j < NUM_FISHING_ENCOUNTER_SLOTS; ++j)
-            {
-                map["fishing_encounters"]["encounter_slots"].push_back(table->fishing_encounters.encounter_slots[j].default_species);
-            }
-        }
-
-        encounter_tables_json[table->map_name] = map;
+        locations_json[location->name] = location->to_json();
     }
 
     json output_json = {
@@ -410,13 +381,58 @@ int main (int argc, char *argv[])
         { "maps", maps_json },
         { "misc_ram_addresses", misc_ram_addresses },
         { "misc_rom_addresses", misc_rom_addresses },
-        { "npc_gifts", npc_gifts_json },
-        { "ball_items", ball_items_json },
-        { "hidden_items", hidden_items_json },
-        { "encounter_tables", encounter_tables_json },
+        { "locations", locations_json },
+        { "warps", warps },
         { "constants", constants_json },
     };
 
-    std::ofstream outfile(root_dir / "data.json");
+    std::ofstream outfile(root_dir / "extracted_data.json");
     outfile << std::setw(2) << output_json << std::endl;
+}
+
+std::string location_type_to_string (LocationType lt)
+{
+    switch (lt)
+    {
+        case GROUND_ITEM: return "GROUND_ITEM";
+        case HIDDEN_ITEM: return "HIDDEN_ITEM";
+        case NPC_GIFT: return "NPC_GIFT";
+        default: return "UNKNOWN";
+    }
+}
+
+json LocationInfo::to_json ()
+{
+    return {
+        { "type", location_type_to_string(this->type) },
+        { "flag", this->flag },
+        { "ram_address", this->ram_address },
+        { "rom_address", this->rom_address },
+        { "default_item", this->default_item },
+    };
+}
+
+json MapInfo::to_json ()
+{
+    return {
+        { "land_encounters", this->land_encounters.to_json() },
+        { "water_encounters", this->water_encounters.to_json() },
+        { "fishing_encounters", this->fishing_encounters.to_json() },
+    };
+}
+
+json EncounterTableInfo::to_json ()
+{
+    if (!this->exists) return nullptr;
+    json slots_json = json::array();
+    for (const auto &encounter_slot: this->encounter_slots)
+    {
+        slots_json.push_back(encounter_slot->default_species);
+    }
+
+    return {
+        { "encounter_slots", slots_json },
+        { "ram_address", this->ram_address },
+        { "rom_address", this->rom_address },
+    };
 }
