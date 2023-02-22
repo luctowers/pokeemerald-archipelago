@@ -231,7 +231,7 @@ extract: syms tools
 	$(EXTRACTOR)
 
 patch: $(ROM)
-	bsdiff pokeemerald.gba $(ROM) base_patch.bsdiff4
+	bsdiff4 pokeemerald.gba $(ROM) base_patch.bsdiff4
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: all
