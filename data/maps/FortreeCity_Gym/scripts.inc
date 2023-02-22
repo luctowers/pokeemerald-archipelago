@@ -25,9 +25,8 @@ FortreeCity_Gym_EventScript_Winona::
 	end
 
 FortreeCity_Gym_EventScript_WinonaDefeated::
-	setvar VAR_UNUSED_0x8014, 5
-	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
-	giveitem VAR_RESULT
+Archipelago_Target_Badge_6::
+	giveitem ITEM_BADGE_6
 	msgbox FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setvar VAR_0x8008, 6

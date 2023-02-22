@@ -58,9 +58,8 @@ LavaridgeTown_Gym_1F_EventScript_Flannery::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
-	setvar VAR_UNUSED_0x8014, 3
-	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
-	giveitem VAR_RESULT
+Archipelago_Target_Badge_4::
+	giveitem ITEM_BADGE_4
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_WHITEOUT_TO_LAVARIDGE
 	setflag FLAG_DEFEATED_LAVARIDGE_GYM

@@ -4294,8 +4294,3 @@ void ArchipelagoSpecial_SetArchipelagoFlag(void)
     ArchipelagoFlagSet(gArchipelagoReceivedItem.archipelagoFlagId);
     gArchipelagoReceivedItem.full = FALSE;
 }
-
-u16 ArchipelagoSpecial_GetItemAtBadge(void)
-{
-    return gGymBadgeItems[gSpecialVar_Unused_0x8014];
-}

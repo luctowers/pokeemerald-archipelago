@@ -11,9 +11,8 @@ RustboroCity_Gym_EventScript_Roxanne::
 	end
 
 RustboroCity_Gym_EventScript_RoxanneDefeated::
-	setvar VAR_UNUSED_0x8014, 0
-	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
-	giveitem VAR_RESULT
+Archipelago_Target_Badge_1::
+	giveitem ITEM_BADGE_1
 	msgbox RustboroCity_Gym_Text_StoneBadgeInfoTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setvar VAR_RUSTBORO_CITY_STATE, 1

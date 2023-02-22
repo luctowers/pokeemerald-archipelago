@@ -58,9 +58,8 @@ MossdeepCity_Gym_EventScript_TateAndLiza::
 	end
 
 MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
-	setvar VAR_UNUSED_0x8014, 6
-	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
-	giveitem VAR_RESULT
+Archipelago_Target_Badge_7::
+	giveitem ITEM_BADGE_7
 	msgbox MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS

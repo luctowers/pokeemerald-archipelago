@@ -84,9 +84,8 @@ MauvilleCity_Gym_EventScript_Wattson::
 	end
 
 MauvilleCity_Gym_EventScript_WattsonDefeated::
-	setvar VAR_UNUSED_0x8014, 2
-	specialvar VAR_RESULT, ArchipelagoSpecial_GetItemAtBadge
-	giveitem VAR_RESULT
+Archipelago_Target_Badge_3::
+	giveitem ITEM_BADGE_3
 	msgbox MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis, MSGBOX_DEFAULT
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT

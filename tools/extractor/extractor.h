@@ -13,7 +13,8 @@
 enum LocationType {
     GROUND_ITEM,
     HIDDEN_ITEM,
-    NPC_GIFT
+    NPC_GIFT,
+    BADGE
 };
 
 std::string location_type_to_string (LocationType lt);

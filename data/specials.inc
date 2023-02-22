@@ -540,4 +540,3 @@ gSpecials::
 	def_special ArchipelagoSpecial_IsItemBadge
 	def_special ArchipelagoSpecial_GetReceivedItemId
 	def_special ArchipelagoSpecial_SetArchipelagoFlag
-	def_special ArchipelagoSpecial_GetItemAtBadge

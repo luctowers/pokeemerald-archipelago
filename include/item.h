@@ -36,7 +36,6 @@ struct ArchipelagoReceivedItem
     bool8 full;             // Whether the item in this structure has yet to be received
 };
 
-extern const u16 gGymBadgeItems[];
 extern struct ArchipelagoReceivedItem gArchipelagoReceivedItem;
 
 extern const struct Item gItems[];

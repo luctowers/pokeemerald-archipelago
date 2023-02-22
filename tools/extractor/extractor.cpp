@@ -56,6 +56,7 @@ int main (int argc, char *argv[])
         }
     }
 
+    // NPC Gifts
     std::vector<std::shared_ptr<LocationInfo>> npc_gifts;
     for (auto const& [symbol, address] : symbol_map)
     {
@@ -71,14 +72,25 @@ int main (int argc, char *argv[])
         }
     }
 
+    // Badges
+    std::vector<std::shared_ptr<LocationInfo>> badges;
+    for (auto const& [symbol, address] : symbol_map)
+    {
+        if (symbol.substr(0, 25) == "Archipelago_Target_Badge_")
+        {
+            std::shared_ptr<LocationInfo> item(new LocationInfo());
+            item->name = "BADGE_" + symbol.substr(25);
+            item->type = BADGE;
+            item->flag = constants_json["FLAG_BADGE0" + symbol.substr(25) + "_GET"];
+            item->ram_address = address + 3;
+            item->rom_address = item->ram_address - 0x8000000;
+            badges.push_back(item);
+        }
+    }
+
     std::map<std::string, uint32_t> misc_ram_addresses = {
         { "gSaveblock1", symbol_map["gSaveblock1"] },
         { "gArchipelagoReceivedItem", symbol_map["gArchipelagoReceivedItem"] },
-        { "gGymBadgeItems", symbol_map["gGymBadgeItems"] },
-    };
-
-    std::map<std::string, uint32_t> misc_rom_addresses = {
-        { "gGymBadgeItems", symbol_map["gGymBadgeItems"] - 0x8000000 },
     };
 
     // ------------------------------------------------------------------------
@@ -353,6 +365,12 @@ int main (int argc, char *argv[])
         rom.read((char*)&(item->default_item), 2);
     }
 
+    for (const auto& item: badges)
+    {
+        rom.seekg(item->rom_address, std::ios::beg);
+        rom.read((char*)&(item->default_item), 2);
+    }
+
     // ------------------------------------------------------------------------
     // Creating output
     // ------------------------------------------------------------------------
@@ -375,12 +393,15 @@ int main (int argc, char *argv[])
     {
         locations_json[location->name] = location->to_json();
     }
+    for (const auto& location: badges)
+    {
+        locations_json[location->name] = location->to_json();
+    }
 
     json output_json = {
         { "_comment", "DO NOT MODIFY. This file was auto-generated. Your changes will likely be overwritten." },
         { "maps", maps_json },
         { "misc_ram_addresses", misc_ram_addresses },
-        { "misc_rom_addresses", misc_rom_addresses },
         { "locations", locations_json },
         { "warps", warps },
         { "constants", constants_json },
@@ -397,6 +418,7 @@ std::string location_type_to_string (LocationType lt)
         case GROUND_ITEM: return "GROUND_ITEM";
         case HIDDEN_ITEM: return "HIDDEN_ITEM";
         case NPC_GIFT: return "NPC_GIFT";
+        case BADGE: return "BADGE";
         default: return "UNKNOWN";
     }
 }

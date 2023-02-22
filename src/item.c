@@ -18,12 +18,6 @@
 static bool8 CheckPyramidBagHasItem(u16 itemId, u16 count);
 static bool8 CheckPyramidBagHasSpace(u16 itemId, u16 count);
 
-const u16 gGymBadgeItems[8] = {
-    ITEM_BADGE_1, ITEM_BADGE_2,
-    ITEM_BADGE_3, ITEM_BADGE_4,
-    ITEM_BADGE_5, ITEM_BADGE_6,
-    ITEM_BADGE_7, ITEM_BADGE_8
-};
 EWRAM_DATA struct ArchipelagoReceivedItem gArchipelagoReceivedItem = {0};
 
 EWRAM_DATA struct BagPocket gBagPockets[POCKETS_COUNT] = {0};
