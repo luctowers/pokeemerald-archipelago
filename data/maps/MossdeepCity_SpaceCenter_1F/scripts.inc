@@ -114,9 +114,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_SunStoneMan::
 	goto_if_eq VAR_MOSSDEEP_CITY_STATE, 2, MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma
 	goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone
 	msgbox MossdeepCity_SpaceCenter_1F_Text_FoundThisYouCanHaveIt, MSGBOX_DEFAULT
-	giveitem ITEM_SUN_STONE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
+	call MossdeepCity_SpaceCenter_1F_EventScript_GiveSunStone
 	msgbox MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers, MSGBOX_DEFAULT
 	release
 	end
@@ -129,9 +127,7 @@ MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone::
 MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma::
 	goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma
 	msgbox MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_SUN_STONE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
+	call MossdeepCity_SpaceCenter_1F_EventScript_GiveSunStone
 	msgbox MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma, MSGBOX_DEFAULT
 	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
@@ -144,6 +140,13 @@ MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma::
 	waitmovement 0
 	release
 	end
+
+MossdeepCity_SpaceCenter_1F_EventScript_GiveSunStone::
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_SUN_STONE_MOSSDEEP::
+	giveitem ITEM_SUN_STONE
+	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
+	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_Woman::
 	lock
