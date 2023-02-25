@@ -62,19 +62,22 @@ LavaridgeTown_EventScript_RivalGiveGoGoggles::
 
 LavaridgeTown_EventScript_MayGiveGoGoggles::
 	msgbox LavaridgeTown_Text_MayNiceBadgesTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_GO_GOGGLES
-	setflag FLAG_RECEIVED_GO_GOGGLES
+	call LavaridgeTown_EventScript_GiveGoGoggles
 	msgbox LavaridgeTown_Text_MayExplainGoGogglesChallengeDad, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_RivalExit
 	end
 
 LavaridgeTown_EventScript_BrendanGiveGoGoggles::
 	msgbox LavaridgeTown_Text_BrendanNiceBadgesTakeThis, MSGBOX_DEFAULT
-	giveitem ITEM_GO_GOGGLES
-	setflag FLAG_RECEIVED_GO_GOGGLES
+	call LavaridgeTown_EventScript_GiveGoGoggles
 	msgbox LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad, MSGBOX_DEFAULT
 	goto LavaridgeTown_EventScript_RivalExit
 	end
+
+LavaridgeTown_EventScript_GiveGoGoggles::
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_GO_GOGGLES::
+	giveitem ITEM_GO_GOGGLES
+	setflag FLAG_RECEIVED_GO_GOGGLES
 
 LavaridgeTown_EventScript_RivalExit::
 	closemessage
