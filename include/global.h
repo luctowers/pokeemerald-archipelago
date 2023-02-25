@@ -968,6 +968,11 @@ struct ExternalEventFlags
 
 } __attribute__((packed));/*size = 0x15*/
 
+// Since the save block struct has been modified to expand bag capacity
+// and remove data for Union Room chats, the exact positions of each field
+// below is only approximate. The compiler may have moved or not added
+// the padding that you see in the vanilla save block. It should only
+// differ by a few bytes if at all.
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -980,93 +985,93 @@ struct SaveBlock1
     /*0x2E*/ u8 weather;
     /*0x2F*/ u8 weatherCycleStage;
     /*0x30*/ u8 flashLevel;
-    /*0x31*/ //u8 padding1;
+    /*0x31*/ //u8 padding1; // Padding may have been (re)moved after bag expansion
     /*0x32*/ u16 mapLayoutId;
     /*0x34*/ u16 mapView[0x100];
     /*0x234*/ u8 playerPartyCount;
-    /*0x235*/ //u8 padding2[3];
+    /*0x235*/ //u8 padding2[3]; // Padding may have been (re)moved after bag expansion
     /*0x238*/ struct Pokemon playerParty[PARTY_SIZE];
     /*0x490*/ u32 money;
     /*0x494*/ u16 coins;
     /*0x496*/ u16 registeredItem; // registered for use with SELECT button
     /*0x498*/ struct ItemSlot pcItems[PC_ITEMS_COUNT];
     /*0x560*/ struct ItemSlot bagPocket_Items[BAG_ITEMS_COUNT];
-    /*0x5D8*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
-    /*0x650*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
-    /*0x690*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
-    /*0x790*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
-    /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
-    /*0x988*/ u8 seen1[NUM_DEX_FLAG_BYTES];
-    /*0x9BC*/ u16 berryBlenderRecords[3];
-    /*0x9C2*/ u8 unused_9C2[6];
-    /*0x9C8*/ u16 trainerRematchStepCounter;
-    /*0x9CA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
-    /*0xA2E*/ //u8 padding3[2];
-    /*0xA30*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
-    /*0xC70*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
-    /*0x1270*/ u8 flags[NUM_FLAG_BYTES];
-    /*0x139C*/ u16 vars[VARS_COUNT];
-    /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
-    /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
-    /*0x1A9C*/ struct SecretBase secretBases[SECRET_BASES_COUNT];
-    /*0x271C*/ u8 playerRoomDecorations[DECOR_MAX_PLAYERS_HOUSE];
-    /*0x2728*/ u8 playerRoomDecorationPositions[DECOR_MAX_PLAYERS_HOUSE];
-    /*0x2734*/ u8 decorationDesks[10];
-    /*0x273E*/ u8 decorationChairs[10];
-    /*0x2748*/ u8 decorationPlants[10];
-    /*0x2752*/ u8 decorationOrnaments[30];
-    /*0x2770*/ u8 decorationMats[30];
-    /*0x278E*/ u8 decorationPosters[10];
-    /*0x2798*/ u8 decorationDolls[40];
-    /*0x27C0*/ u8 decorationCushions[10];
-    /*0x27CA*/ //u8 padding4[2];
-    /*0x27CC*/ TVShow tvShows[TV_SHOWS_COUNT];
-    /*0x2B50*/ PokeNews pokeNews[POKE_NEWS_COUNT];
-    /*0x2B90*/ u16 outbreakPokemonSpecies;
-    /*0x2B92*/ u8 outbreakLocationMapNum;
-    /*0x2B93*/ u8 outbreakLocationMapGroup;
-    /*0x2B94*/ u8 outbreakPokemonLevel;
-    /*0x2B95*/ u8 outbreakUnused1;
-    /*0x2B96*/ u16 outbreakUnused2;
-    /*0x2B98*/ u16 outbreakPokemonMoves[MAX_MON_MOVES];
-    /*0x2BA0*/ u8 outbreakUnused3;
-    /*0x2BA1*/ u8 outbreakPokemonProbability;
-    /*0x2BA2*/ u16 outbreakDaysLeft;
-    /*0x2BA4*/ struct GabbyAndTyData gabbyAndTyData;
-    /*0x2BB0*/ u16 easyChatProfile[EASY_CHAT_BATTLE_WORDS_COUNT];
-    /*0x2BBC*/ u16 easyChatBattleStart[EASY_CHAT_BATTLE_WORDS_COUNT];
-    /*0x2BC8*/ u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT];
-    /*0x2BD4*/ u16 easyChatBattleLost[EASY_CHAT_BATTLE_WORDS_COUNT];
-    /*0x2BE0*/ struct Mail mail[MAIL_COUNT];
-    /*0x2E20*/ u8 additionalPhrases[NUM_ADDITIONAL_PHRASE_BYTES]; // bitfield for 33 additional phrases in easy chat system
-    /*0x2E25*/ //u8 padding5[3];
-    /*0x2E28*/ OldMan oldMan;
-    /*0x2e64*/ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
-    /*0x2e90*/ struct ContestWinner contestWinners[NUM_CONTEST_WINNERS]; // see CONTEST_WINNER_*
-    /*0x3030*/ struct DayCare daycare;
-    /*0x3150*/ struct LinkBattleRecords linkBattleRecords;
-    /*0x31A8*/ u8 giftRibbons[GIFT_RIBBONS_COUNT];
-    /*0x31B3*/ struct ExternalEventData externalEventData;
-    /*0x31C7*/ struct ExternalEventFlags externalEventFlags;
-    /*0x31DC*/ struct Roamer roamer;
-    /*0x31F8*/ struct EnigmaBerry enigmaBerry;
-    /*0x322C*/ struct MysteryGiftSave mysteryGift;
-    /*0x3598*/ u8 archipelagoFlags[0x180]; // Previously unused block, now flags for received items (capacity for 3072 flags)
-    /*0x3718*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
-    /*0x3728*/ struct RamScript ramScript;
-    /*0x3B14*/ struct RecordMixingGift recordMixingGift;
-    /*0x3B24*/ u8 seen2[NUM_DEX_FLAG_BYTES];
-    /*0x3B58*/ LilycoveLady lilycoveLady;
-    /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
+    /*0x718*/ struct ItemSlot bagPocket_KeyItems[BAG_KEYITEMS_COUNT];
+    /*0x790*/ struct ItemSlot bagPocket_PokeBalls[BAG_POKEBALLS_COUNT];
+    /*0x7D0*/ struct ItemSlot bagPocket_TMHM[BAG_TMHM_COUNT];
+    /*0x8D0*/ struct ItemSlot bagPocket_Berries[BAG_BERRIES_COUNT];
+    /*0x988*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
+    /*0xAC8*/ u8 seen1[NUM_DEX_FLAG_BYTES];
+    /*0xAFC*/ u16 berryBlenderRecords[3];
+    /*0xB02*/ u8 unused_9C2[6];
+    /*0xB08*/ u16 trainerRematchStepCounter;
+    /*0xB0A*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
+    /*0xB6E*/ //u8 padding3[2]; // Padding may have been (re)moved after bag expansion
+    /*0xB70*/ struct ObjectEvent objectEvents[OBJECT_EVENTS_COUNT];
+    /*0xDB0*/ struct ObjectEventTemplate objectEventTemplates[OBJECT_EVENT_TEMPLATES_COUNT];
+    /*0x13B0*/ u8 flags[NUM_FLAG_BYTES];
+    /*0x14DC*/ u16 vars[VARS_COUNT];
+    /*0x16DC*/ u32 gameStats[NUM_GAME_STATS];
+    /*0x17DC*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
+    /*0x1BDC*/ struct SecretBase secretBases[SECRET_BASES_COUNT];
+    /*0x285C*/ u8 playerRoomDecorations[DECOR_MAX_PLAYERS_HOUSE];
+    /*0x2868*/ u8 playerRoomDecorationPositions[DECOR_MAX_PLAYERS_HOUSE];
+    /*0x2874*/ u8 decorationDesks[10];
+    /*0x287E*/ u8 decorationChairs[10];
+    /*0x2888*/ u8 decorationPlants[10];
+    /*0x2892*/ u8 decorationOrnaments[30];
+    /*0x28B0*/ u8 decorationMats[30];
+    /*0x28CE*/ u8 decorationPosters[10];
+    /*0x28D8*/ u8 decorationDolls[40];
+    /*0x2900*/ u8 decorationCushions[10];
+    /*0x290A*/ //u8 padding4[2]; // Padding may have been (re)moved after bag expansion
+    /*0x290C*/ TVShow tvShows[TV_SHOWS_COUNT];
+    /*0x2C90*/ PokeNews pokeNews[POKE_NEWS_COUNT];
+    /*0x2CD0*/ u16 outbreakPokemonSpecies;
+    /*0x2CD2*/ u8 outbreakLocationMapNum;
+    /*0x2CD3*/ u8 outbreakLocationMapGroup;
+    /*0x2CD4*/ u8 outbreakPokemonLevel;
+    /*0x2CD5*/ u8 outbreakUnused1;
+    /*0x2CD6*/ u16 outbreakUnused2;
+    /*0x2CD8*/ u16 outbreakPokemonMoves[MAX_MON_MOVES];
+    /*0x2CE0*/ u8 outbreakUnused3;
+    /*0x2CE1*/ u8 outbreakPokemonProbability;
+    /*0x2CE2*/ u16 outbreakDaysLeft;
+    /*0x2CE4*/ struct GabbyAndTyData gabbyAndTyData;
+    /*0x2CF0*/ u16 easyChatProfile[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x2CFC*/ u16 easyChatBattleStart[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x2D08*/ u16 easyChatBattleWon[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x2D14*/ u16 easyChatBattleLost[EASY_CHAT_BATTLE_WORDS_COUNT];
+    /*0x2D20*/ struct Mail mail[MAIL_COUNT];
+    /*0x2F60*/ u8 additionalPhrases[NUM_ADDITIONAL_PHRASE_BYTES]; // bitfield for 33 additional phrases in easy chat system
+    /*0x2F65*/ //u8 padding5[3]; // Padding may have been (re)moved after bag expansion
+    /*0x2F68*/ OldMan oldMan;
+    /*0x2FA4*/ struct DewfordTrend dewfordTrends[SAVED_TRENDS_COUNT];
+    /*0x2FD0*/ struct ContestWinner contestWinners[NUM_CONTEST_WINNERS]; // see CONTEST_WINNER_*
+    /*0x3170*/ struct DayCare daycare;
+    /*0x3290*/ struct LinkBattleRecords linkBattleRecords;
+    /*0x32E8*/ u8 giftRibbons[GIFT_RIBBONS_COUNT];
+    /*0x32F3*/ struct ExternalEventData externalEventData;
+    /*0x3307*/ struct ExternalEventFlags externalEventFlags;
+    /*0x331C*/ struct Roamer roamer;
+    /*0x3338*/ struct EnigmaBerry enigmaBerry;
+    /*0x336C*/ struct MysteryGiftSave mysteryGift;
+    /*0x36D8*/ u8 archipelagoFlags[0x180]; // Previously unused block, now flags for received items (capacity for 3072 flags)
+    /*0x3858*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
+    /*0x3868*/ struct RamScript ramScript;
+    /*0x3C54*/ struct RecordMixingGift recordMixingGift;
+    /*0x3C64*/ u8 seen2[NUM_DEX_FLAG_BYTES];
+    /*0x3C98*/ LilycoveLady lilycoveLady;
+    /*0x3CD8*/ struct TrainerNameRecord trainerNameRecords[20];
 
     #ifndef FREE_UNION_ROOM_REGISTERED_TEXTS
     /*------*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
     #endif // FREE_UNION_ROOM_REGISTERED_TEXTS
 
-    /*0x3C88*/ u8 unused_3D5A[10];
-    /*0x3C92*/ struct TrainerHillSave trainerHill;
-    /*0x3C9E*/ struct WaldaPhrase waldaPhrase;
-    // sizeof: 0x3CB6
+    /*0x3DC8*/ u8 unused_3D5A[10];
+    /*0x3DD2*/ struct TrainerHillSave trainerHill;
+    /*0x3DDE*/ struct WaldaPhrase waldaPhrase;
+    // sizeof: 0x3DF8
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
