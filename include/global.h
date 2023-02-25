@@ -16,6 +16,9 @@
 #include "constants/easy_chat.h"
 #include "constants/trainer_hill.h"
 
+// Freeing up space in SaveBlock1
+#define FREE_UNION_ROOM_REGISTERED_TEXTS
+
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");
 
@@ -1055,11 +1058,15 @@ struct SaveBlock1
     /*0x3B24*/ u8 seen2[NUM_DEX_FLAG_BYTES];
     /*0x3B58*/ LilycoveLady lilycoveLady;
     /*0x3B98*/ struct TrainerNameRecord trainerNameRecords[20];
-    /*0x3C88*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
-    /*0x3D5A*/ u8 unused_3D5A[10];
-    /*0x3D64*/ struct TrainerHillSave trainerHill;
-    /*0x3D70*/ struct WaldaPhrase waldaPhrase;
-    // sizeof: 0x3D88
+
+    #ifndef FREE_UNION_ROOM_REGISTERED_TEXTS
+    /*------*/ u8 registeredTexts[UNION_ROOM_KB_ROW_COUNT][21];
+    #endif // FREE_UNION_ROOM_REGISTERED_TEXTS
+
+    /*0x3C88*/ u8 unused_3D5A[10];
+    /*0x3C92*/ struct TrainerHillSave trainerHill;
+    /*0x3C9E*/ struct WaldaPhrase waldaPhrase;
+    // sizeof: 0x3CB6
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
