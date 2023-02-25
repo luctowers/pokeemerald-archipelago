@@ -463,7 +463,9 @@ Route110_EventScript_BrendanDefeated::
 	end
 
 Route110_EventScript_GiveItemfinder::
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_ITEMFINDER::
 	giveitem ITEM_ITEMFINDER
+	setflag FLAG_RECEIVED_ITEMFINDER
 	return
 
 Route110_EventScript_RivalExit::

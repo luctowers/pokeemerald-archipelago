@@ -1217,12 +1217,14 @@
 #define FLAG_ITEM_SAFARI_ZONE_NORTH_EAST_NUGGET                     0x491
 #define FLAG_ITEM_SAFARI_ZONE_SOUTH_EAST_BIG_PEARL                  0x492
 
-#define FLAG_UNUSED_0x493                                           0x493 // Unused Flag
-#define FLAG_UNUSED_0x494                                           0x494 // Unused Flag
-#define FLAG_UNUSED_0x495                                           0x495 // Unused Flag
-#define FLAG_UNUSED_0x496                                           0x496 // Unused Flag
-#define FLAG_UNUSED_0x497                                           0x497 // Unused Flag
-#define FLAG_UNUSED_0x498                                           0x498 // Unused Flag
+// Flags for archipelago locations that don't have a good option otherwise
+#define FLAG_RECEIVED_GREAT_BALL_PETALBURG_WOODS                    0x493
+#define FLAG_RECEIVED_DEVON_GOODS_RUSTURF_TUNNEL                    0x494
+#define FLAG_RECEIVED_GREAT_BALL_RUSTBORO_CITY                      0x495
+#define FLAG_RECEIVED_LETTER                                        0x496
+#define FLAG_RECEIVED_TM47                                          0x497
+#define FLAG_RECEIVED_ITEMFINDER                                    0x498
+
 #define FLAG_UNUSED_0x499                                           0x499 // Unused Flag
 #define FLAG_UNUSED_0x49A                                           0x49A // Unused Flag
 #define FLAG_UNUSED_0x49B                                           0x49B // Unused Flag

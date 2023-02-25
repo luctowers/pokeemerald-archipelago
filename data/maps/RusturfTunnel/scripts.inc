@@ -309,7 +309,9 @@ RusturfTunnel_EventScript_Grunt::
 	msgbox RusturfTunnel_Text_GruntIntro, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_GRUNT_RUSTURF_TUNNEL, RusturfTunnel_Text_GruntDefeat
 	msgbox RusturfTunnel_Text_GruntTakePackage, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_DEVON_GOODS_RUSTURF_TUNNEL::
 	giveitem ITEM_DEVON_GOODS
+	setflag FLAG_RECEIVED_DEVON_GOODS_RUSTURF_TUNNEL
 	closemessage
 	applymovement OBJ_EVENT_ID_PLAYER, RusturfTunnel_Movement_PushPlayerAsideForGrunt
 	applymovement LOCALID_GRUNT, RusturfTunnel_Movement_GruntEscape
