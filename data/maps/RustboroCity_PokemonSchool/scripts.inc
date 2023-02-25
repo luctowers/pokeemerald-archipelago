@@ -81,6 +81,7 @@ RustboroCity_PokemonSchool_EventScript_Teacher::
 	call_if_eq VAR_FACING, DIR_EAST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast
 	call_if_eq VAR_FACING, DIR_WEST, RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest
 	msgbox RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_QUICK_CLAW::
 	giveitem ITEM_QUICK_CLAW
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	closemessage

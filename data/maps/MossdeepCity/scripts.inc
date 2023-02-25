@@ -235,6 +235,7 @@ MossdeepCity_EventScript_KingsRockBoy::
 	msgbox MossdeepCity_Text_WantKingsRockStevenGaveMe, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MossdeepCity_EventScript_DeclineKingsRock
 	msgbox MossdeepCity_Text_YouCanKeepIt, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_KINGS_ROCK::
 	giveitem ITEM_KINGS_ROCK
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_KINGS_ROCK

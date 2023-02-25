@@ -45,6 +45,7 @@ Route114_EventScript_RoarGentleman::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM05, Route114_EventScript_ReceivedRoar
 	msgbox Route114_Text_AllMyMonDoesIsRoarTakeThis, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM05::
 	giveitem ITEM_TM05
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM05

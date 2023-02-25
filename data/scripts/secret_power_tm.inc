@@ -43,6 +43,7 @@ Route111_EventScript_SecretPowerMan::
 	end
 
 Route111_EventScript_GiveSecretPower::
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_SECRET_POWER::
 	giveitem ITEM_TM43
 	goto_if_eq VAR_RESULT, FALSE, Route111_EventScript_NoRoomForSecretPower
 	msgbox Route111_Text_ExplainSecretPower, MSGBOX_DEFAULT

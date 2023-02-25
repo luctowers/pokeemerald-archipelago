@@ -203,6 +203,7 @@ SlateportCity_PokemonFanClub_EventScript_GiveSootheBell::
 	applymovement VAR_LAST_TALKED, Common_Movement_Delay48
 	waitmovement 0
 	msgbox SlateportCity_PokemonFanClub_Text_PokemonAdoresYou, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_SOOTHE_BELL::
 	giveitem ITEM_SOOTHE_BELL
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_SOOTHE_BELL

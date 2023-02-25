@@ -24,6 +24,7 @@ Archipelago_Target_Badge_1::
 	end
 
 RustboroCity_Gym_EventScript_GiveRockTomb::
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM39::
 	giveitem ITEM_TM39
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM39

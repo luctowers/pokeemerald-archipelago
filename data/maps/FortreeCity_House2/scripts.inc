@@ -19,6 +19,7 @@ FortreeCity_House2_EventScript_HiddenPowerGiver::
 	switch VAR_RESULT
 	case 0, FortreeCity_House2_EventScript_WrongGuess
 	msgbox FortreeCity_House2_Text_YourHiddenPowerHasAwoken, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM10::
 	giveitem ITEM_TM10
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM10

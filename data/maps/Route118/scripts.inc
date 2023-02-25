@@ -33,6 +33,7 @@ Route118_EventScript_GoodRodFisherman::
 
 Route118_EventScript_ReceiveGoodRod::
 	msgbox Route118_Text_IdenticalMindsTakeThis, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_GOOD_ROD::
 	giveitem ITEM_GOOD_ROD
 	setflag FLAG_RECEIVED_GOOD_ROD
 	msgbox Route118_Text_TryYourLuckFishing, MSGBOX_DEFAULT

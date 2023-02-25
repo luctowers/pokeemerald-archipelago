@@ -165,6 +165,7 @@ Archipelago_Target_Badge_2::
 	end
 
 DewfordTown_Gym_EventScript_GiveBulkUp::
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM08::
 	giveitem ITEM_TM08
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_BagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT

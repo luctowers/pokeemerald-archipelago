@@ -92,6 +92,7 @@ DewfordTown_EventScript_OldRodFisherman::
 
 DewfordTown_EventScript_GiveOldRod::
 	msgbox DewfordTown_Text_GiveYouOneOfMyRods, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_OLD_ROD::
 	giveitem ITEM_OLD_ROD
 	setflag FLAG_RECEIVED_OLD_ROD
 	msgbox DewfordTown_Text_ThrowInFishingAdvice, MSGBOX_DEFAULT
