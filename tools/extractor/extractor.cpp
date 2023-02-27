@@ -31,7 +31,7 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Getting constants
     // ------------------------------------------------------------------------
-    std::ifstream macro_file(root_dir / "tools/extractor/constants.json");
+    std::ifstream macro_file(root_dir / "constants.json");
     if (macro_file.fail())
     {
         fprintf(stderr, "Could not find constants.json\n");

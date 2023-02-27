@@ -1,9 +1,4 @@
 TOOLCHAIN := $(DEVKITARM)
-COMPARE ?= 0
-
-ifeq (compare,$(MAKECMDGOALS))
-  COMPARE := 1
-endif
 
 # don't use dkP's base_tools anymore
 # because the redefinition of $(CC) conflicts
@@ -121,7 +116,7 @@ endif
 
 LDFLAGS = -Map ../../$(MAP)
 
-SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
+NODE := $(shell { command -v node; } 2>/dev/null)
 GFX := tools/gbagfx/gbagfx$(EXE)
 AIF := tools/aif2pcm/aif2pcm$(EXE)
 MID := tools/mid2agb/mid2agb$(EXE)
@@ -151,7 +146,7 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools mostlyclean clean-tools $(TOOLDIRS) libagbsyscall modern tidymodern tidynonmodern
+.PHONY: all rom clean tidy tools mostlyclean clean-tools $(TOOLDIRS) libagbsyscall modern tidymodern tidynonmodern
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -223,18 +218,15 @@ $(TOOLDIRS):
 	@$(MAKE) -C $@
 
 rom: $(ROM)
-ifeq ($(COMPARE),1)
-	@$(SHA1) rom.sha1
-endif
 
-extract: syms tools
+parse-constants:
+	$(NODE) ./tools/extractor/parseConstants.js
+
+extract: tools rom syms parse-constants
 	$(EXTRACTOR)
 
 patch: $(ROM)
 	bsdiff4 pokeemerald.gba $(ROM) base_patch.bsdiff4
-
-# For contributors to make sure a change didn't affect the contents of the ROM.
-compare: all
 
 clean: mostlyclean clean-tools
 
