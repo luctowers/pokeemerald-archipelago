@@ -93,6 +93,11 @@ int main (int argc, char *argv[])
         { "gArchipelagoReceivedItem", symbol_map["gArchipelagoReceivedItem"] },
     };
 
+    std::map<std::string, uint32_t> misc_rom_addresses = {
+        { "gExpMultiplierNumerator", symbol_map["gExpMultiplierNumerator"] },
+        { "gExpMultiplierDenominator", symbol_map["gExpMultiplierDenominator"] },
+    };
+
     // ------------------------------------------------------------------------
     // Reading map.json files
     // ------------------------------------------------------------------------
@@ -402,6 +407,7 @@ int main (int argc, char *argv[])
         { "_comment", "DO NOT MODIFY. This file was auto-generated. Your changes will likely be overwritten." },
         { "maps", maps_json },
         { "misc_ram_addresses", misc_ram_addresses },
+        { "misc_rom_addresses", misc_rom_addresses },
         { "locations", locations_json },
         { "warps", warps },
         { "constants", constants_json },
