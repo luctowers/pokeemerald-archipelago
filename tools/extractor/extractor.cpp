@@ -4,6 +4,7 @@
 #include <fstream>
 #include <filesystem>
 #include <iostream>
+#include <set>
 #include <string>
 #include <regex>
 
@@ -31,6 +32,7 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Getting constants
     // ------------------------------------------------------------------------
+    std::cout << "Loading constants..." << std::endl;
     std::ifstream macro_file(root_dir / "constants.json");
     if (macro_file.fail())
     {
@@ -42,6 +44,7 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Reading symbols
     // ------------------------------------------------------------------------
+    std::cout << "Reading symbols..." << std::endl;
     std::ifstream symbol_map_file(root_dir / "pokeemerald-archipelago.sym");
     std::regex symbol_map_regex("^([0-9a-fA-F]+) [lg] [0-9a-fA-F]+ ([a-zA-Z0-9_]+)$");
     std::map<std::string, uint32_t> symbol_map;
@@ -101,10 +104,11 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Reading map.json files
     // ------------------------------------------------------------------------
+    std::cout << "Reading maps..." << std::endl;
     std::vector<std::shared_ptr<LocationInfo>> ball_items;
     std::vector<std::shared_ptr<LocationInfo>> hidden_items;
     std::map<std::string, std::shared_ptr<MapInfo>> maps;
-    std::vector<std::string> warps;
+    std::vector<std::shared_ptr<WarpInfo>> warps;
 
     for(const auto& entry: std::filesystem::directory_iterator(root_dir / "data/maps/"))
     {
@@ -125,19 +129,23 @@ int main (int argc, char *argv[])
             // Doorways, for example, are often 2 tiles wide indoors but
             // only 1 tile wide outdoors. Both indoor warps point to the
             // outdoor warp, and the outdoor warp points to only one of the
-            // indoor warps. We want to describe warps logically in a way that
+            // indoor warps. There are also warps that are 2 tiles wide and lead to
+            // a corresponding pair of warps. We want to describe warps logically in a way that
             // retains information about individual warp events.
             //
             // This is how warps are encoded:
             //
-            // {source_map}:{source_warp_ids}/{dest_map}:{dest_warp_id}
+            // {source_map}:{source_warp_ids}/{dest_map}:{dest_warp_id}[!]
             //    source_map:       The map the warp events are located in
             //    source_warp_ids:  The ids of all adjacent warp events in source_map
             //                      (these must be in ascending order)
             //    dest_map:         The map of the warp event to which this one is connected
-            //    dest_warp_id:     The id of the warp event in dest_map
+            //    dest_warp_ids:     The ids of the warp events in dest_map
+            //    [!]:              If the warp expects to lead to a destination which does
+            //                      not lead back to it, add a ! to the end
             //
-            // Example: MAP_LAVARIDGE_TOWN_HOUSE:0,1/MAP_LAVARIDGE_TOWN:4
+            // Example:   MAP_LAVARIDGE_TOWN_HOUSE:0,1/MAP_LAVARIDGE_TOWN:4
+            // Example 2: MAP_AQUA_HIDEOUT_B1F:14/MAP_AQUA_HIDEOUT_B1F:12!
             //
             // Note: A warp must have its destination set as another warp event.
             // However, that does not guarantee that the destination warp event
@@ -156,13 +164,30 @@ int main (int argc, char *argv[])
             //   - 2P/4P Battle Colosseum
 
             json warp_events_json = map_data_json["warp_events"];
-            // (id, x, y, encoded_destination)
-            std::vector<std::tuple<int, int, int, std::string>> map_warps;
+            // (id, x, y, destination_map, destination_id)
+            std::vector<std::shared_ptr<WarpInfo>> map_warps;
             uint i = 0;
             for (const auto& warp_json: warp_events_json)
             {
-                std::string destination = static_cast<std::string>(warp_json["dest_map"]) + ":" + static_cast<std::string>(warp_json["dest_warp_id"]);
-                map_warps.push_back(std::tuple<int, int, int, std::string>(i, warp_json["x"], warp_json["y"], destination));
+                std::shared_ptr<WarpInfo> warp(new WarpInfo);
+                warp->source_map = map->name;
+                warp->source_indices.push_back(i);
+                warp->source_coordinates.push_back(std::tuple<int, int>(warp_json["x"], warp_json["y"]));
+                warp->dest_map = warp_json["dest_map"];
+                if (warp_json["dest_warp_id"] == "WARP_ID_DYNAMIC")
+                {
+                    warp->dest_indices.push_back(-1);
+                }
+                else if (warp_json["dest_warp_id"] == "WARP_ID_SECRET_BASE")
+                {
+                    warp->dest_indices.push_back(-2);
+                }
+                else
+                {
+                    warp->dest_indices.push_back(std::stoi(static_cast<std::string>(warp_json["dest_warp_id"])));
+                }
+
+                map_warps.push_back(warp);
                 ++i;
             }
 
@@ -171,65 +196,53 @@ int main (int argc, char *argv[])
             // recursive flood of some sort.
             std::sort(
                 map_warps.begin(), map_warps.end(),
-                [](std::tuple<int, int, int, std::string> a, std::tuple<int, int, int, std::string> b)
+                [](std::shared_ptr<WarpInfo> a, std::shared_ptr<WarpInfo> b)
                 {
-                    return std::get<1>(a) == std::get<1>(b)
-                        ? std::get<2>(a) < std::get<2>(a)
-                        : std::get<1>(a) < std::get<1>(b);
+                    return std::get<0>(a->source_coordinates[0]) == std::get<0>(b->source_coordinates[0])
+                        ? std::get<1>(a->source_coordinates[0]) < std::get<1>(b->source_coordinates[0])
+                        : std::get<0>(a->source_coordinates[0]) < std::get<0>(b->source_coordinates[0]);
                 }
             );
 
             // Group warps by whether they're logically the same
-            std::vector<std::tuple<std::vector<uint>, std::string>> groups;
+            std::vector<std::shared_ptr<WarpInfo>> grouped_warps;
             std::vector<bool> is_collected(map_warps.size());
             for (uint i = 0; i < map_warps.size(); ++i)
             {
                 if (is_collected[i]) continue;
 
-                const auto& warp = map_warps[i];
-                std::vector<uint> indices;
-                indices.push_back(std::get<0>(warp));
+                const auto warp = map_warps[i];
                 is_collected[i] = true;
 
-                uint previous_matched_warp_index = i;
                 for (uint j = i + 1; j < map_warps.size(); ++j)
                 {
-                    auto& other_warp = map_warps[j];
-                    // Check Destination
-                    if (std::get<3>(warp) != std::get<3>(other_warp)) continue;
-                    // Check Adjacency
+                    const auto other_warp = map_warps[j];
+
+                    // Check destination map to exit early, but we're assuming that adjacent
+                    // warps are always part of the same logical warp
+                    if (warp->dest_map != other_warp->dest_map) continue;
+                    // Check adjacency
                     if (
-                        abs(std::get<1>(map_warps[previous_matched_warp_index]) - std::get<1>(other_warp)) +
-                        abs(std::get<2>(map_warps[previous_matched_warp_index]) - std::get<2>(other_warp)) > 1
+                        abs(std::get<0>(warp->source_coordinates.back()) - std::get<0>(other_warp->source_coordinates[0])) +
+                        abs(std::get<1>(warp->source_coordinates.back()) - std::get<1>(other_warp->source_coordinates[0])) > 1
                     ) continue;
 
-                    indices.push_back(std::get<0>(other_warp));
+                    if (
+                        map->name == "MAP_ROUTE110_TRICK_HOUSE_PUZZLE7" &&
+                        (warp->source_indices[0] == 9 || warp->source_indices[0] == 11)
+                    ) continue; // These are the only two warps in the game which are adjacent but go to completely different places
+
+                    warp->source_indices.push_back(other_warp->source_indices[0]);
+                    warp->dest_indices.push_back(other_warp->dest_indices[0]);
+                    warp->source_coordinates.push_back(other_warp->source_coordinates[0]);
                     is_collected[j] = true;
-                    previous_matched_warp_index = j;
                 }
-                groups.push_back({ indices, std::get<3>(warp) });
+                grouped_warps.push_back(warp);
             }
 
-            // Encode and push warp
-            for (const auto& group: groups)
+            for (const auto warp: grouped_warps)
             {
-                auto indices = std::get<0>(group);
-                std::sort(indices.begin(), indices.end());
-
-                std::string indices_string = "";
-                for (const auto& index: indices)
-                {
-                    indices_string += std::to_string(index) + ",";
-                }
-                indices_string.pop_back(); // Remove last ","
-
-                warps.push_back(
-                    map->name +
-                    ":" +
-                    indices_string +
-                    "/" +
-                    std::get<1>(group)
-                );
+                warps.push_back(warp);
             }
 
             // ----------------------------------------------------------------
@@ -270,9 +283,29 @@ int main (int argc, char *argv[])
         }
     }
 
+    // Now that all warps are created we can check 1-way
+    for (const auto &warp: warps)
+    {
+        for (const auto &other_warp: warps)
+        {
+            if (warp == other_warp) continue;
+            if (warp->connects_to(*other_warp))
+            {
+                // Found our destination
+                if (other_warp->connects_to(*warp))
+                {
+                    warp->is_one_way = false;
+                }
+
+                break;
+            }
+        }
+    }
+
     // ------------------------------------------------------------------------
     // Reading encounter tables
     // ------------------------------------------------------------------------
+    std::cout << "Reading encounter tables..." << std::endl;
     std::ifstream wild_encounters_file(root_dir / "src/data/wild_encounters.json");
     json wild_encounters_json = json::parse(wild_encounters_file);
     
@@ -351,6 +384,7 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Reading ROM
     // ------------------------------------------------------------------------
+    std::cout << "Reading ROM..." << std::endl;
     std::ifstream rom(root_dir / "pokeemerald-archipelago.gba", std::ios::binary);
     if (rom.fail())
     {
@@ -379,6 +413,7 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     // Creating output
     // ------------------------------------------------------------------------
+    std::cout << "Creating JSON..." << std::endl;
     json maps_json;
     for (const auto& map_tuple: maps)
     {
@@ -403,16 +438,24 @@ int main (int argc, char *argv[])
         locations_json[location->name] = location->to_json();
     }
 
+    std::vector<std::string> encoded_warps;
+    for (const auto& warp: warps)
+    {
+        encoded_warps.push_back(warp->encode());
+    }
+    std::sort(encoded_warps.begin(), encoded_warps.end());
+
     json output_json = {
         { "_comment", "DO NOT MODIFY. This file was auto-generated. Your changes will likely be overwritten." },
         { "maps", maps_json },
         { "misc_ram_addresses", misc_ram_addresses },
         { "misc_rom_addresses", misc_rom_addresses },
         { "locations", locations_json },
-        { "warps", warps },
+        { "warps", encoded_warps },
         { "constants", constants_json },
     };
 
+    std::cout << "Writing file..." << std::endl;
     std::ofstream outfile(root_dir / "extracted_data.json");
     outfile << std::setw(2) << output_json << std::endl;
 }
@@ -438,6 +481,110 @@ json LocationInfo::to_json ()
         { "rom_address", this->rom_address },
         { "default_item", this->default_item },
     };
+}
+
+bool WarpInfo::connects_to (const WarpInfo &other)
+{
+    if (this->dest_map != other.source_map) return false;
+
+    bool contains_all_indices = true;
+    for (uint dest_i: this->dest_indices)
+    {
+        bool found_index = false;
+        for (uint other_source_i: other.source_indices)
+        {
+            if (dest_i == other_source_i)
+            {
+                found_index = true;
+                break;
+            }
+        }
+
+        if (!found_index) {
+            contains_all_indices = false;
+            break;
+        }
+    }
+
+    return contains_all_indices;
+}
+
+std::string WarpInfo::encode ()
+{
+    std::string result = "";
+
+    result += this->source_map + ":";
+    std::set<int> sorted_source_indices(this->source_indices.begin(), this->source_indices.end());
+    for (int i: sorted_source_indices)
+    {
+        result += std::to_string(i) + ",";
+    }
+    result.pop_back();
+
+    result += "/";
+
+    result += this->dest_map + ":";
+    std::set<int> sorted_dest_indices(this->dest_indices.begin(), this->dest_indices.end());
+    for (int i: sorted_dest_indices)
+    {
+        result += std::to_string(i) + ",";
+    }
+    result.pop_back();
+
+    if (this->is_one_way)
+    {
+        result += '!';
+    }
+
+    return result;
+}
+
+WarpInfo WarpInfo::decode (std::string s)
+{
+    bool is_one_way = false;
+    if (s.back() == '!')
+    {
+        is_one_way = true;
+        s.pop_back();
+    }
+
+    size_t slash_i = s.find('/');
+    std::string source = s.substr(0, slash_i);
+    std::string dest = s.substr(slash_i + 1);
+
+    size_t source_colon_i = source.find(':');
+    std::string source_map = source.substr(0, source_colon_i);
+    std::string source_indices_string = source.substr(source_colon_i + 1);
+    size_t dest_colon_i = dest.find(':');
+    std::string dest_map = dest.substr(0, dest_colon_i);
+    std::string dest_indices_string = dest.substr(dest_colon_i + 1);
+
+    size_t i = 0;
+    size_t prev_i = 0;
+    std::vector<int> source_indices;
+    while ((i = source_indices_string.find(',', i)) < source_indices_string.size())
+    {
+        source_indices.push_back(std::stoi(source_indices_string.substr(prev_i, i - prev_i)));
+        prev_i = i + 1;
+    }
+
+    i = 0;
+    prev_i = 0;
+    std::vector<int> dest_indices;
+    while ((i = dest_indices_string.find(',', i)) < dest_indices_string.size())
+    {
+        dest_indices.push_back(std::stoi(dest_indices_string.substr(prev_i, i - prev_i)));
+        prev_i = i + 1;
+    }
+
+    WarpInfo warp_info;
+    warp_info.is_one_way = is_one_way;
+    warp_info.source_map = source_map;
+    warp_info.source_indices = source_indices;
+    warp_info.dest_map = dest_map;
+    warp_info.dest_indices = dest_indices;
+
+    return warp_info;
 }
 
 json MapInfo::to_json ()

@@ -31,6 +31,21 @@ class LocationInfo {
         nlohmann::json to_json ();
 };
 
+class WarpInfo {
+    public:
+        bool is_one_way = true;
+        std::string source_map;
+        std::vector<int> source_indices;
+        std::vector<std::tuple<int, int>> source_coordinates;
+        std::string dest_map;
+        std::vector<int> dest_indices;
+        std::vector<std::tuple<int, int>> dest_coordinates;
+
+        bool connects_to (const WarpInfo &other);
+        std::string encode ();
+        static WarpInfo decode (std::string s);
+};
+
 struct EncounterSlotInfo {
     uint16_t default_species;
     uint8_t min_level;
