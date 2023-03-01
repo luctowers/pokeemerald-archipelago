@@ -6,14 +6,10 @@ PacifidlogTown_House2_EventScript_FanClubYoungerBrother::
 	faceplayer
 	dotimebasedevents
 	call PacifidlogTown_House2_EventScript_UpdateFanClubTMFlag
-	goto_if_set FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK, PacifidlogTown_House2_EventScript_ComeBackInXDays
 	call_if_set FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_MonAssessment
 	call_if_unset FLAG_MET_FANCLUB_YOUNGER_BROTHER, PacifidlogTown_House2_EventScript_FirstMonAssessment
 	setflag FLAG_MET_FANCLUB_YOUNGER_BROTHER
-	specialvar VAR_RESULT, GetLeadMonFriendshipScore
-	goto_if_ge VAR_RESULT, FRIENDSHIP_150_TO_199, PacifidlogTown_House2_EventScript_GiveReturn
-	specialvar VAR_RESULT, GetLeadMonFriendshipScore
-	goto_if_ge VAR_RESULT, FRIENDSHIP_50_TO_99, PacifidlogTown_House2_EventScript_PutInEffort
+	call PacifidlogTown_House2_EventScript_GiveReturn
 	goto PacifidlogTown_House2_EventScript_GiveFrustration
 	end
 
@@ -38,10 +34,10 @@ PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM::
 
 PacifidlogTown_House2_EventScript_GiveReturn::
 	msgbox PacifidlogTown_House2_Text_AdoringPokemonTakeThis, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM27_2::
 	giveitem ITEM_TM27
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
-	special SetPacifidlogTMReceivedDay
+	setflag FLAG_RECEIVED_TM27_2
 	msgbox PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT
 	release
 	end
@@ -53,10 +49,10 @@ PacifidlogTown_House2_EventScript_PutInEffort::
 
 PacifidlogTown_House2_EventScript_GiveFrustration::
 	msgbox PacifidlogTown_House2_Text_ViciousPokemonTakeThis, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM21::
 	giveitem ITEM_TM21
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_FANCLUB_TM_THIS_WEEK
-	special SetPacifidlogTMReceivedDay
+	setflag FLAG_RECEIVED_TM21
 	msgbox PacifidlogTown_House2_Text_ExplainReturnFrustration, MSGBOX_DEFAULT
 	release
 	end

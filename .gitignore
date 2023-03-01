@@ -39,4 +39,5 @@ prefabs.json
 *.sna
 *.diff
 *.sym
-*.json
+extracted_data.json
+constants.json

@@ -14,6 +14,7 @@ Route123_EventScript_GigaDrainGirl::
 	special IsGrassTypeInParty
 	goto_if_eq VAR_RESULT, FALSE, Route123_EventScript_NoGrassMons
 	msgbox Route123_Text_YouLikeGrassMonsTooHaveThis, MSGBOX_DEFAULT
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM19::
 	giveitem ITEM_TM19
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setflag FLAG_RECEIVED_TM19
