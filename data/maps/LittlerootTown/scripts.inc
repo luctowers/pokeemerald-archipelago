@@ -471,6 +471,7 @@ LittlerootTown_EventScript_GiveRunningShoesTrigger5::
 	end
 
 LittlerootTown_EventScript_GiveRunningShoesTrigger::
+	call LittlerootTown_EventScript_SetSkipWallyTutorial
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomNoticePlayerMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomNoticePlayerFemale
@@ -488,6 +489,15 @@ LittlerootTown_EventScript_GiveRunningShoesTrigger::
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomReturnHomeFemale
 	goto LittlerootTown_EventScript_SetReceivedRunningShoes
 	end
+
+@ Progresses Petalburg City and Petalburg City Gym as if the Wally tutorial already happened
+LittlerootTown_EventScript_SetSkipWallyTutorial::
+	setflag FLAG_HIDE_PETALBURG_CITY_WALLYS_MOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_RIVAL
+	special InitBirchState
+	setvar VAR_PETALBURG_CITY_STATE, 3
+	setvar VAR_PETALBURG_GYM_STATE, 2
+	return
 
 LittlerootTown_EventScript_SetHomeDoorCoordsMale::
 	setvar VAR_0x8009, 5

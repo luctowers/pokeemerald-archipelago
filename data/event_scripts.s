@@ -669,6 +669,11 @@ Common_ShowEasyChatScreen::
 	fadescreen FADE_FROM_BLACK
 	return
 
+Common_EventScript_ProgressPetalburgGym::
+	addvar VAR_PETALBURG_GYM_STATE, 1
+	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
+	return
+
 Common_EventScript_ReadyPetalburgGymForBattle::
 	clearflag FLAG_HIDE_PETALBURG_GYM_GREETER
 	setflag FLAG_PETALBURG_MART_EXPANDED_ITEMS

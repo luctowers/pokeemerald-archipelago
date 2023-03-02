@@ -90,8 +90,7 @@ Archipelago_Target_Badge_3::
 	setvar VAR_SLATEPORT_OUTSIDE_MUSEUM_STATE, 3
 	clearflag FLAG_HIDE_VERDANTURF_TOWN_SCOTT
 	setflag FLAG_DEFEATED_MAUVILLE_GYM
-	addvar VAR_PETALBURG_GYM_STATE, 1
-	call_if_eq VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ReadyPetalburgGymForBattle
+	call_if_lt VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ProgressPetalburgGym
 	setvar VAR_0x8008, 3
 	call Common_EventScript_SetGymTrainers
 	special MauvilleGymDeactivatePuzzle
