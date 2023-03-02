@@ -97,8 +97,8 @@ int main (int argc, char *argv[])
     };
 
     std::map<std::string, uint32_t> misc_rom_addresses = {
-        { "gExpMultiplierNumerator", symbol_map["gExpMultiplierNumerator"] },
-        { "gExpMultiplierDenominator", symbol_map["gExpMultiplierDenominator"] },
+        { "gExpMultiplierNumerator", symbol_map["gExpMultiplierNumerator"] - 0x8000000 },
+        { "gExpMultiplierDenominator", symbol_map["gExpMultiplierDenominator"] - 0x8000000 },
     };
 
     // ------------------------------------------------------------------------
