@@ -53,8 +53,8 @@
 #include "constants/trainers.h"
 
 extern const u8 *const gBattleScriptsForMoveEffects[];
-const u8 gExpMultiplierNumerator = 1;
-const u8 gExpMultiplierDenominator = 1;
+const u16 gExpMultiplierNumerator = 100;
+const u16 gExpMultiplierDenominator = 100;
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
@@ -3276,7 +3276,7 @@ static void Cmd_getexp(void)
                     viaExpShare++;
             }
 
-            calculatedExp = gSpeciesInfo[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7 * gExpMultiplierNumerator / gExpMultiplierDenominator;
+            calculatedExp = gSpeciesInfo[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7 * (gExpMultiplierNumerator / gExpMultiplierDenominator);
 
             if (viaExpShare) // at least one mon is getting exp via exp share
             {
