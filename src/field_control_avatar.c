@@ -40,6 +40,9 @@ static EWRAM_DATA u16 sPrevMetatileBehavior = 0;
 
 u8 gSelectedObjectEvent;
 
+static EWRAM_DATA u8 sPreviouslyHeldDirections;
+static EWRAM_DATA u8 sLastPressedDirection;
+
 static void GetPlayerPosition(struct MapPosition *);
 static void GetInFrontOfPlayerPosition(struct MapPosition *);
 static u16 GetPlayerCurMetatileBehavior(int);
@@ -91,6 +94,7 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     u8 tileTransitionState = gPlayerAvatar.tileTransitionState;
     u8 runningState = gPlayerAvatar.runningState;
     bool8 forcedMove = MetatileBehavior_IsForcedMovementTile(GetPlayerCurMetatileBehavior(runningState));
+    u8 heldDirections = 0;
 
     if ((tileTransitionState == T_TILE_CENTER && forcedMove == FALSE) || tileTransitionState == T_NOT_MOVING)
     {
@@ -122,13 +126,34 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
     }
 
     if (heldKeys & DPAD_UP)
-        input->dpadDirection = DIR_NORTH;
-    else if (heldKeys & DPAD_DOWN)
-        input->dpadDirection = DIR_SOUTH;
-    else if (heldKeys & DPAD_LEFT)
-        input->dpadDirection = DIR_WEST;
-    else if (heldKeys & DPAD_RIGHT)
-        input->dpadDirection = DIR_EAST;
+        heldDirections |= (1 << DIR_NORTH);
+    if (heldKeys & DPAD_DOWN)
+        heldDirections |= (1 << DIR_SOUTH);
+    if (heldKeys & DPAD_LEFT)
+        heldDirections |= (1 << DIR_WEST);
+    if (heldKeys & DPAD_RIGHT)
+        heldDirections |= (1 << DIR_EAST);
+
+    if (heldDirections == 0)
+        input->dpadDirection = DIR_NONE;
+    else if (heldDirections == sPreviouslyHeldDirections)
+        input->dpadDirection = sLastPressedDirection;
+    else
+    {
+        u8 newDirections = heldDirections & (~sPreviouslyHeldDirections);
+        u8 i = 0;
+
+        if (newDirections == 0)
+            newDirections = heldDirections;
+
+        while(((newDirections >> i) & 1) == 0)
+            ++i;
+
+        input->dpadDirection = i;
+        sLastPressedDirection = i;
+    }
+
+    sPreviouslyHeldDirections = heldDirections;
 }
 
 int ProcessPlayerFieldInput(struct FieldInput *input)

@@ -57,8 +57,6 @@ static const struct {
     u16 numerator;
     u16 denominator;
 } sExpMultiplier = { 100, 100 };
-// const u16 gExpMultiplierNumerator = 100;
-// const u16 gExpMultiplierDenominator = 100;
 
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
