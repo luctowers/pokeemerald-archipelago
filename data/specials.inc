@@ -536,6 +536,8 @@ gSpecials::
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
 
+	def_special GetItemHoldEffect
+
 	def_special ArchipelagoSpecial_ShouldHandle
 	def_special ArchipelagoSpecial_IsItemBadge
 	def_special ArchipelagoSpecial_GetReceivedItemId

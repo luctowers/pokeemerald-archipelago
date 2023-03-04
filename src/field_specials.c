@@ -4272,6 +4272,11 @@ u8 Script_TryGainNewFanFromCounter(void)
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
 
+u8 GetItemHoldEffect(void)
+{
+    return ItemId_GetHoldEffectParam(gSpecialVar_0x8004);
+}
+
 // Archipelago
 bool8 ArchipelagoSpecial_IsItemBadge(void)
 {
