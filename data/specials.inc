@@ -538,6 +538,7 @@ gSpecials::
 
 	def_special GetItemHoldEffect
 
+	def_special ArchipelagoSpecial_IsFerryEnabled
 	def_special ArchipelagoSpecial_ShouldHandle
 	def_special ArchipelagoSpecial_IsItemBadge
 	def_special ArchipelagoSpecial_GetReceivedItemId

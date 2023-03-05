@@ -350,12 +350,13 @@ LilycoveCity_Harbor_EventScript_FerryUnavailable::
 
 LilycoveCity_Harbor_EventScript_NoEventTickets::
 	msgbox LilycoveCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT
+	checkitem ITEM_SS_TICKET
+	goto_if_eq VAR_RESULT, FALSE, LilycoveCity_Harbor_EventScript_NoTicket
 	message LilycoveCity_Harbor_Text_FlashTicketWhereTo
 	waitmessage
 	goto LilycoveCity_Harbor_EventScript_FerryRegularLocationSelect
 	end
 
-@ Unused
 LilycoveCity_Harbor_EventScript_NoTicket::
 	msgbox LilycoveCity_Harbor_Text_NoTicket, MSGBOX_DEFAULT
 	release

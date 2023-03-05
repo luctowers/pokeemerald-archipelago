@@ -11,8 +11,8 @@ SlateportCity_Harbor_MapScripts::
 SlateportCity_Harbor_OnTransition:
 	setescapewarp MAP_SLATEPORT_CITY, 28, 13
 	setvar VAR_TEMP_1, 0
+	call_if_unset FLAG_SS_TIDAL_DISABLED, SlateportCity_Harbor_EventScript_ShowSSTidal
 	call_if_eq VAR_SLATEPORT_HARBOR_STATE, 1, SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene
-	call_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_ShowSSTidal
 	end
 
 SlateportCity_Harbor_EventScript_ShowSSTidal::
@@ -24,6 +24,7 @@ SlateportCity_Harbor_EventScript_ReadyAquaEscapeScene::
 	setobjectxyperm LOCALID_CAPT_STERN, 12, 13
 	setobjectmovementtype LOCALID_CAPT_STERN, MOVEMENT_TYPE_FACE_LEFT
 	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
+	setflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
 	return
 
 SlateportCity_Harbor_EventScript_AquaEscapeTrigger0::
@@ -163,16 +164,18 @@ SlateportCity_Harbor_Movement_PlayerWalkUp:
 SlateportCity_Harbor_EventScript_FerryAttendant::
 	lock
 	faceplayer
-	goto_if_set FLAG_SYS_GAME_CLEAR, SlateportCity_Harbor_EventScript_AskForTicket
+	goto_if_unset FLAG_SS_TIDAL_DISABLED, SlateportCity_Harbor_EventScript_AskForTicket
 	msgbox SlateportCity_Harbor_Text_FerryServiceUnavailable, MSGBOX_DEFAULT
 	release
 	end
 
 SlateportCity_Harbor_EventScript_AskForTicket::
 	msgbox SlateportCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT
+	checkitem ITEM_SS_TICKET
+	goto_if_eq VAR_RESULT, FALSE, SlateportCity_Harbor_EventScript_NoTicket
 	message SlateportCity_Harbor_Text_FlashedTicketWhereTo
 	waitmessage
-	goto SlateportCity_Harbor_EventScript_ChooseDestination
+	goto SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier
 	end
 
 SlateportCity_Harbor_EventScript_ChooseDestination::
@@ -193,7 +196,6 @@ SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier::
 	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_CancelDestinationSelect
 	end
 
-@ Unused. Should be impossible for player to reach Ferry without having received SS Tidal ticket
 SlateportCity_Harbor_EventScript_NoTicket::
 	msgbox SlateportCity_Harbor_Text_YouMustHaveTicket, MSGBOX_DEFAULT
 	release
@@ -221,7 +223,7 @@ SlateportCity_Harbor_EventScript_BattleFrontier::
 SlateportCity_Harbor_EventScript_ChooseNewDestination::
 	message SlateportCity_Harbor_Text_WhereWouldYouLikeToGo
 	waitmessage
-	goto SlateportCity_Harbor_EventScript_ChooseDestination
+	goto SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier
 	end
 
 SlateportCity_Harbor_EventScript_BoardFerry::

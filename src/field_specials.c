@@ -4278,6 +4278,12 @@ u8 GetItemHoldEffect(void)
 }
 
 // Archipelago
+bool8 ArchipelagoSpecial_IsFerryEnabled(void)
+{
+    // return FALSE;
+    return gArchipelagoOptions.isFerryEnabled;
+}
+
 bool8 ArchipelagoSpecial_IsItemBadge(void)
 {
     return gSpecialVar_Unused_0x8014 >= ITEM_BADGE_1 && gSpecialVar_Unused_0x8014 <= ITEM_BADGE_8;

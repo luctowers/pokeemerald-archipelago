@@ -97,8 +97,7 @@ int main (int argc, char *argv[])
     };
 
     std::map<std::string, uint32_t> misc_rom_addresses = {
-        { "sExpMultiplier", symbol_map["sExpMultiplier"] - 0x8000000 },
-        { "sAreTrainersBlind", symbol_map["sAreTrainersBlind"] - 0x8000000 },
+        { "gArchipelagoOptions", symbol_map["gArchipelagoOptions"] - 0x8000000 },
         { "sStarterMon", symbol_map["sStarterMon"] - 0x8000000 },
     };
 

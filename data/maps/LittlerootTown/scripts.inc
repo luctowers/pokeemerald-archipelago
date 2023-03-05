@@ -472,6 +472,7 @@ LittlerootTown_EventScript_GiveRunningShoesTrigger5::
 
 LittlerootTown_EventScript_GiveRunningShoesTrigger::
 	call LittlerootTown_EventScript_SetSkipWallyTutorial
+	call LittlerootTown_EventScript_EnableDisableFerry
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomNoticePlayerMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomNoticePlayerFemale
@@ -497,6 +498,16 @@ LittlerootTown_EventScript_SetSkipWallyTutorial::
 	special InitBirchState
 	setvar VAR_PETALBURG_CITY_STATE, 3
 	setvar VAR_PETALBURG_GYM_STATE, 2
+	return
+
+@ Unsets the ferry flag if the setting for enabling ferry is on
+LittlerootTown_EventScript_EnableDisableFerry::
+	specialvar VAR_RESULT, ArchipelagoSpecial_IsFerryEnabled
+	call_if_eq VAR_RESULT, TRUE, LittlerootTown_EventScript_EnableFerry
+	return
+
+LittlerootTown_EventScript_EnableFerry::
+	clearflag FLAG_SS_TIDAL_DISABLED
 	return
 
 LittlerootTown_EventScript_SetHomeDoorCoordsMale::

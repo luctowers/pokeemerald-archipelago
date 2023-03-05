@@ -28,6 +28,13 @@ struct LoadedSaveData
  /*0x02E8*/ struct Mail mail[MAIL_COUNT];
 };
 
+const struct ArchipelagoOptions gArchipelagoOptions = {
+    .isFerryEnabled = FALSE,
+    .areTrainersBlind = FALSE,
+    .expMultiplierNumerator = 100,
+    .expMultiplierDenominator = 100,
+};
+
 // EWRAM DATA
 EWRAM_DATA struct SaveBlock2ASLR gSaveblock2 = {0};
 EWRAM_DATA struct SaveBlock1ASLR gSaveblock1 = {0};
