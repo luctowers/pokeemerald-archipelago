@@ -180,6 +180,7 @@ Route120_EventScript_StevenBattleKecleon::
 	closemessage
 	call_if_eq VAR_FACING, DIR_NORTH, Route120_EventScript_PlayerApproachKecleonNorth
 	call_if_eq VAR_FACING, DIR_WEST, Route120_EventScript_PlayerApproachKecleonWest
+	call_if_eq VAR_FACING, DIR_EAST, Route120_EventScript_PlayerApproachKecleonEast
 	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
 	delay 20
@@ -214,9 +215,8 @@ Route120_EventScript_RemoveBridgeKecleonPostBattle::
 	end
 
 Route120_EventScript_StevenGiveDeconScope::
-	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterDown
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
+	call_if_eq VAR_FACING, DIR_WEST, Route120_EventScript_StevenPlayerFaceEachOtherSouth
+	call_if_eq VAR_FACING, DIR_SOUTH, Route120_EventScript_StevenPlayerFaceEachOtherWest
 	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_DEVON_SCOPE::
 	giveitem ITEM_DEVON_SCOPE
@@ -253,6 +253,23 @@ Route120_Movement_ApproachKecleonWest:
 	walk_down
 	walk_left
 	step_end
+
+Route120_EventScript_PlayerApproachKecleonEast::
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	return
+
+Route120_EventScript_StevenPlayerFaceEachOtherSouth::
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterDown
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+	waitmovement 0
+	return
+
+Route120_EventScript_StevenPlayerFaceEachOtherWest::
+	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterLeft
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	return
 
 Route120_EventScript_BridgeKecleon::
 	msgbox Kecleon_Text_SomethingUnseeable, MSGBOX_NPC
