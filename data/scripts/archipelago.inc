@@ -30,10 +30,10 @@ ArchipelagoScript_FindItem::
 	return
 
 ArchipelagoScript_FindHiddenItem::
+	special SetHiddenItemFlag
 	specialvar VAR_RESULT, ArchipelagoSpecial_IsItemBadge
 	goto_if_eq VAR_RESULT, TRUE, ArchipelagoScript_HandleBadgeItem
 	call ArchipelagoScript_FoundArchipelagoItem
-	special SetHiddenItemFlag
 	releaseall
 	end
 

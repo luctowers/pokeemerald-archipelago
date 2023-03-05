@@ -5,10 +5,6 @@ Std_ObtainItem::
 	copyvar VAR_UNUSED_0x8014 ITEMID
 	specialvar VAR_RESULT, ArchipelagoSpecial_ShouldHandle
 	goto_if_eq VAR_RESULT, TRUE, ArchipelagoScript_ObtainItem
-	goto_if_eq VAR_RESULT, FALSE, Std_ObtainItem_Rest
-	return
-
-Std_ObtainItem_Rest::
 	additem ITEMID, AMOUNT
 	copyvar VAR_0x8007, VAR_RESULT
 	call EventScript_ObtainItemMessage
