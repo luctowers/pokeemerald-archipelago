@@ -6,7 +6,10 @@ GraniteCave_StevensRoom_MapScripts::
 GraniteCave_StevensRoom_EventScript_Steven::
 	lock
 	faceplayer
-	msgbox GraniteCave_StevensRoom_Text_ImStevenLetterForMe, MSGBOX_DEFAULT
+	msgbox GraniteCave_StevensRoom_Text_ImSteven, MSGBOX_DEFAULT
+	checkitem ITEM_LETTER
+	goto_if_eq VAR_RESULT, FALSE, GraniteCave_StevensRoom_EventScript_NoLetter
+	msgbox GraniteCave_StevensRoom_Text_LetterForMe, MSGBOX_DEFAULT
 	setvar VAR_0x8004, ITEM_LETTER
 	call Common_EventScript_PlayerHandedOverTheItem
 	setflag FLAG_DELIVERED_STEVEN_LETTER
@@ -32,6 +35,10 @@ Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM47::
 	call_if_eq VAR_FACING, DIR_EAST, GraniteCave_StevensRoom_EventScript_StevenExitWestEast
 	playse SE_EXIT
 	removeobject LOCALID_STEVEN
+	release
+	end
+
+GraniteCave_StevensRoom_EventScript_NoLetter::
 	release
 	end
 
@@ -83,10 +90,12 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	delay_8
 	step_end
 
-GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
+GraniteCave_StevensRoom_Text_ImSteven:
 	.string "My name is STEVEN.\p"
 	.string "I'm interested in rare stones,\n"
-	.string "so I travel here and there.\p"
+	.string "so I travel here and there.$"
+
+GraniteCave_StevensRoom_Text_LetterForMe:
 	.string "Oh?\n"
 	.string "A LETTER for me?$"
 
