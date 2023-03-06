@@ -19,12 +19,15 @@ MauvilleCity_BikeShop_EventScript_SkipGreeting::
 	end
 
 MauvilleCity_BikeShop_EventScript_ChooseBike::
-	message MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne
+	message MauvilleCity_BikeShop_Text_ExplainBikes
 	waitmessage
-	multichoice 21, 8, MULTI_BIKE, TRUE
-	switch VAR_RESULT
-	case 0, MauvilleCity_BikeShop_EventScript_GetMachBike
-	case 1, MauvilleCity_BikeShop_EventScript_GetAcroBike
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_MACH_BIKE::
+	giveitem ITEM_MACH_BIKE
+	setflag FLAG_RECEIVED_MACH_BIKE
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_ACRO_BIKE::
+	giveitem ITEM_ACRO_BIKE
+	setflag FLAG_RECEIVED_ACRO_BIKE
+	release
 	end
 
 MauvilleCity_BikeShop_EventScript_NotFar::
@@ -190,7 +193,7 @@ MauvilleCity_BikeShop_Text_GuessYouDontNeedBike:
 	.string "Then, I guess you have no need for\n"
 	.string "any of my BIKES.$"
 
-MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne:
+MauvilleCity_BikeShop_Text_ExplainBikes:
 	.string "RYDEL: Hm, hm… … … … …\p"
 	.string "You're saying that you came all this\n"
 	.string "way from LITTLEROOT?\p"
@@ -211,8 +214,7 @@ MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne:
 	.string "And an ACRO BIKE is for those who\n"
 	.string "prefer technical rides!\p"
 	.string "I'm a real sweetheart, so you can\n"
-	.string "have whichever one you like!\p"
-	.string "Which one will you choose?$"
+	.string "have both!$"
 
 MauvilleCity_BikeShop_Text_ChoseMachBike:
 	.string "{PLAYER} chose the MACH BIKE.$"

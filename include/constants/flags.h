@@ -1227,9 +1227,9 @@
 #define FLAG_RECEIVED_MAGMA_EMBLEM                                  0x499
 #define FLAG_RECEIVED_TM27_2                                        0x49A
 #define FLAG_RECEIVED_TM21                                          0x49B
+#define FLAG_RECEIVED_MACH_BIKE                                     0x49C
+#define FLAG_RECEIVED_ACRO_BIKE                                     0x49D
 
-#define FLAG_UNUSED_0x49C                                           0x49C // Unused Flag
-#define FLAG_UNUSED_0x49D                                           0x49D // Unused Flag
 #define FLAG_UNUSED_0x49E                                           0x49E // Unused Flag
 #define FLAG_UNUSED_0x49F                                           0x49F // Unused Flag
 #define FLAG_UNUSED_0x4A0                                           0x4A0 // Unused Flag
