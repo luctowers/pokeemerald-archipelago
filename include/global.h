@@ -1076,17 +1076,6 @@ struct SaveBlock1
 
 extern struct SaveBlock1* gSaveBlock1Ptr;
 
-struct ArchipelagoOptions
-{
-    bool8 isFerryEnabled;
-    bool8 areTrainersBlind;
-    u16 expMultiplierNumerator;
-    u16 expMultiplierDenominator;
-} __attribute__((packed));
-
-// Initialized in load_save.c
-extern const struct ArchipelagoOptions gArchipelagoOptions;
-
 struct MapPosition
 {
     s16 x;

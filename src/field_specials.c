@@ -1,5 +1,6 @@
 #include "global.h"
 #include "malloc.h"
+#include "archipelago.h"
 #include "battle.h"
 #include "battle_tower.h"
 #include "cable_club.h"
