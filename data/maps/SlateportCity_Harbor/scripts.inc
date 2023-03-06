@@ -175,7 +175,7 @@ SlateportCity_Harbor_EventScript_AskForTicket::
 	goto_if_eq VAR_RESULT, FALSE, SlateportCity_Harbor_EventScript_NoTicket
 	message SlateportCity_Harbor_Text_FlashedTicketWhereTo
 	waitmessage
-	goto SlateportCity_Harbor_EventScript_ChooseDestinationWithBattleFrontier
+	goto SlateportCity_Harbor_EventScript_ChooseDestination
 	end
 
 SlateportCity_Harbor_EventScript_ChooseDestination::
