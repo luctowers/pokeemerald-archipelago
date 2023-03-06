@@ -98,6 +98,8 @@ int main (int argc, char *argv[])
 
     std::map<std::string, uint32_t> misc_rom_addresses = {
         { "gArchipelagoOptions", symbol_map["gArchipelagoOptions"] - 0x8000000 },
+        { "gSpeciesInfo", symbol_map["gSpeciesInfo"] - 0x8000000 },
+        { "gTMHMLearnsets", symbol_map["gTMHMLearnsets"] - 0x8000000 },
         { "sStarterMon", symbol_map["sStarterMon"] - 0x8000000 },
     };
 
@@ -475,9 +477,7 @@ std::string location_type_to_string (LocationType lt)
 json LocationInfo::to_json ()
 {
     return {
-        { "type", location_type_to_string(this->type) },
         { "flag", this->flag },
-        { "ram_address", this->ram_address },
         { "rom_address", this->rom_address },
         { "default_item", this->default_item },
     };
@@ -607,7 +607,6 @@ json EncounterTableInfo::to_json ()
 
     return {
         { "encounter_slots", slots_json },
-        { "ram_address", this->ram_address },
         { "rom_address", this->rom_address },
     };
 }
