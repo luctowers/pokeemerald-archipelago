@@ -191,8 +191,7 @@ SlateportCity_PokemonFanClub_EventScript_SootheBellWoman::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_SOOTHE_BELL, SlateportCity_PokemonFanClub_EventScript_ReceivedSootheBell
 	msgbox SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou, MSGBOX_DEFAULT
-	specialvar VAR_RESULT, GetLeadMonFriendshipScore
-	goto_if_ge VAR_RESULT, FRIENDSHIP_150_TO_199, SlateportCity_PokemonFanClub_EventScript_GiveSootheBell
+	goto SlateportCity_PokemonFanClub_EventScript_GiveSootheBell
 	release
 	end
 
