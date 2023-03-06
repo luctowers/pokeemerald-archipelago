@@ -10,14 +10,20 @@ SlateportCity_SternsShipyard_1F_EventScript_Dock::
 	msgbox SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails, MSGBOX_DEFAULT
 	applymovement LOCALID_DOCK, Common_Movement_FacePlayer
 	waitmovement 0
-	msgbox SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern, MSGBOX_DEFAULT
+	msgbox SlateportCity_SternsShipyard_1F_Text_MeetDock, MSGBOX_DEFAULT
+	checkitem ITEM_DEVON_GOODS
+	call_if_eq VAR_RESULT, TRUE, SlateportCity_SternsShipyard_1F_EventScript_DockRejectGoods
 	closemessage
 	applymovement LOCALID_DOCK, Common_Movement_FaceOriginalDirection
 	waitmovement 0
-	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
-	setflag FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA
 	releaseall
 	end
+
+SlateportCity_SternsShipyard_1F_EventScript_DockRejectGoods::
+	msgbox SlateportCity_SternsShipyard_1F_Text_DeliverToStern, MSGBOX_DEFAULT
+	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
+	setflag FLAG_HIDE_SLATEPORT_CITY_TEAM_AQUA
+	return
 
 SlateportCity_SternsShipyard_1F_EventScript_FerryReady::
 	applymovement LOCALID_DOCK, Common_Movement_FacePlayer
@@ -70,11 +76,13 @@ SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails:
 	.string "Aaargh! I can't make heads or tails\n"
 	.string "of this!$"
 
-SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern:
+SlateportCity_SternsShipyard_1F_Text_MeetDock:
 	.string "Hm?\n"
 	.string "Hi, I'm DOCK.\p"
 	.string "CAPT. STERN commissioned me to\n"
-	.string "design a ferry.\p"
+	.string "design a ferry.$"
+
+SlateportCity_SternsShipyard_1F_Text_DeliverToStern:
 	.string "Oh! That there…\n"
 	.string "Are they DEVON GOODS?\p"
 	.string "But, hmm…\n"
