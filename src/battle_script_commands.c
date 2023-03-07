@@ -944,7 +944,8 @@ static void Cmd_attackcanceler(void)
 
     if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBattlerAttacker].status2 & STATUS2_MULTIPLETURNS))
     {
-        i = IsMonDisobedient(); // why use the 'i' variable...?
+        // i = IsMonDisobedient(); // why use the 'i' variable...?
+        i = 0;
         switch (i)
         {
         case 0:
