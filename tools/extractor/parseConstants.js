@@ -44,7 +44,8 @@ const parseFile = async (filePath, startingDict = {}) => {
   let output = {
     ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'items.h')),
     ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'flags.h'), { MAX_TRAINERS_COUNT: 864 }),
-    ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'species.h'))
+    ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'species.h')),
+    ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'moves.h'))
   }
 
   await fs.promises.writeFile('./constants.json', JSON.stringify(output), 'utf-8')

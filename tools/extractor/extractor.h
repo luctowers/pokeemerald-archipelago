@@ -10,19 +10,9 @@
 #define NUM_WATER_ENCOUNTER_SLOTS 5
 #define NUM_FISHING_ENCOUNTER_SLOTS 10
 
-enum LocationType {
-    GROUND_ITEM,
-    HIDDEN_ITEM,
-    NPC_GIFT,
-    BADGE
-};
-
-std::string location_type_to_string (LocationType lt);
-
 class LocationInfo {
     public:
         std::string name;
-        LocationType type;
         uint16_t flag;
         uint32_t ram_address;
         uint32_t rom_address;
@@ -44,6 +34,12 @@ class WarpInfo {
         bool connects_to (const WarpInfo &other);
         std::string encode ();
         static WarpInfo decode (std::string s);
+};
+
+class LearnsetInfo {
+    public:
+        uint32_t rom_address;
+        std::vector<std::tuple<uint8_t, uint16_t>> moves;
 };
 
 struct EncounterSlotInfo {

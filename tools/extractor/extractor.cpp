@@ -67,7 +67,6 @@ int main (int argc, char *argv[])
         {
             std::shared_ptr<LocationInfo> item(new LocationInfo());
             item->name = "NPC_GIFT_" + symbol.substr(33);
-            item->type = NPC_GIFT;
             item->flag = constants_json[symbol.substr(28)];
             item->ram_address = address + 3;
             item->rom_address = item->ram_address - 0x8000000;
@@ -83,7 +82,6 @@ int main (int argc, char *argv[])
         {
             std::shared_ptr<LocationInfo> item(new LocationInfo());
             item->name = "BADGE_" + symbol.substr(25);
-            item->type = BADGE;
             item->flag = constants_json["FLAG_BADGE0" + symbol.substr(25) + "_GET"];
             item->ram_address = address + 3;
             item->rom_address = item->ram_address - 0x8000000;
@@ -98,6 +96,7 @@ int main (int argc, char *argv[])
 
     std::map<std::string, uint32_t> misc_rom_addresses = {
         { "gArchipelagoOptions", symbol_map["gArchipelagoOptions"] - 0x8000000 },
+        { "gLevelUpLearnsets", symbol_map["gLevelUpLearnsets"] - 0x8000000 },
         { "gSpeciesInfo", symbol_map["gSpeciesInfo"] - 0x8000000 },
         { "gTMHMLearnsets", symbol_map["gTMHMLearnsets"] - 0x8000000 },
         { "sStarterMon", symbol_map["sStarterMon"] - 0x8000000 },
@@ -259,7 +258,6 @@ int main (int argc, char *argv[])
                     std::shared_ptr<LocationInfo> item(new LocationInfo());
                     item->flag = constants_json[flag_name];
                     item->name = flag_name.substr(5);
-                    item->type = GROUND_ITEM;
                     item->ram_address = symbol_map[event_json["script"]] + 3;
                     item->rom_address = item->ram_address - 0x8000000;
                     ball_items.push_back(item);
@@ -275,7 +273,6 @@ int main (int argc, char *argv[])
                     std::shared_ptr<LocationInfo> item(new LocationInfo());
                     item->flag = constants_json[flag_name];
                     item->name = flag_name.substr(5);
-                    item->type = HIDDEN_ITEM;
                     item->ram_address = symbol_map["Archipelago_Target_Hidden_Item_" + flag_name] + 8;
                     item->rom_address = item->ram_address - 0x8000000;
                     item->default_item = constants_json[event_json["item"].get<std::string>()];
@@ -393,7 +390,42 @@ int main (int argc, char *argv[])
         fprintf(stderr, "Could not open rom file\n");
         exit(1);
     }
-    
+
+    // Reading learnsets
+    std::vector<std::shared_ptr<LearnsetInfo>> learnsets;
+    for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
+    {
+        std::shared_ptr<LearnsetInfo> learnset(new LearnsetInfo);
+
+        uint32_t learnset_pointer;
+        rom.seekg(misc_rom_addresses["gLevelUpLearnsets"] + (i * 4), rom.beg);
+        rom.read((char*)&(learnset_pointer), 4);
+        learnset_pointer -= 0x8000000;
+        learnset->rom_address = learnset_pointer;
+
+        uint16_t move;
+        size_t move_i = 0;
+        do
+        {
+            rom.seekg(learnset_pointer + (move_i * 2), rom.beg);
+            rom.read((char*)&(move), 2);
+
+            if (move != 0xFFFF)
+            {
+                uint8_t level = move >> 9;
+                uint16_t move_id = move & 0x1FF;
+
+                learnset->moves.push_back(std::tuple<uint8_t, uint16_t>(level, move_id));
+            }
+
+            ++move_i;
+        }
+        while (move != 0xFFFF);
+
+        learnsets.push_back(learnset);
+    }
+
+    // Reading default items
     for (const auto& item: ball_items)
     {
         rom.seekg(item->rom_address, rom.beg);
@@ -420,6 +452,24 @@ int main (int argc, char *argv[])
     for (const auto& map_tuple: maps)
     {
         maps_json[map_tuple.first] = map_tuple.second->to_json();
+    }
+
+    json learnsets_json = json::array();
+    for (const auto& learnset: learnsets)
+    {
+        json moves_json = json::array();
+        for (const auto& move: learnset->moves)
+        {
+            moves_json.push_back({
+                { "level", std::get<0>(move) },
+                { "move_id", std::get<1>(move) },
+            });
+        }
+
+        learnsets_json.push_back({
+            { "rom_address", learnset->rom_address },
+            { "moves", moves_json },
+        });
     }
 
     json locations_json;
@@ -454,24 +504,13 @@ int main (int argc, char *argv[])
         { "misc_rom_addresses", misc_rom_addresses },
         { "locations", locations_json },
         { "warps", encoded_warps },
+        { "learnsets", learnsets_json },
         { "constants", constants_json },
     };
 
     std::cout << "Writing file..." << std::endl;
     std::ofstream outfile(root_dir / "extracted_data.json");
     outfile << std::setw(2) << output_json << std::endl;
-}
-
-std::string location_type_to_string (LocationType lt)
-{
-    switch (lt)
-    {
-        case GROUND_ITEM: return "GROUND_ITEM";
-        case HIDDEN_ITEM: return "HIDDEN_ITEM";
-        case NPC_GIFT: return "NPC_GIFT";
-        case BADGE: return "BADGE";
-        default: return "UNKNOWN";
-    }
 }
 
 json LocationInfo::to_json ()
