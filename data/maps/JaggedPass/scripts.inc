@@ -17,6 +17,7 @@ JaggedPass_EventScript_CheckHasMagmaEmblem::
 	return
 
 JaggedPass_EventScript_SetReadyToOpenHideout::
+	call JaggedPass_EventScript_HideMagmaHideoutGuard
 	setvar VAR_JAGGED_PASS_STATE, 1
 	return
 
