@@ -9,6 +9,7 @@ struct ArchipelagoOptions
     bool8 areTrainersBlind;
     u16 expMultiplierNumerator;
     u16 expMultiplierDenominator;
+    u16 birchPokemon;
 } __attribute__((packed));
 
 extern const struct ArchipelagoOptions gArchipelagoOptions;

@@ -5,4 +5,5 @@ const struct ArchipelagoOptions gArchipelagoOptions = {
     .areTrainersBlind = FALSE,
     .expMultiplierNumerator = 100,
     .expMultiplierDenominator = 100,
+    .birchPokemon = SPECIES_LOTAD,
 };
