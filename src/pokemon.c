@@ -6236,6 +6236,9 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
         if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
             break;
 
+        if ((gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID) == MOVE_NONE)
+            continue;
+
         moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
 
         if (moveLevel <= (level << 9))
@@ -6263,9 +6266,10 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
     int i;
 
     for (i = 0; i < MAX_LEVEL_UP_MOVES && gLevelUpLearnsets[species][i] != LEVEL_UP_END; i++)
-         moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
+        if ((gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID) != MOVE_NONE)
+            moves[numMoves++] = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID;
 
-     return numMoves;
+    return numMoves;
 }
 
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
@@ -6289,6 +6293,9 @@ u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 
         if (gLevelUpLearnsets[species][i] == LEVEL_UP_END)
             break;
+
+        if ((gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_ID) == MOVE_NONE)
+            continue;
 
         moveLevel = gLevelUpLearnsets[species][i] & LEVEL_UP_MOVE_LV;
 

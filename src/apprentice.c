@@ -418,6 +418,12 @@ static u16 GetRandomAlternateMove(u8 monId)
                     moveId = learnset[learnsetId] & LEVEL_UP_MOVE_ID;
                     shouldUseMove = TRUE;
 
+                    if (moveId == MOVE_NONE)
+                    {
+                        shouldUseMove = FALSE;
+                        continue;
+                    }
+
                     for (j = numLearnsetMoves - MAX_MON_MOVES; j < numLearnsetMoves; j++)
                     {
                         // Keep looking for moves until one not in the last 4 is found
