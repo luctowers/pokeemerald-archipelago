@@ -4281,7 +4281,6 @@ u8 GetItemHoldEffect(void)
 // Archipelago
 bool8 ArchipelagoSpecial_IsFerryEnabled(void)
 {
-    // return FALSE;
     return gArchipelagoOptions.isFerryEnabled;
 }
 
