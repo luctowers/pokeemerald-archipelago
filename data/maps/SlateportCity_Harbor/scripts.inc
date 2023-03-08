@@ -16,6 +16,7 @@ SlateportCity_Harbor_OnTransition:
 	end
 
 SlateportCity_Harbor_EventScript_ShowSSTidal::
+	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS
 	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_SS_TIDAL
 	return
 
