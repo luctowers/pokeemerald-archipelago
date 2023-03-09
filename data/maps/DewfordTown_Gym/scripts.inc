@@ -142,6 +142,7 @@ DewfordTown_Gym_EventScript_Brawly::
 	end
 
 DewfordTown_Gym_EventScript_BrawlyDefeated::
+	call DewfordTown_Gym_EventScript_AnimateFlashFullBrightness
 Archipelago_Target_Badge_2::
 	giveitem ITEM_BADGE_2
 	msgbox DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis, MSGBOX_DEFAULT
