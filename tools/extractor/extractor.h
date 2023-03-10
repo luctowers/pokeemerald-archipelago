@@ -40,6 +40,22 @@ class LearnsetInfo {
     public:
         uint32_t rom_address;
         std::vector<std::tuple<uint8_t, uint16_t>> moves;
+
+        nlohmann::json to_json ();
+};
+
+class SpeciesInfo {
+    public:
+        uint32_t rom_address;
+        uint16_t id;
+        uint8_t base_stats[6];
+        uint8_t catch_rate;
+        uint8_t abilities[2];
+        uint8_t types[2];
+
+        LearnsetInfo learnset_info;
+
+        nlohmann::json to_json ();
 };
 
 struct EncounterSlotInfo {

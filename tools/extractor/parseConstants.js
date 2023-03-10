@@ -42,9 +42,11 @@ const parseFile = async (filePath, startingDict = {}) => {
 
 ;(async () => {
   let output = {
+    ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'opponents.h')),
     ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'items.h')),
     ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'flags.h'), { MAX_TRAINERS_COUNT: 864 }),
     ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'species.h')),
+    ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'abilities.h')),
     ...await parseFile(path.join(process.cwd(), 'include', 'constants', 'moves.h'))
   }
 

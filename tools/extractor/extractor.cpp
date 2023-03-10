@@ -90,7 +90,7 @@ int main (int argc, char *argv[])
     }
 
     std::map<std::string, uint32_t> misc_ram_addresses = {
-        { "gSaveblock1", symbol_map["gSaveblock1"] },
+        { "gSaveBlock1Ptr", symbol_map["gSaveBlock1Ptr"] },
         { "gArchipelagoReceivedItem", symbol_map["gArchipelagoReceivedItem"] },
     };
 
@@ -307,7 +307,7 @@ int main (int argc, char *argv[])
     std::cout << "Reading encounter tables..." << std::endl;
     std::ifstream wild_encounters_file(root_dir / "src/data/wild_encounters.json");
     json wild_encounters_json = json::parse(wild_encounters_file);
-    
+
     for (const auto& map_json: wild_encounters_json["wild_encounter_groups"][0]["encounters"]) {
         std::shared_ptr<MapInfo> map = maps[map_json["map"]];
 
@@ -391,17 +391,59 @@ int main (int argc, char *argv[])
         exit(1);
     }
 
+    // Reading species info
+    std::vector<std::shared_ptr<SpeciesInfo>> all_species;
+    for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
+    {
+        std::shared_ptr<SpeciesInfo> species(new SpeciesInfo);
+
+        species->id = i;
+        species->rom_address = misc_rom_addresses["gSpeciesInfo"] + (i * 28);
+
+        // Base Stats
+        rom.seekg(species->rom_address + 0, rom.beg);
+        rom.read((char*)&(species->base_stats[0]), 1);
+        rom.seekg(species->rom_address + 1, rom.beg);
+        rom.read((char*)&(species->base_stats[1]), 1);
+        rom.seekg(species->rom_address + 2, rom.beg);
+        rom.read((char*)&(species->base_stats[2]), 1);
+        rom.seekg(species->rom_address + 3, rom.beg);
+        rom.read((char*)&(species->base_stats[3]), 1);
+        rom.seekg(species->rom_address + 4, rom.beg);
+        rom.read((char*)&(species->base_stats[4]), 1);
+        rom.seekg(species->rom_address + 5, rom.beg);
+        rom.read((char*)&(species->base_stats[5]), 1);
+
+        // Types
+        rom.seekg(species->rom_address + 6, rom.beg);
+        rom.read((char*)&(species->types[0]), 1);
+        rom.seekg(species->rom_address + 7, rom.beg);
+        rom.read((char*)&(species->types[1]), 1);
+
+        // Catch Rate
+        rom.seekg(species->rom_address + 8, rom.beg);
+        rom.read((char*)&(species->catch_rate), 1);
+
+        // Abilities
+        rom.seekg(species->rom_address + 22, rom.beg);
+        rom.read((char*)&(species->abilities[0]), 1);
+        rom.seekg(species->rom_address + 23, rom.beg);
+        rom.read((char*)&(species->abilities[1]), 1);
+
+        all_species.push_back(species);
+    }
+
     // Reading learnsets
     std::vector<std::shared_ptr<LearnsetInfo>> learnsets;
     for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
     {
-        std::shared_ptr<LearnsetInfo> learnset(new LearnsetInfo);
+        const auto &species = all_species[i];
 
         uint32_t learnset_pointer;
         rom.seekg(misc_rom_addresses["gLevelUpLearnsets"] + (i * 4), rom.beg);
         rom.read((char*)&(learnset_pointer), 4);
         learnset_pointer -= 0x8000000;
-        learnset->rom_address = learnset_pointer;
+        species->learnset_info.rom_address = learnset_pointer;
 
         uint16_t move;
         size_t move_i = 0;
@@ -415,14 +457,12 @@ int main (int argc, char *argv[])
                 uint8_t level = move >> 9;
                 uint16_t move_id = move & 0x1FF;
 
-                learnset->moves.push_back(std::tuple<uint8_t, uint16_t>(level, move_id));
+                species->learnset_info.moves.push_back(std::tuple<uint8_t, uint16_t>(level, move_id));
             }
 
             ++move_i;
         }
         while (move != 0xFFFF);
-
-        learnsets.push_back(learnset);
     }
 
     // Reading default items
@@ -454,22 +494,10 @@ int main (int argc, char *argv[])
         maps_json[map_tuple.first] = map_tuple.second->to_json();
     }
 
-    json learnsets_json = json::array();
-    for (const auto& learnset: learnsets)
+    json species_json = json::array();
+    for (const auto& species: all_species)
     {
-        json moves_json = json::array();
-        for (const auto& move: learnset->moves)
-        {
-            moves_json.push_back({
-                { "level", std::get<0>(move) },
-                { "move_id", std::get<1>(move) },
-            });
-        }
-
-        learnsets_json.push_back({
-            { "rom_address", learnset->rom_address },
-            { "moves", moves_json },
-        });
+        species_json.push_back(species->to_json());
     }
 
     json locations_json;
@@ -504,13 +532,13 @@ int main (int argc, char *argv[])
         { "misc_rom_addresses", misc_rom_addresses },
         { "locations", locations_json },
         { "warps", encoded_warps },
-        { "learnsets", learnsets_json },
+        { "species", species_json },
         { "constants", constants_json },
     };
 
     std::cout << "Writing file..." << std::endl;
     std::ofstream outfile(root_dir / "extracted_data.json");
-    outfile << std::setw(2) << output_json << std::endl;
+    outfile << output_json.dump() << std::endl;
 }
 
 json LocationInfo::to_json ()
@@ -647,5 +675,48 @@ json EncounterTableInfo::to_json ()
     return {
         { "encounter_slots", slots_json },
         { "rom_address", this->rom_address },
+    };
+}
+
+json SpeciesInfo::to_json ()
+{
+    return {
+        { "rom_address", this->rom_address },
+        { "id", this->id },
+        { "base_stats", {
+            this->base_stats[0],
+            this->base_stats[1],
+            this->base_stats[2],
+            this->base_stats[3],
+            this->base_stats[4],
+            this->base_stats[5],
+        } },
+        { "types", {
+            this->types[0],
+            this->types[1],
+        } },
+        { "abilities", {
+            this->abilities[0],
+            this->abilities[1],
+        } },
+        { "catch_rate", this->catch_rate },
+        { "learnset", this->learnset_info.to_json() },
+    };
+}
+
+json LearnsetInfo::to_json ()
+{
+    json moves_json = json::array();
+    for (const auto& move: this->moves)
+    {
+        moves_json.push_back({
+            { "level", std::get<0>(move) },
+            { "move_id", std::get<1>(move) },
+        });
+    }
+
+    return {
+        { "rom_address", this->rom_address },
+        { "moves", moves_json },
     };
 }
