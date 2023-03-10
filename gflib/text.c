@@ -1,4 +1,5 @@
 #include "global.h"
+#include "archipelago.h"
 #include "battle.h"
 #include "main.h"
 #include "m4a.h"
@@ -874,7 +875,7 @@ bool16 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
     else
     {
         TextPrinterDrawDownArrow(textPrinter);
-        if (JOY_HELD_RAW(A_BUTTON) || JOY_NEW(A_BUTTON | B_BUTTON))
+        if ((gArchipelagoOptions.advanceTextWithHoldA && JOY_HELD_RAW(A_BUTTON)) || JOY_NEW(A_BUTTON | B_BUTTON))
         {
             result = TRUE;
             PlaySE(SE_SELECT);
@@ -892,7 +893,7 @@ bool16 TextPrinterWait(struct TextPrinter *textPrinter)
     }
     else
     {
-        if (JOY_HELD_RAW(A_BUTTON) || JOY_NEW(A_BUTTON | B_BUTTON))
+        if ((gArchipelagoOptions.advanceTextWithHoldA && JOY_HELD_RAW(A_BUTTON)) || JOY_NEW(A_BUTTON | B_BUTTON))
         {
             result = TRUE;
             PlaySE(SE_SELECT);

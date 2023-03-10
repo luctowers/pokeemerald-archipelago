@@ -1,4 +1,5 @@
 #include "global.h"
+#include "archipelago.h"
 #include "frontier_util.h"
 #include "battle_setup.h"
 #include "berry.h"
@@ -1325,7 +1326,7 @@ static bool8 WaitForAorBPress(void)
         return TRUE;
     if (JOY_NEW(B_BUTTON))
         return TRUE;
-    if (JOY_HELD_RAW(A_BUTTON))
+    if (gArchipelagoOptions.advanceTextWithHoldA && JOY_HELD_RAW(A_BUTTON))
         return TRUE;
     return FALSE;
 }

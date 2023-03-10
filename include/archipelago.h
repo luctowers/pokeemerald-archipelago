@@ -5,6 +5,7 @@
 
 struct ArchipelagoOptions
 {
+    bool8 advanceTextWithHoldA;
     bool8 isFerryEnabled;
     bool8 areTrainersBlind;
     u16 expMultiplierNumerator;
