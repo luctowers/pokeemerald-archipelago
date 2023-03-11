@@ -27,34 +27,44 @@ struct MonCoords
 
 struct TrainerMonNoItemDefaultMoves
 {
-    u16 iv;
-    u8 lvl;
-    u16 species;
+    /* 0x00 */ u16 iv;
+    /* 0x02 */ u8 lvl;
+    /* 0x03 */ // u8 padding[1]
+    /* 0x04 */ u16 species;
+    /* 0x06 */ // u8 padding[2]
+    // sizeof: 0x08
 };
 
 struct TrainerMonItemDefaultMoves
 {
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 heldItem;
+    /* 0x00 */ u16 iv;
+    /* 0x02 */ u8 lvl;
+    /* 0x03 */ // u8 padding[1]
+    /* 0x04 */ u16 species;
+    /* 0x06 */ u16 heldItem;
+    // sizeof: 0x08
 };
 
 struct TrainerMonNoItemCustomMoves
 {
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 moves[MAX_MON_MOVES];
+    /* 0x00 */ u16 iv;
+    /* 0x02 */ u8 lvl;
+    /* 0x03 */ // u8 padding[1]
+    /* 0x04 */ u16 species;
+    /* 0x06 */ u16 moves[MAX_MON_MOVES];
+    /* 0x0E */ // u8 padding[2]
+    // sizeof: 0x10
 };
 
 struct TrainerMonItemCustomMoves
 {
-    u16 iv;
-    u8 lvl;
-    u16 species;
-    u16 heldItem;
-    u16 moves[MAX_MON_MOVES];
+    /* 0x00 */ u16 iv;
+    /* 0x02 */ u8 lvl;
+    /* 0x03 */ // u8 padding[1]
+    /* 0x04 */ u16 species;
+    /* 0x06 */ u16 heldItem;
+    /* 0x08 */ u16 moves[MAX_MON_MOVES];
+    // sizeof: 0x10
 };
 
 #define NO_ITEM_DEFAULT_MOVES(party) { .NoItemDefaultMoves = party }, .partySize = ARRAY_COUNT(party), .partyFlags = 0
@@ -77,11 +87,15 @@ struct Trainer
     /*0x02*/ u8 encounterMusic_gender; // last bit is gender
     /*0x03*/ u8 trainerPic;
     /*0x04*/ u8 trainerName[TRAINER_NAME_LENGTH + 1];
+    /*0x0F*/ // u8 padding[1]
     /*0x10*/ u16 items[MAX_TRAINER_ITEMS];
     /*0x18*/ bool8 doubleBattle;
+    /*0x19*/ // u8 padding[3]
     /*0x1C*/ u32 aiFlags;
     /*0x20*/ u8 partySize;
+    /*0x21*/ // u8 padding[3]
     /*0x24*/ union TrainerMonPtr party;
+    // sizeof: 0x28
 };
 
 #define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))

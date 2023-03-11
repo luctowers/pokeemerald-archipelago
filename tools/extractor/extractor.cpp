@@ -98,6 +98,7 @@ int main (int argc, char *argv[])
         { "gArchipelagoOptions", symbol_map["gArchipelagoOptions"] - 0x8000000 },
         { "gLevelUpLearnsets", symbol_map["gLevelUpLearnsets"] - 0x8000000 },
         { "gSpeciesInfo", symbol_map["gSpeciesInfo"] - 0x8000000 },
+        { "gTrainers", symbol_map["gTrainers"] - 0x8000000 },
         { "gTMHMLearnsets", symbol_map["gTMHMLearnsets"] - 0x8000000 },
         { "sStarterMon", symbol_map["sStarterMon"] - 0x8000000 },
     };
@@ -170,7 +171,7 @@ int main (int argc, char *argv[])
             uint i = 0;
             for (const auto& warp_json: warp_events_json)
             {
-                std::shared_ptr<WarpInfo> warp(new WarpInfo);
+                std::shared_ptr<WarpInfo> warp(new WarpInfo());
                 warp->source_map = map->name;
                 warp->source_indices.push_back(i);
                 warp->source_coordinates.push_back(std::tuple<int, int>(warp_json["x"], warp_json["y"]));
@@ -395,7 +396,7 @@ int main (int argc, char *argv[])
     std::vector<std::shared_ptr<SpeciesInfo>> all_species;
     for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
     {
-        std::shared_ptr<SpeciesInfo> species(new SpeciesInfo);
+        std::shared_ptr<SpeciesInfo> species(new SpeciesInfo());
 
         species->id = i;
         species->rom_address = misc_rom_addresses["gSpeciesInfo"] + (i * 28);
@@ -465,6 +466,109 @@ int main (int argc, char *argv[])
         while (move != 0xFFFF);
     }
 
+    // Reading trainers
+    std::vector<std::shared_ptr<TrainerInfo>> trainers;
+    for (size_t i = 0; i < constants_json["TRAINERS_COUNT"]; ++i)
+    {
+        std::shared_ptr<TrainerInfo> trainer(new TrainerInfo());
+
+        trainer->rom_address = misc_rom_addresses["gTrainers"] + (i * 0x28);
+
+        uint8_t party_flags;
+        rom.seekg(trainer->rom_address + 0x0, rom.beg);
+        rom.read((char*)&(party_flags), 1);
+
+        uint8_t party_size;
+        rom.seekg(trainer->rom_address + 0x20, rom.beg);
+        rom.read((char*)&(party_size), 1);
+
+        rom.seekg(trainer->rom_address + 0x24, rom.beg);
+        rom.read((char*)&(trainer->party_rom_address), 4);
+        trainer->party_rom_address -= 0x8000000;
+
+        switch (party_flags)
+        {
+            case 0b00:
+                trainer->pokemon_data_type = NO_ITEM_DEFAULT_MOVES;
+                break;
+            case 0b01:
+                trainer->pokemon_data_type = NO_ITEM_CUSTOM_MOVES;
+                break;
+            case 0b10:
+                trainer->pokemon_data_type = ITEM_DEFAULT_MOVES;
+                break;
+            case 0b11:
+                trainer->pokemon_data_type = ITEM_CUSTOM_MOVES;
+                break;
+            default:
+                throw new std::exception();
+        }
+
+        size_t pokemon_data_size;
+        switch (trainer->pokemon_data_type)
+        {
+            case NO_ITEM_DEFAULT_MOVES:
+                pokemon_data_size = 8;
+                break;
+            case NO_ITEM_CUSTOM_MOVES:
+                pokemon_data_size = 16;
+                break;
+            case ITEM_DEFAULT_MOVES:
+                pokemon_data_size = 8;
+                break;
+            case ITEM_CUSTOM_MOVES:
+                pokemon_data_size = 16;
+                break;
+        }
+
+        size_t moves_offset;
+        switch (trainer->pokemon_data_type)
+        {
+            case NO_ITEM_CUSTOM_MOVES:
+                moves_offset = 6;
+                break;
+            case ITEM_CUSTOM_MOVES:
+                moves_offset = 8;
+                break;
+            default:
+                moves_offset = 0;
+                break;
+        }
+
+        for (size_t j = 0; j < party_size; ++j)
+        {
+            TrainerPokemonInfo pokemon;
+
+            uint32_t address = trainer->party_rom_address + (j * pokemon_data_size);
+
+            rom.seekg(address + 4, rom.beg);
+            rom.read((char*)&(pokemon.species), 2);
+
+            if (trainer->pokemon_data_type == NO_ITEM_CUSTOM_MOVES || trainer->pokemon_data_type == ITEM_CUSTOM_MOVES)
+            {
+                for (size_t k = 0; k < 4; ++k)
+                {
+                    uint16_t move;
+                    rom.seekg(address + moves_offset + (k * 2), rom.beg);
+                    rom.read((char*)&(move), 2);
+
+                    pokemon.moves[k] = move;
+                }
+            }
+            else
+            {
+                pokemon.moves[0] = 0;
+                pokemon.moves[1] = 0;
+                pokemon.moves[2] = 0;
+                pokemon.moves[3] = 0;
+            }
+
+            trainer->party.push_back(pokemon);
+        }
+
+        trainers.push_back(trainer);
+    }
+
     // Reading default items
     for (const auto& item: ball_items)
     {
@@ -500,6 +604,12 @@ int main (int argc, char *argv[])
         species_json.push_back(species->to_json());
     }
 
+    json trainers_json = json::array();
+    for (const auto& trainer: trainers)
+    {
+        trainers_json.push_back(trainer->to_json());
+    }
+
     json locations_json;
     for (const auto& location: npc_gifts)
     {
@@ -533,6 +643,7 @@ int main (int argc, char *argv[])
         { "locations", locations_json },
         { "warps", encoded_warps },
         { "species", species_json },
+        { "trainers", trainers_json },
         { "constants", constants_json },
     };
 
@@ -718,5 +829,41 @@ json LearnsetInfo::to_json ()
     return {
         { "rom_address", this->rom_address },
         { "moves", moves_json },
+    };
+}
+
+json TrainerInfo::to_json ()
+{
+    json party_json = json::array();
+    for (const auto& pokemon: this->party)
+    {
+        party_json.push_back({
+            { "species", pokemon.species },
+            { "moves", pokemon.moves },
+        });
+    }
+
+    std::string pokemon_data_type_string;
+    switch (this->pokemon_data_type)
+    {
+        case NO_ITEM_DEFAULT_MOVES:
+            pokemon_data_type_string = "NO_ITEM_DEFAULT_MOVES";
+            break;
+        case NO_ITEM_CUSTOM_MOVES:
+            pokemon_data_type_string = "NO_ITEM_CUSTOM_MOVES";
+            break;
+        case ITEM_DEFAULT_MOVES:
+            pokemon_data_type_string = "ITEM_DEFAULT_MOVES";
+            break;
+        case ITEM_CUSTOM_MOVES:
+            pokemon_data_type_string = "ITEM_CUSTOM_MOVES";
+            break;
+    }
+
+    return {
+        { "rom_address", this->rom_address },
+        { "party_rom_address", this->party_rom_address },
+        { "party", party_json },
+        { "pokemon_data_type", pokemon_data_type_string },
     };
 }

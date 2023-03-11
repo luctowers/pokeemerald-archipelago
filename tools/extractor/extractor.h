@@ -58,6 +58,29 @@ class SpeciesInfo {
         nlohmann::json to_json ();
 };
 
+enum TrainerPokemonInfoType {
+    NO_ITEM_DEFAULT_MOVES,
+    NO_ITEM_CUSTOM_MOVES,
+    ITEM_DEFAULT_MOVES,
+    ITEM_CUSTOM_MOVES
+};
+
+class TrainerPokemonInfo {
+    public:
+        uint16_t species;
+        uint8_t moves[4];
+};
+
+class TrainerInfo {
+    public:
+        std::vector<TrainerPokemonInfo> party;
+        TrainerPokemonInfoType pokemon_data_type;
+        uint32_t rom_address;
+        uint32_t party_rom_address;
+
+        nlohmann::json to_json ();
+};
+
 struct EncounterSlotInfo {
     uint16_t default_species;
     uint8_t min_level;
