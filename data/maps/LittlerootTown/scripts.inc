@@ -473,6 +473,7 @@ LittlerootTown_EventScript_GiveRunningShoesTrigger5::
 LittlerootTown_EventScript_GiveRunningShoesTrigger::
 	call LittlerootTown_EventScript_SetSkipWallyTutorial
 	call LittlerootTown_EventScript_EnableDisableFerry
+	call LittlerootTown_EventScript_GiveNationalDexEarly
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomNoticePlayerMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomNoticePlayerFemale
@@ -504,6 +505,11 @@ LittlerootTown_EventScript_SetSkipWallyTutorial::
 LittlerootTown_EventScript_EnableDisableFerry::
 	specialvar VAR_RESULT, ArchipelagoSpecial_IsFerryEnabled
 	call_if_eq VAR_RESULT, TRUE, LittlerootTown_EventScript_EnableFerry
+	return
+
+LittlerootTown_EventScript_GiveNationalDexEarly::
+	setflag FLAG_SYS_NATIONAL_DEX
+	special EnableNationalPokedex
 	return
 
 LittlerootTown_EventScript_EnableFerry::
