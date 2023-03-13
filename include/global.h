@@ -999,7 +999,8 @@ struct SaveBlock1
     /*0x0A28*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x0B68*/ u8 seen1[NUM_DEX_FLAG_BYTES];
     /*0x0B9C*/ u16 berryBlenderRecords[3];
-    /*0x0BA2*/ u8 unused_9C2[6];
+    /*0x0BA2*/ u16 archipelagoLastReceivedItemIndex;
+    /*0x0BA4*/ u8 unused_9C2[4];
     /*0x0BA8*/ u16 trainerRematchStepCounter;
     /*0x0BAA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
     /*0x0C0E*/ //u8 padding3[2]; // Padding may have been (re)moved after bag expansion

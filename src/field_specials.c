@@ -4297,6 +4297,7 @@ bool8 ArchipelagoSpecial_ShouldHandle(void)
 
 u16 ArchipelagoSpecial_GetReceivedItemId(void)
 {
+    gSaveBlock1Ptr->archipelagoLastReceivedItemIndex = gArchipelagoReceivedItem.itemIndex;
     return gArchipelagoReceivedItem.itemId;
 }
 
