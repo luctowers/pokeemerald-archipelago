@@ -4302,6 +4302,5 @@ u16 ArchipelagoSpecial_GetReceivedItemId(void)
 
 void ArchipelagoSpecial_SetArchipelagoFlag(void)
 {
-    ArchipelagoFlagSet(gArchipelagoReceivedItem.archipelagoFlagId);
     gArchipelagoReceivedItem.full = FALSE;
 }

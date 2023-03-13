@@ -236,17 +236,3 @@ bool8 FlagGet(u16 id)
 
     return TRUE;
 }
-
-// Archipelago
-u8 *GetArchipelagoFlagPointer(u16 id)
-{
-    return &gSaveBlock1Ptr->archipelagoFlags[id / 8];
-}
-
-u8 ArchipelagoFlagSet(u16 id)
-{
-    u8 *ptr = GetArchipelagoFlagPointer(id);
-    if (ptr)
-        *ptr |= 1 << (id & 7);
-    return 0;
-}
