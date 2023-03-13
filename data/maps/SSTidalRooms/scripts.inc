@@ -6,10 +6,10 @@ SSTidalRooms_EventScript_SnatchGiver::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM49, SSTidalRooms_EventScript_ExplainSnatch
 	msgbox SSTidalRooms_Text_NotSuspiciousTakeThis, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM49
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM49::
 	giveitem ITEM_TM49
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM49
 	msgbox SSTidalRooms_Text_ExplainSnatch, MSGBOX_DEFAULT
 	release
 	end

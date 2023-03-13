@@ -109,11 +109,11 @@ Archipelago_Target_Badge_3::
 	end
 
 MauvilleCity_Gym_EventScript_GiveShockWave::
+	setflag FLAG_RECEIVED_TM34
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM34::
 	giveitem ITEM_TM34
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM34
 	release
 	end
 

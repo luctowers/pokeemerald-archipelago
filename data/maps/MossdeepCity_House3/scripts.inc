@@ -8,9 +8,9 @@ MossdeepCity_House3_EventScript_SuperRodFisherman::
 	msgbox MossdeepCity_House3_Text_YouWantSuperRod, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, MossdeepCity_House3_EventScript_DeclineSuperRod
 	msgbox MossdeepCity_House3_Text_SuperRodIsSuper, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_SUPER_ROD
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_SUPER_ROD::
 	giveitem ITEM_SUPER_ROD
-	setflag FLAG_RECEIVED_SUPER_ROD
 	msgbox MossdeepCity_House3_Text_TryDroppingRodInWater, MSGBOX_DEFAULT
 	release
 	end

@@ -600,9 +600,9 @@ RustboroCity_EventScript_ReturnGoods::
 	call_if_eq VAR_TEMP_1, 3, RustboroCity_EventScript_EmployeeApproachPlayerDown2
 	call_if_eq VAR_TEMP_1, 4, RustboroCity_EventScript_EmployeeFacePlayerRight
 	msgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_GREAT_BALL_RUSTBORO_CITY
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_GREAT_BALL_RUSTBORO_CITY::
 	giveitem ITEM_GREAT_BALL
-	setflag FLAG_RECEIVED_GREAT_BALL_RUSTBORO_CITY
 	call_if_eq VAR_RESULT, FALSE, RustboroCity_EventScript_BagFull
 	msgbox RustboroCity_Text_PleaseComeWithMe, MSGBOX_DEFAULT
 	closemessage

@@ -115,11 +115,11 @@ Archipelago_Target_Badge_8::
 	end
 
 SootopolisCity_Gym_1F_EventScript_GiveWaterPulse::
+	setflag FLAG_RECEIVED_TM03
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM03::
 	giveitem ITEM_TM03
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox SootopolisCity_Gym_1F_Text_ExplainWaterPulse, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM03
 	release
 	end
 

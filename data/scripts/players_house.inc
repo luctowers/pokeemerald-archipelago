@@ -342,11 +342,11 @@ PlayersHouse_1F_EventScript_CheckGiveAmuletCoin::
 PlayersHouse_1F_EventScript_TryGiveAmuletCoin::
 	goto_if_set FLAG_RECEIVED_AMULET_COIN, PlayersHouse_1F_EventScript_MomHealsParty
 	msgbox PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_AMULET_COIN
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_AMULET_COIN::
 	giveitem ITEM_AMULET_COIN
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox PlayersHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_AMULET_COIN
 	release
 	end
 
@@ -439,9 +439,9 @@ PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV::
 	call_if_eq VAR_0x8008, MALE, PlayersHouse_1F_EventScript_DadApproachPlayerMale
 	call_if_eq VAR_0x8008, FEMALE, PlayersHouse_1F_EventScript_DadApproachPlayerFemale
 	msgbox PlayersHouse_1F_Text_TicketFromBrineyCameForYou, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_SS_TICKET
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_SS_TICKET::
 	giveitem ITEM_SS_TICKET
-	setflag FLAG_RECEIVED_SS_TICKET
 	msgbox PlayersHouse_1F_Text_PortsInSlateportLilycove, MSGBOX_DEFAULT
 	closemessage
 	delay 20

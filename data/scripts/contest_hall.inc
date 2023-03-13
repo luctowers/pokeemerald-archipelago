@@ -30,9 +30,9 @@ LilycoveCity_ContestLobby_EventScript_ReceptionWelcome::
 
 LilycoveCity_ContestLobby_EventScript_GivePokeblockCase::
 	msgbox LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_POKEBLOCK_CASE::
 	giveitem ITEM_POKEBLOCK_CASE
-	setflag FLAG_RECEIVED_POKEBLOCK_CASE
 	msgbox LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp, MSGBOX_DEFAULT
 	return
 

@@ -65,9 +65,9 @@ MtPyre_Summit_EventScript_TeamAquaExits::
 	call_if_eq VAR_0x8008, 1, MtPyre_Summit_EventScript_OldLadyApproachPlayer1
 	call_if_eq VAR_0x8008, 2, MtPyre_Summit_EventScript_OldLadyApproachPlayer2
 	msgbox MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_MAGMA_EMBLEM
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_MAGMA_EMBLEM::
 	giveitem ITEM_MAGMA_EMBLEM
-	setflag FLAG_RECEIVED_MAGMA_EMBLEM
 	setflag FLAG_RECEIVED_RED_OR_BLUE_ORB
 	setflag FLAG_HIDE_JAGGED_PASS_MAGMA_GUARD
 	releaseall

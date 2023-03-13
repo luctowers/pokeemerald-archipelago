@@ -165,11 +165,11 @@ Archipelago_Target_Badge_2::
 	end
 
 DewfordTown_Gym_EventScript_GiveBulkUp::
+	setflag FLAG_RECEIVED_TM08
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM08::
 	giveitem ITEM_TM08
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	msgbox DewfordTown_Gym_Text_ExplainBulkUp, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM08
 	return
 
 DewfordTown_Gym_EventScript_BrawlyRematch::

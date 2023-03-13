@@ -142,10 +142,10 @@ MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma::
 	end
 
 MossdeepCity_SpaceCenter_1F_EventScript_GiveSunStone::
+	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_SUN_STONE_MOSSDEEP::
 	giveitem ITEM_SUN_STONE
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
 	return
 
 MossdeepCity_SpaceCenter_1F_EventScript_Woman::

@@ -403,10 +403,10 @@ Archipelago_Target_Badge_5::
 	end
 
 PetalburgCity_Gym_EventScript_GiveFacade::
+	setflag FLAG_RECEIVED_TM42
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM42::
 	giveitem ITEM_TM42
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
-	setflag FLAG_RECEIVED_TM42
 	msgbox PetalburgCity_Gym_Text_ExplainFacade, MSGBOX_DEFAULT
 	return
 

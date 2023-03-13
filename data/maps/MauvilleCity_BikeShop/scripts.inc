@@ -21,12 +21,12 @@ MauvilleCity_BikeShop_EventScript_SkipGreeting::
 MauvilleCity_BikeShop_EventScript_ChooseBike::
 	message MauvilleCity_BikeShop_Text_ExplainBikes
 	waitmessage
+	setflag FLAG_RECEIVED_MACH_BIKE
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_MACH_BIKE::
 	giveitem ITEM_MACH_BIKE
-	setflag FLAG_RECEIVED_MACH_BIKE
+	setflag FLAG_RECEIVED_ACRO_BIKE
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_ACRO_BIKE::
 	giveitem ITEM_ACRO_BIKE
-	setflag FLAG_RECEIVED_ACRO_BIKE
 	release
 	end
 

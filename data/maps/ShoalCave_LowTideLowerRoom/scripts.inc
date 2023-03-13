@@ -35,10 +35,10 @@ ShoalCave_LowTideLowerRoom_EventScript_BlackBelt::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_FOCUS_BAND, ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand
 	msgbox ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_FOCUS_BAND
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_FOCUS_BAND::
 	giveitem ITEM_FOCUS_BAND
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_FOCUS_BAND
 	release
 	end
 

@@ -262,10 +262,10 @@ Route104_EventScript_ExpertF::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104, Route104_EventScript_ReceivedBerry
 	msgbox Route104_Text_PlantBerriesInSoilTakeThis, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104::
 	giveitem ITEM_CHESTO_BERRY
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_CHESTO_BERRY_ROUTE_104
 	msgbox Route104_Text_TrainersOftenMakeMonHoldBerries, MSGBOX_DEFAULT
 	release
 	end
@@ -280,10 +280,10 @@ Route104_EventScript_WhiteHerbFlorist::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_WHITE_HERB, Route104_EventScript_ReceivedWhiteHerb
 	msgbox Route104_Text_DontNeedThisTakeIt, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_WHITE_HERB
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_WHITE_HERB::
 	giveitem ITEM_WHITE_HERB
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_WHITE_HERB
 	release
 	end
 
@@ -333,10 +333,10 @@ Route104_EventScript_Boy2::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_TM09, Route104_EventScript_ReceivedBulletSeed
 	msgbox Route104_Text_LikeFillingMouthWithSeedsTakeThis, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM09
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM09::
 	giveitem ITEM_TM09
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_TM09
 	release
 	end
 

@@ -47,11 +47,11 @@ Archipelago_Target_Badge_6::
 	end
 
 FortreeCity_Gym_EventScript_GiveAerialAce::
+	setflag FLAG_RECEIVED_TM40
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM40::
 	giveitem ITEM_TM40
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM40
 	release
 	end
 

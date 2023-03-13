@@ -16,12 +16,12 @@ FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite::
 	call_if_set FLAG_TEMP_2, FallarborTown_CozmosHouse_EventScript_AskForMeteorite
 	goto_if_eq VAR_RESULT, NO, FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite
 	msgbox FallarborTown_CozmosHouse_Text_PleaseUseThisTM, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_TM27
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM27::
 	giveitem ITEM_TM27
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	setvar VAR_0x8004, ITEM_METEORITE
 	call Common_EventScript_PlayerHandedOverTheItem
-	setflag FLAG_RECEIVED_TM27
 	msgbox FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch, MSGBOX_DEFAULT
 	release
 	end

@@ -56,6 +56,7 @@ Route116_EventScript_DevonEmployee::
 
 Route116_EventScript_GiveRepeatBall::
 	setflag FLAG_MET_DEVON_EMPLOYEE
+	setflag FLAG_RECEIVED_REPEAT_BALL
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_REPEAT_BALL::
 	giveitem ITEM_REPEAT_BALL
 	goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_NoRoomForRepeatBall
@@ -67,7 +68,6 @@ Archipelago_Target_NPC_Gift_FLAG_RECEIVED_REPEAT_BALL::
 	call_if_eq VAR_FACING, DIR_EAST, Route116_EventScript_DevonEmployeeExitEast
 	removeobject VAR_LAST_TALKED
 	clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
-	setflag FLAG_RECEIVED_REPEAT_BALL
 	release
 	end
 

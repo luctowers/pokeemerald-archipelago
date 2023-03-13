@@ -89,11 +89,11 @@ Archipelago_Target_Badge_7::
 	end
 
 MossdeepCity_Gym_EventScript_GiveCalmMind::
+	setflag FLAG_RECEIVED_TM04
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM04::
 	giveitem ITEM_TM04
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM04
 	release
 	end
 

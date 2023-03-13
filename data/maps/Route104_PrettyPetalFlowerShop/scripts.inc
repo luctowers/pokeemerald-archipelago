@@ -73,10 +73,10 @@ Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl::
 
 Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail::
 	msgbox Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_WAILMER_PAIL
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_WAILMER_PAIL::
 	giveitem ITEM_WAILMER_PAIL
 	msgbox Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_WAILMER_PAIL
 	release
 	end
 

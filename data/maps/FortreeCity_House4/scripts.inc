@@ -33,10 +33,10 @@ FortreeCity_House4_EventScript_WingullReturned::
 	applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
 	waitmovement 0
 	msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_MENTAL_HERB
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_MENTAL_HERB::
 	giveitem ITEM_MENTAL_HERB
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_MENTAL_HERB
 	releaseall
 	end
 

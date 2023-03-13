@@ -332,13 +332,13 @@ Route109_EventScript_SoftSandGirl::
 	special GetPlayerBigGuyGirlString
 	goto_if_set FLAG_RECEIVED_SOFT_SAND, Route109_EventScript_AlreadyReceivedSoftSand
 	msgbox Route109_Text_YouCanHaveThis, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_SOFT_SAND
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_SOFT_SAND::
 	giveitem ITEM_SOFT_SAND
 	goto_if_eq VAR_RESULT, 0, Common_EventScript_ShowBagIsFull
 	closemessage
 	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
 	waitmovement 0
-	setflag FLAG_RECEIVED_SOFT_SAND
 	release
 	end
 

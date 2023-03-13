@@ -6,10 +6,10 @@ DewfordTown_House2_EventScript_Man::
 	faceplayer
 	goto_if_set FLAG_RECEIVED_SILK_SCARF, DewfordTown_House2_EventScript_ExplainSilkScarf
 	msgbox DewfordTown_House2_Text_WantYouToHaveSilkScarf, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_SILK_SCARF
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_SILK_SCARF::
 	giveitem ITEM_SILK_SCARF
 	goto_if_eq VAR_RESULT, FALSE, DewfordTown_House2_EventScript_NoRoomForScarf
-	setflag FLAG_RECEIVED_SILK_SCARF
 	release
 	end
 

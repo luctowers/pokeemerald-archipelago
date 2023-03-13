@@ -81,11 +81,11 @@ Archipelago_Target_Badge_4::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_GiveOverheat::
+	setflag FLAG_RECEIVED_TM50
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_TM50::
 	giveitem ITEM_TM50
 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
-	setflag FLAG_RECEIVED_TM50
 	release
 	end
 

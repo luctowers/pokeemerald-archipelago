@@ -75,9 +75,9 @@ LavaridgeTown_EventScript_BrendanGiveGoGoggles::
 	end
 
 LavaridgeTown_EventScript_GiveGoGoggles::
+	setflag FLAG_RECEIVED_GO_GOGGLES
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_GO_GOGGLES::
 	giveitem ITEM_GO_GOGGLES
-	setflag FLAG_RECEIVED_GO_GOGGLES
 
 LavaridgeTown_EventScript_RivalExit::
 	closemessage

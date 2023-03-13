@@ -3,7 +3,6 @@
 ArchipelagoScript_ReceiveRemoteItem::
 	specialvar VAR_RESULT, ArchipelagoSpecial_GetReceivedItemId
 	giveitem VAR_RESULT
-	special ArchipelagoSpecial_SetArchipelagoFlag
 	releaseall
 	end
 

@@ -132,9 +132,9 @@ Route119_EventScript_DefeatedBrendan::
 	end
 
 Route119_EventScript_GiveFlyHM::
+	setflag FLAG_RECEIVED_HM02
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_HM02::
 	giveitem ITEM_HM02
-	setflag FLAG_RECEIVED_HM02
 	return
 
 Route119_EventScript_RivalExitScottArrive::

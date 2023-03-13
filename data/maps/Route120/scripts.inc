@@ -218,9 +218,9 @@ Route120_EventScript_StevenGiveDeconScope::
 	call_if_eq VAR_FACING, DIR_WEST, Route120_EventScript_StevenPlayerFaceEachOtherSouth
 	call_if_eq VAR_FACING, DIR_SOUTH, Route120_EventScript_StevenPlayerFaceEachOtherWest
 	msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
+	setflag FLAG_RECEIVED_DEVON_SCOPE
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_DEVON_SCOPE::
 	giveitem ITEM_DEVON_SCOPE
-	setflag FLAG_RECEIVED_DEVON_SCOPE
 	msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_STEVEN, Common_Movement_WalkInPlaceFasterDown
