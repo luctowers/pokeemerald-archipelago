@@ -90,6 +90,8 @@ int main (int argc, char *argv[])
     }
 
     std::map<std::string, uint32_t> misc_ram_addresses = {
+        { "gMain", symbol_map["gMain"] },
+        { "CB2_Overworld", symbol_map["CB2_Overworld"] },
         { "gSaveBlock1Ptr", symbol_map["gSaveBlock1Ptr"] },
         { "gArchipelagoReceivedItem", symbol_map["gArchipelagoReceivedItem"] },
     };
