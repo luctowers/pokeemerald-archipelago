@@ -82,7 +82,7 @@ int main (int argc, char *argv[])
         {
             std::shared_ptr<LocationInfo> item(new LocationInfo());
             item->name = "BADGE_" + symbol.substr(25);
-            item->flag = constants_json["FLAG_RECEIVED_BADGE_" + symbol.substr(25) + "_GET"];
+            item->flag = constants_json["FLAG_RECEIVED_BADGE_" + symbol.substr(25)];
             item->ram_address = address + 3;
             item->rom_address = item->ram_address - 0x8000000;
             badges.push_back(item);
