@@ -1,7 +1,7 @@
 .include "data/text/archipelago.inc"
 
 ArchipelagoScript_ReceiveRemoteItem::
-	specialvar VAR_RESULT, ArchipelagoSpecial_GetReceivedItemId
+	specialvar VAR_RESULT, ArchipelagoSpecial_ConsumeReceivedItem
 	giveitem VAR_RESULT
 	releaseall
 	end

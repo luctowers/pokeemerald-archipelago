@@ -999,8 +999,7 @@ struct SaveBlock1
     /*0x0A28*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
     /*0x0B68*/ u8 seen1[NUM_DEX_FLAG_BYTES];
     /*0x0B9C*/ u16 berryBlenderRecords[3];
-    /*0x0BA2*/ u16 archipelagoLastReceivedItemIndex;
-    /*0x0BA4*/ u8 unused_9C2[4];
+    /*0x0BA2*/ u8 unused_BA2[6];
     /*0x0BA8*/ u16 trainerRematchStepCounter;
     /*0x0BAA*/ u8 trainerRematches[MAX_REMATCH_ENTRIES];
     /*0x0C0E*/ //u8 padding3[2]; // Padding may have been (re)moved after bag expansion
@@ -1053,7 +1052,8 @@ struct SaveBlock1
     /*0x33BC*/ struct Roamer roamer;
     /*0x33D8*/ struct EnigmaBerry enigmaBerry;
     /*0x340C*/ struct MysteryGiftSave mysteryGift;
-    /*0x3778*/ u8 unused[0xE0];
+    /*0x3778*/ u16 archipelagoLastReceivedItemIndex;
+    /*0x377A*/ u8 unused_377A[0xDE];
     /*0x3858*/ u32 trainerHillTimes[NUM_TRAINER_HILL_MODES];
     /*0x3868*/ struct RamScript ramScript;
     /*0x3C54*/ struct RecordMixingGift recordMixingGift;

@@ -541,5 +541,4 @@ gSpecials::
 	def_special ArchipelagoSpecial_IsFerryEnabled
 	def_special ArchipelagoSpecial_ShouldHandle
 	def_special ArchipelagoSpecial_IsItemBadge
-	def_special ArchipelagoSpecial_GetReceivedItemId
-	def_special ArchipelagoSpecial_SetArchipelagoFlag
+	def_special ArchipelagoSpecial_ConsumeReceivedItem

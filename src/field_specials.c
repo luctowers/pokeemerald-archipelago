@@ -4295,13 +4295,9 @@ bool8 ArchipelagoSpecial_ShouldHandle(void)
         ArchipelagoSpecial_IsItemBadge();
 }
 
-u16 ArchipelagoSpecial_GetReceivedItemId(void)
+u16 ArchipelagoSpecial_ConsumeReceivedItem(void)
 {
     gSaveBlock1Ptr->archipelagoLastReceivedItemIndex = gArchipelagoReceivedItem.itemIndex;
-    return gArchipelagoReceivedItem.itemId;
-}
-
-void ArchipelagoSpecial_SetArchipelagoFlag(void)
-{
     gArchipelagoReceivedItem.full = FALSE;
+    return gArchipelagoReceivedItem.itemId;
 }
