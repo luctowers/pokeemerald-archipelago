@@ -374,6 +374,7 @@ PetalburgCity_Gym_EventScript_GiveEnigmaBerry::
 PetalburgCity_Gym_EventScript_NormanBattle::
 	msgbox PetalburgCity_Gym_Text_NormanIntro, MSGBOX_DEFAULT
 	trainerbattle_no_intro TRAINER_NORMAN_1, PetalburgCity_Gym_Text_NormanDefeat
+	setflag FLAG_RECEIVED_BADGE_5
 Archipelago_Target_Badge_5::
 	giveitem ITEM_BADGE_5
 	msgbox PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis, MSGBOX_DEFAULT

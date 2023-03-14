@@ -58,6 +58,7 @@ LavaridgeTown_Gym_1F_EventScript_Flannery::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
+	setflag FLAG_RECEIVED_BADGE_4
 Archipelago_Target_Badge_4::
 	giveitem ITEM_BADGE_4
 	msgbox LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis, MSGBOX_DEFAULT

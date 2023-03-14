@@ -90,6 +90,7 @@ SootopolisCity_Gym_1F_EventScript_Juan::
 	end
 
 SootopolisCity_Gym_1F_EventScript_JuanDefeated::
+	setflag FLAG_RECEIVED_BADGE_8
 Archipelago_Target_Badge_8::
 	giveitem ITEM_BADGE_8
 	msgbox SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis, MSGBOX_DEFAULT

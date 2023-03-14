@@ -58,6 +58,7 @@ MossdeepCity_Gym_EventScript_TateAndLiza::
 	end
 
 MossdeepCity_Gym_EventScript_TateAndLizaDefeated::
+	setflag FLAG_RECEIVED_BADGE_7
 Archipelago_Target_Badge_7::
 	giveitem ITEM_BADGE_7
 	msgbox MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis, MSGBOX_DEFAULT

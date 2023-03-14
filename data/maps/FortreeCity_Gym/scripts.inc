@@ -25,6 +25,7 @@ FortreeCity_Gym_EventScript_Winona::
 	end
 
 FortreeCity_Gym_EventScript_WinonaDefeated::
+	setflag FLAG_RECEIVED_BADGE_6
 Archipelago_Target_Badge_6::
 	giveitem ITEM_BADGE_6
 	msgbox FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis, MSGBOX_DEFAULT

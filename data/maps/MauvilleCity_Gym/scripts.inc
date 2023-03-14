@@ -84,6 +84,7 @@ MauvilleCity_Gym_EventScript_Wattson::
 	end
 
 MauvilleCity_Gym_EventScript_WattsonDefeated::
+	setflag FLAG_RECEIVED_BADGE_3
 Archipelago_Target_Badge_3::
 	giveitem ITEM_BADGE_3
 	msgbox MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis, MSGBOX_DEFAULT

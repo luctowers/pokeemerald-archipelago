@@ -11,6 +11,7 @@ RustboroCity_Gym_EventScript_Roxanne::
 	end
 
 RustboroCity_Gym_EventScript_RoxanneDefeated::
+	setflag FLAG_RECEIVED_BADGE_1
 Archipelago_Target_Badge_1::
 	giveitem ITEM_BADGE_1
 	msgbox RustboroCity_Gym_Text_StoneBadgeInfoTakeThis, MSGBOX_DEFAULT
