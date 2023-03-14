@@ -55,7 +55,6 @@ EventScript_BufferBerriesPocket::
 EventScript_ObtainedItem::
 	message gText_ObtainedTheItem
 	waitfanfare
-	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	setvar VAR_RESULT, TRUE
 	return
 
@@ -104,13 +103,16 @@ Std_FindItem::
 	copyvar VAR_UNUSED_0x8014 ITEMID
 	specialvar VAR_RESULT, ArchipelagoSpecial_ShouldHandle
 	goto_if_eq VAR_RESULT, TRUE, ArchipelagoScript_FindItem
-	goto_if_eq VAR_RESULT, FALSE, Std_FindItem_Rest
-	return
-
-Std_FindItem_Rest::
 	checkitemspace ITEMID, AMOUNT
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
+@ Dangerously remove the object immediately before checking for space.
+@ The removeobject function sets the flag, so this means found items
+@ will be sent to the server sooner (in line with archipelago items and gifts).
+@ Bag capacity should be more than large enough to allow the player to carry
+@ all the items in the game. Player would need to intentionally overfill their
+@ bag to run out of space.
+	removeobject VAR_LAST_TALKED
 	checkitemtype ITEMID
 	call EventScript_BufferPocketNameAndTryFanfare
 	call_if_eq VAR_0x8007, TRUE, EventScript_PickUpItem
@@ -119,7 +121,6 @@ Std_FindItem_Rest::
 	return
 
 EventScript_PickUpItem::
-	removeobject VAR_LAST_TALKED
 	additem VAR_0x8004, VAR_0x8005
 	specialvar VAR_RESULT, BufferTMHMMoveName
 	copyvar VAR_0x8008, VAR_RESULT
@@ -130,7 +131,6 @@ EventScript_PickUpItem::
 	bufferitemnameplural STR_VAR_2, VAR_0x8004, VAR_0x8005
 	pyramid_inchallenge
 	goto_if_eq VAR_RESULT, TRUE, EventScript_PutBattlePyramidItemInBag
-	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	return
 
 EventScript_PutBattlePyramidItemInBag::
@@ -162,6 +162,12 @@ EventScript_HiddenItemScript::
 	copyvar VAR_0x8007, VAR_RESULT
 	bufferitemnameplural STR_VAR_2, VAR_0x8005, 1
 	checkitemtype VAR_0x8005
+@ Dangerously set the item flag before checking for space.
+@ Items will be sent to the server sooner (in line with archipelago items and gifts).
+@ Bag capacity should be more than large enough to allow the player to carry
+@ all the items in the game. Player would need to intentionally overfill their
+@ bag to run out of space.
+	special SetHiddenItemFlag
 	call EventScript_BufferPocketNameAndTryFanfare
 	goto_if_eq VAR_0x8007, TRUE, EventScript_PickUpHiddenItem
 	goto_if_eq VAR_0x8007, FALSE, EventScript_NoRoomForHiddenItem
@@ -191,9 +197,7 @@ EventScript_PutHiddenItemInPocket::
 	waitfanfare
 	bufferitemnameplural STR_VAR_2, VAR_0x8004, 1
 	copyvar VAR_0x8004, VAR_0x8008
-	msgbox gText_PutItemInPocket, MSGBOX_DEFAULT
 	special TryPutTreasureInvestigatorsOnAir
-	special SetHiddenItemFlag
 	releaseall
 	end
 
