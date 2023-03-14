@@ -60,9 +60,7 @@ MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes::
 	end
 
 MauvilleCity_BikeShop_EventScript_AskSwitchBikes::
-	msgbox MauvilleCity_BikeShop_Text_WantToSwitchBikes, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_SwitchBikes
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_KeepBike
+	msgbox MauvilleCity_BikeShop_Text_WantToSwitchBikes, MSGBOX_DEFAULT
 	end
 
 @ If the player does not have a bike on them Rydel assumes its stored in the PC
@@ -227,8 +225,11 @@ MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes:
 	.string "BIKES, just come see me!$"
 
 MauvilleCity_BikeShop_Text_WantToSwitchBikes:
-	.string "RYDEL: Oh? Were you thinking about\n"
-	.string "switching BIKES?$"
+	.string "How are you liking those BIKES?\p"
+	.string "The MACH BIKE is for cyclists who want\n"
+	.string "to feel the wind with their bodies!\p"
+	.string "And an ACRO BIKE is for those who\n"
+	.string "prefer technical rides!$"
 
 MauvilleCity_BikeShop_Text_IllSwitchBikes:
 	.string "RYDEL: Okay, no problem!\n"
