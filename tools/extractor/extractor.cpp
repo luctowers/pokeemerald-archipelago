@@ -90,19 +90,20 @@ int main (int argc, char *argv[])
     }
 
     std::map<std::string, uint32_t> misc_ram_addresses = {
-        { "gMain", symbol_map["gMain"] },
         { "CB2_Overworld", symbol_map["CB2_Overworld"] },
-        { "gSaveBlock1Ptr", symbol_map["gSaveBlock1Ptr"] },
         { "gArchipelagoReceivedItem", symbol_map["gArchipelagoReceivedItem"] },
+        { "gMain", symbol_map["gMain"] },
+        { "gSaveBlock1Ptr", symbol_map["gSaveBlock1Ptr"] },
     };
 
     std::map<std::string, uint32_t> misc_rom_addresses = {
         { "gArchipelagoOptions", symbol_map["gArchipelagoOptions"] - 0x8000000 },
         { "gLevelUpLearnsets", symbol_map["gLevelUpLearnsets"] - 0x8000000 },
+        { "sNewGamePCItems", symbol_map["sNewGamePCItems"] - 0x8000000 },
         { "gSpeciesInfo", symbol_map["gSpeciesInfo"] - 0x8000000 },
-        { "gTrainers", symbol_map["gTrainers"] - 0x8000000 },
-        { "gTMHMLearnsets", symbol_map["gTMHMLearnsets"] - 0x8000000 },
         { "sStarterMon", symbol_map["sStarterMon"] - 0x8000000 },
+        { "gTMHMLearnsets", symbol_map["gTMHMLearnsets"] - 0x8000000 },
+        { "gTrainers", symbol_map["gTrainers"] - 0x8000000 },
     };
 
     // ------------------------------------------------------------------------
