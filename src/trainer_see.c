@@ -193,11 +193,13 @@ bool8 CheckForTrainersWantingBattle(void)
 {
     u8 i;
 
-    if (gArchipelagoOptions.areTrainersBlind)
-        return FALSE;
-
     gNoOfApproachingTrainers = 0;
     gApproachingTrainerId = 0;
+
+    if (gArchipelagoOptions.areTrainersBlind)
+    {
+        return FALSE;
+    }
 
     for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
     {
