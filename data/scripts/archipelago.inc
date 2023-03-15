@@ -8,7 +8,7 @@ ArchipelagoScript_ReceiveRemoteItem::
 
 ArchipelagoScript_FoundArchipelagoItem::
 	call EventScript_PlayFanfareObtainedItem
-	message gText_PlayerFoundArchipelagoItem
+	msgbox gText_PlayerFoundArchipelagoItem, MSGBOX_DEFAULT
 	waitfanfare
 	waitmessage
 	return
@@ -49,7 +49,7 @@ ArchipelagoScript_HandleBadgeItem::
 	return
 
 ArchipelagoScript_ReceiveStoneBadge::
-	message RustboroCity_Gym_Text_ReceivedStoneBadge
+	msgbox RustboroCity_Gym_Text_ReceivedStoneBadge, MSGBOX_DEFAULT
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE01_GET
@@ -57,7 +57,7 @@ ArchipelagoScript_ReceiveStoneBadge::
 	return
 
 ArchipelagoScript_ReceiveKnuckleBadge::
-	message DewfordTown_Gym_Text_ReceivedKnuckleBadge
+	msgbox DewfordTown_Gym_Text_ReceivedKnuckleBadge, MSGBOX_DEFAULT
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE02_GET
@@ -65,7 +65,7 @@ ArchipelagoScript_ReceiveKnuckleBadge::
 	return
 
 ArchipelagoScript_ReceiveDynamoBadge::
-	message MauvilleCity_Gym_Text_ReceivedDynamoBadge
+	msgbox MauvilleCity_Gym_Text_ReceivedDynamoBadge, MSGBOX_DEFAULT
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE03_GET
@@ -73,7 +73,7 @@ ArchipelagoScript_ReceiveDynamoBadge::
 	return
 
 ArchipelagoScript_ReceiveHeatBadge::
-	message LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge
+	msgbox LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge, MSGBOX_DEFAULT
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE04_GET
@@ -81,7 +81,7 @@ ArchipelagoScript_ReceiveHeatBadge::
 	return
 
 ArchipelagoScript_ReceiveBalanceBadge::
-	message PetalburgCity_Gym_Text_ReceivedBalanceBadge
+	msgbox PetalburgCity_Gym_Text_ReceivedBalanceBadge, MSGBOX_DEFAULT
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE05_GET
@@ -89,7 +89,7 @@ ArchipelagoScript_ReceiveBalanceBadge::
 	return
 
 ArchipelagoScript_ReceiveFeatherBadge::
-	message FortreeCity_Gym_Text_ReceivedFeatherBadge
+	msgbox FortreeCity_Gym_Text_ReceivedFeatherBadge, MSGBOX_DEFAULT
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE06_GET
@@ -97,7 +97,7 @@ ArchipelagoScript_ReceiveFeatherBadge::
 	return
 
 ArchipelagoScript_ReceiveMindBadge::
-	message MossdeepCity_Gym_Text_ReceivedMindBadge
+	msgbox MossdeepCity_Gym_Text_ReceivedMindBadge, MSGBOX_DEFAULT
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE07_GET
@@ -105,7 +105,7 @@ ArchipelagoScript_ReceiveMindBadge::
 	return
 
 ArchipelagoScript_ReceiveRainBadge::
-	message SootopolisCity_Gym_1F_Text_ReceivedRainBadge
+	msgbox SootopolisCity_Gym_1F_Text_ReceivedRainBadge, MSGBOX_DEFAULT
 	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
 	setflag FLAG_BADGE08_GET
