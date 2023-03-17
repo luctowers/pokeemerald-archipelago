@@ -53,7 +53,7 @@ EventScript_BufferBerriesPocket::
 	return
 
 EventScript_ObtainedItem::
-	message gText_ObtainedTheItem
+	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
 	waitfanfare
 	setvar VAR_RESULT, TRUE
 	return
