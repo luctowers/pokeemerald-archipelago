@@ -11,7 +11,7 @@ Std_ObtainItem::
 	return
 
 EventScript_ObtainItemMessage::
-	bufferitemnameplural STR_VAR_2, ITEMID, AMOUNT
+	bufferitemnameplural STR_VAR_1, ITEMID, AMOUNT
 	checkitemtype ITEMID
 	call EventScript_BufferPocketNameAndTryFanfare
 	call_if_eq VAR_0x8007, TRUE, EventScript_ObtainedItem
@@ -53,7 +53,16 @@ EventScript_BufferBerriesPocket::
 	return
 
 EventScript_ObtainedItem::
+	copyvar VAR_0x8004, ITEMID
+	specialvar VAR_RESULT, BufferTMHMMoveName
+	goto_if_eq VAR_RESULT, TRUE, EventScript_ObtainedTMHM
 	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
+	waitfanfare
+	setvar VAR_RESULT, TRUE
+	return
+
+EventScript_ObtainedTMHM::
+	msgbox gText_ObtainedTheTMHM, MSGBOX_DEFAULT
 	waitfanfare
 	setvar VAR_RESULT, TRUE
 	return
