@@ -71,7 +71,13 @@ Archipelago_Target_NPC_Gift_FLAG_RECEIVED_LETTER::
 	setvar VAR_BRINEY_LOCATION, 1
 	clearflag FLAG_HIDE_RUSTBORO_CITY_RIVAL
 	setvar VAR_DEVON_CORP_3F_STATE, 1
-	setvar VAR_RUSTBORO_CITY_STATE, 6
+
+	@ Skip match call tutorial
+	setvar VAR_RUSTBORO_CITY_STATE, 7
+	setvar VAR_ROUTE104_STATE, 1
+	setflag FLAG_HAS_MATCH_CALL
+	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
+	setflag FLAG_HIDE_RUSTBORO_CITY_SCIENTIST
 	releaseall
 	end
 
