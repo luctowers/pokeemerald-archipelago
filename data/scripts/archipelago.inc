@@ -50,64 +50,64 @@ ArchipelagoScript_HandleBadgeItem::
 
 ArchipelagoScript_ReceiveStoneBadge::
 	msgbox RustboroCity_Gym_Text_ReceivedStoneBadge, MSGBOX_DEFAULT
-	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	waitmessage
 	setflag FLAG_BADGE01_GET
 	release
 	return
 
 ArchipelagoScript_ReceiveKnuckleBadge::
 	msgbox DewfordTown_Gym_Text_ReceivedKnuckleBadge, MSGBOX_DEFAULT
-	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	waitmessage
 	setflag FLAG_BADGE02_GET
 	release
 	return
 
 ArchipelagoScript_ReceiveDynamoBadge::
 	msgbox MauvilleCity_Gym_Text_ReceivedDynamoBadge, MSGBOX_DEFAULT
-	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	waitmessage
 	setflag FLAG_BADGE03_GET
 	release
 	return
 
 ArchipelagoScript_ReceiveHeatBadge::
 	msgbox LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge, MSGBOX_DEFAULT
-	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	waitmessage
 	setflag FLAG_BADGE04_GET
 	release
 	return
 
 ArchipelagoScript_ReceiveBalanceBadge::
 	msgbox PetalburgCity_Gym_Text_ReceivedBalanceBadge, MSGBOX_DEFAULT
-	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	waitmessage
 	setflag FLAG_BADGE05_GET
 	release
 	return
 
 ArchipelagoScript_ReceiveFeatherBadge::
 	msgbox FortreeCity_Gym_Text_ReceivedFeatherBadge, MSGBOX_DEFAULT
-	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	waitmessage
 	setflag FLAG_BADGE06_GET
 	release
 	return
 
 ArchipelagoScript_ReceiveMindBadge::
 	msgbox MossdeepCity_Gym_Text_ReceivedMindBadge, MSGBOX_DEFAULT
-	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	waitmessage
 	setflag FLAG_BADGE07_GET
 	release
 	return
 
 ArchipelagoScript_ReceiveRainBadge::
 	msgbox SootopolisCity_Gym_1F_Text_ReceivedRainBadge, MSGBOX_DEFAULT
-	waitmessage
 	call Common_EventScript_PlayGymBadgeFanfare
+	waitmessage
 	setflag FLAG_BADGE08_GET
 	release
 	return
