@@ -9,7 +9,6 @@ ArchipelagoScript_ReceiveRemoteItem::
 ArchipelagoScript_FoundArchipelagoItem::
 	call EventScript_PlayFanfareObtainedItem
 	msgbox gText_PlayerFoundArchipelagoItem, MSGBOX_DEFAULT
-	waitfanfare
 	waitmessage
 	return
 
