@@ -3780,7 +3780,7 @@ static const u16 sTyranitarLevelUpLearnset[] = {
 static const u16 sLugiaLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_NONE),
     LEVEL_UP_MOVE( 1, MOVE_NONE),
-    LEVEL_UP_MOVE( 1, MOVE_NONE),
+    LEVEL_UP_MOVE( 1, MOVE_GUST),
     LEVEL_UP_MOVE( 1, MOVE_WHIRLWIND),
     LEVEL_UP_MOVE(11, MOVE_SAFEGUARD),
     LEVEL_UP_MOVE(22, MOVE_GUST),
