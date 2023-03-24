@@ -3722,9 +3722,9 @@ static void CursorCb_FieldMove(u8 taskId)
     }
     else
     {
-        bool8 allowFly = fieldMove == FIELD_MOVE_FLY && gArchipelagoOptions.canFlyWithoutBadge;
+        bool8 flyPassThrough = (fieldMove == FIELD_MOVE_FLY) && gArchipelagoOptions.canFlyWithoutBadge;
         // All field moves before WATERFALL are HMs.
-        if ((fieldMove <= FIELD_MOVE_WATERFALL && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE) || allowFly)
+        if ((fieldMove <= FIELD_MOVE_WATERFALL && FlagGet(FLAG_BADGE01_GET + fieldMove) != TRUE) && !flyPassThrough)
         {
             DisplayPartyMenuMessage(gText_CantUseUntilNewBadge, TRUE);
             gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
