@@ -53,7 +53,7 @@ EventScript_BufferBerriesPocket::
 	return
 
 EventScript_ObtainedItem::
-	copyvar VAR_0x8004, ITEMID
+	copyvar VAR_0x8004, VAR_UNUSED_0x8014
 	specialvar VAR_RESULT, BufferTMHMMoveName
 	goto_if_eq VAR_RESULT, TRUE, EventScript_ObtainedTMHM
 	msgbox gText_ObtainedTheItem, MSGBOX_DEFAULT
