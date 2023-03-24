@@ -1,9 +1,8 @@
 gText_ObtainedTheItem::
-	.string "{PLAYER} received a\n"
-	.string "{STR_VAR_1}!$"
+	.string "{PLAYER} received one {STR_VAR_1}!$"
 
 gText_ObtainedTheTMHM::
-	.string "{PLAYER} received {STR_VAR_1}\n"
+	.string "{PLAYER} received one {STR_VAR_1}\n"
 	.string "{STR_VAR_2}!$"
 
 gText_TheBagIsFull::
@@ -14,7 +13,7 @@ gText_PutItemInPocket::
 	.string "in the {STR_VAR_3} POCKET.$"
 
 gText_PlayerFoundOneItem::
-	.string "{PLAYER} found a {STR_VAR_2}!$"
+	.string "{PLAYER} found one {STR_VAR_2}!$"
 
 gText_TooBadBagIsFull::
 	.string "Too bad!\n"
