@@ -12,6 +12,7 @@ struct ArchipelagoOptions
     u16 expMultiplierNumerator;
     u16 expMultiplierDenominator;
     u16 birchPokemon;
+    bool8 guaranteedCatch;
 } __attribute__((packed));
 
 extern const struct ArchipelagoOptions gArchipelagoOptions;

@@ -8,4 +8,5 @@ const struct ArchipelagoOptions gArchipelagoOptions = {
     .expMultiplierNumerator = 100,
     .expMultiplierDenominator = 100,
     .birchPokemon = SPECIES_LOTAD,
+    .guaranteedCatch = FALSE,
 };
