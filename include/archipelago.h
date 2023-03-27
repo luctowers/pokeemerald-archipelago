@@ -13,6 +13,7 @@ struct ArchipelagoOptions
     u16 expMultiplierDenominator;
     u16 birchPokemon;
     bool8 guaranteedCatch;
+    bool8 betterShopsEnabled;
 } __attribute__((packed));
 
 extern const struct ArchipelagoOptions gArchipelagoOptions;

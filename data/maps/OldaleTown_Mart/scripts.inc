@@ -6,22 +6,7 @@ OldaleTown_Mart_EventScript_Clerk::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart OldaleTown_Mart_Pokemart_Expanded
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-OldaleTown_Mart_Pokemart_Basic:
-	.2byte ITEM_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_NONE
-	release
-	end
-
-OldaleTown_Mart_ExpandedItems::
+	goto_if_set FLAG_BETTER_SHOPS_ENABLED, OldaleTown_Mart_EventScript_PokemartBetter
 	pokemart OldaleTown_Mart_Pokemart_Expanded
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
@@ -38,8 +23,14 @@ OldaleTown_Mart_Pokemart_Expanded:
 	release
 	end
 
+OldaleTown_Mart_EventScript_PokemartBetter::
+	pokemart OldaleTown_Mart_Pokemart_Better
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
 	.align 2
-SootopolisCity_Mart_Pokemart_Better:
+OldaleTown_Mart_Pokemart_Better:
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_ULTRA_BALL

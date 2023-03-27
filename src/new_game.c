@@ -1,4 +1,5 @@
 #include "global.h"
+#include "archipelago.h"
 #include "new_game.h"
 #include "random.h"
 #include "pokemon.h"
@@ -204,6 +205,11 @@ void NewGameInitData(void)
     WipeTrainerNameRecords();
     ResetTrainerHillResults();
     ResetContestLinkResults();
+
+    if (gArchipelagoOptions.betterShopsEnabled)
+    {
+        FlagSet(FLAG_BETTER_SHOPS_ENABLED);
+    }
 }
 
 static void ResetMiniGamesRecords(void)
