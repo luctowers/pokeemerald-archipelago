@@ -4298,7 +4298,7 @@ bool8 ArchipelagoSpecial_ShouldHandle(void)
 u16 ArchipelagoSpecial_ConsumeReceivedItem(void)
 {
     gSaveBlock1Ptr->archipelagoLastReceivedItemIndex = gArchipelagoReceivedItem.itemIndex;
-    gArchipelagoReceivedItem.full = FALSE;
+    gArchipelagoReceivedItem.isFilled = FALSE;
     return gArchipelagoReceivedItem.itemId;
 }
 

@@ -6,6 +6,11 @@ ArchipelagoScript_ReceiveRemoteItem::
 	releaseall
 	end
 
+ArchipelagoScript_ReceiveRemoteItemSilent::
+	specialvar VAR_RESULT, ArchipelagoSpecial_ConsumeReceivedItem
+	additem VAR_RESULT, AMOUNT
+	end
+
 ArchipelagoScript_FoundArchipelagoItem::
 	call EventScript_PlayFanfareObtainedItem
 	msgbox gText_PlayerFoundArchipelagoItem, MSGBOX_DEFAULT

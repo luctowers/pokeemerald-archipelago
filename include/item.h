@@ -31,9 +31,10 @@ struct BagPocket
 
 struct ArchipelagoReceivedItem
 {
-    u16 itemId;             // The id of the item to be received
-    u16 itemIndex;
-    bool8 full;             // Whether the item in this structure has yet to be received
+    u16 itemId;                  // The id of the item to be received
+    u16 itemIndex;               // The index of the item according to the AP server
+    bool8 isFilled;              // Whether there is an item in this struct that has not been consumed
+    bool8 shouldDisplayMessage;  // Whether a message should be displayed about receiving this item
 };
 
 extern struct ArchipelagoReceivedItem gArchipelagoReceivedItem;
