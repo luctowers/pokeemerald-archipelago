@@ -14,6 +14,10 @@ struct ArchipelagoOptions
     u16 birchPokemon;
     bool8 guaranteedCatch;
     bool8 betterShopsEnabled;
+    bool8 eliteFourRequiresGyms;
+    u8 eliteFourRequiredCount;
+    bool8 normanRequiresGyms;
+    u8 normanRequiredCount;
 } __attribute__((packed));
 
 extern const struct ArchipelagoOptions gArchipelagoOptions;

@@ -4301,3 +4301,67 @@ u16 ArchipelagoSpecial_ConsumeReceivedItem(void)
     gArchipelagoReceivedItem.full = FALSE;
     return gArchipelagoReceivedItem.itemId;
 }
+
+bool8 ArchipelagoSpecial_CanChallengeNorman(void)
+{
+    if (gArchipelagoOptions.normanRequiresGyms)
+    {
+        u8 gymCount = 0;
+        gymCount += FlagGet(FLAG_DEFEATED_RUSTBORO_GYM)   ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_DEWFORD_GYM)    ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_MAUVILLE_GYM)   ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_LAVARIDGE_GYM)  ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_PETALBURG_GYM)  ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_FORTREE_GYM)    ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_MOSSDEEP_GYM)   ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_SOOTOPOLIS_GYM) ? 1 : 0;
+
+        return gymCount >= gArchipelagoOptions.normanRequiredCount;
+    }
+    else
+    {
+        u8 badgeCount = 0;
+        badgeCount += FlagGet(FLAG_BADGE01_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE02_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE03_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE04_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE05_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE06_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE07_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE08_GET) ? 1 : 0;
+
+        return badgeCount >= gArchipelagoOptions.normanRequiredCount;
+    }
+}
+
+bool8 ArchipelagoSpecial_CanChallengeEliteFour(void)
+{
+    if (gArchipelagoOptions.eliteFourRequiresGyms)
+    {
+        u8 gymCount = 0;
+        gymCount += FlagGet(FLAG_DEFEATED_RUSTBORO_GYM)   ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_DEWFORD_GYM)    ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_MAUVILLE_GYM)   ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_LAVARIDGE_GYM)  ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_PETALBURG_GYM)  ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_FORTREE_GYM)    ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_MOSSDEEP_GYM)   ? 1 : 0;
+        gymCount += FlagGet(FLAG_DEFEATED_SOOTOPOLIS_GYM) ? 1 : 0;
+
+        return gymCount >= gArchipelagoOptions.eliteFourRequiredCount;
+    }
+    else
+    {
+        u8 badgeCount = 0;
+        badgeCount += FlagGet(FLAG_BADGE01_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE02_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE03_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE04_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE05_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE06_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE07_GET) ? 1 : 0;
+        badgeCount += FlagGet(FLAG_BADGE08_GET) ? 1 : 0;
+
+        return badgeCount >= gArchipelagoOptions.eliteFourRequiredCount;
+    }
+}

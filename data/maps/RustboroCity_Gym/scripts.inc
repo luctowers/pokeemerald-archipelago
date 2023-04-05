@@ -17,7 +17,6 @@ Archipelago_Target_Badge_1::
 	msgbox RustboroCity_Gym_Text_StoneBadgeInfoTakeThis, MSGBOX_DEFAULT
 	setflag FLAG_DEFEATED_RUSTBORO_GYM
 	setvar VAR_RUSTBORO_CITY_STATE, 1
-	call_if_lt VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ProgressPetalburgGym
 	setvar VAR_0x8008, 1
 	call Common_EventScript_SetGymTrainers
 	goto RustboroCity_Gym_EventScript_GiveRockTomb

@@ -10,4 +10,8 @@ const struct ArchipelagoOptions gArchipelagoOptions = {
     .birchPokemon = SPECIES_LOTAD,
     .guaranteedCatch = FALSE,
     .betterShopsEnabled = FALSE,
+    .eliteFourRequiresGyms = FALSE,
+    .eliteFourRequiredCount = 8,
+    .normanRequiresGyms = FALSE,
+    .normanRequiredCount = 4,
 };

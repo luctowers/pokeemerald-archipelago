@@ -542,3 +542,5 @@ gSpecials::
 	def_special ArchipelagoSpecial_ShouldHandle
 	def_special ArchipelagoSpecial_IsItemBadge
 	def_special ArchipelagoSpecial_ConsumeReceivedItem
+	def_special ArchipelagoSpecial_CanChallengeNorman
+	def_special ArchipelagoSpecial_CanChallengeEliteFour

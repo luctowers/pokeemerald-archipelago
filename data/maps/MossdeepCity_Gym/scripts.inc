@@ -66,7 +66,6 @@ Archipelago_Target_Badge_7::
 	setflag FLAG_HIDE_AQUA_HIDEOUT_GRUNTS
 	clearflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
 	clearflag FLAG_UNKNOWN_0x393
-	call_if_lt VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ProgressPetalburgGym
 	setvar VAR_0x8008, 7
 	call Common_EventScript_SetGymTrainers
 	clearflag FLAG_HIDE_SLATEPORT_CITY_HARBOR_PATRONS

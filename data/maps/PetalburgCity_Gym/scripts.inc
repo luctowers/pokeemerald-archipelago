@@ -10,9 +10,15 @@ PetalburgCity_Gym_MapScripts::
 	.byte 0
 
 PetalburgCity_Gym_OnLoad:
+	call_if_lt VAR_PETALBURG_GYM_STATE, 6, PetalburgCity_Gym_EventScript_CheckCanChallengeNorman
 	goto_if_eq VAR_PETALBURG_GYM_STATE, 6, PetalburgCity_Gym_EventScript_OpenUnlockedDoors
 	call_if_ge VAR_PETALBURG_GYM_STATE, 7, PetalburgCity_Gym_EventScript_UnlockAllDoors
 	end
+
+PetalburgCity_Gym_EventScript_CheckCanChallengeNorman::
+	specialvar VAR_RESULT, ArchipelagoSpecial_CanChallengeNorman
+	call_if_eq VAR_RESULT, TRUE, Common_EventScript_ReadyPetalburgGymForBattle
+	return
 
 @ NOTE: Strength and OHKO rooms are misleading. Both are more accurately Critical-Hit
 PetalburgCity_Gym_EventScript_OpenUnlockedDoors::

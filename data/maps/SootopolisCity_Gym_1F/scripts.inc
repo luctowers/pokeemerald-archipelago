@@ -100,7 +100,6 @@ Archipelago_Target_Badge_8::
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_WALLACE
 	setvar VAR_SOOTOPOLIS_CITY_STATE, 6
 	clearflag FLAG_HIDE_SOOTOPOLIS_CITY_MAN_1
-	call_if_lt VAR_PETALBURG_GYM_STATE, 6, Common_EventScript_ProgressPetalburgGym
 	setvar VAR_0x8008, 8
 	call Common_EventScript_SetGymTrainers
 	call SootopolisCity_Gym_1F_EventScript_GiveWaterPulse
