@@ -336,9 +336,9 @@ SlateportCity_Harbor_EventScript_FerryFinished::
 	end
 
 SlateportCity_Harbor_EventScript_AskToTradeScanner::
-	message SlateportCity_Harbor_Text_WouldYouTradeScanner
-	waitmessage
-	goto SlateportCity_Harbor_EventScript_ChooseScannerTrade
+	msgbox SlateportCity_Harbor_Text_WouldYouTradeScanner, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, SlateportCity_Harbor_EventScript_AcceptTrade
+	goto_if_eq VAR_RESULT, NO, SlateportCity_Harbor_EventScript_DeclineTrade
 	end
 
 SlateportCity_Harbor_EventScript_ChooseScannerTrade::
@@ -348,6 +348,19 @@ SlateportCity_Harbor_EventScript_ChooseScannerTrade::
 	case 1, SlateportCity_Harbor_EventScript_DeepSeaScale
 	case 2, SlateportCity_Harbor_EventScript_DeclineTrade
 	case MULTI_B_PRESSED, SlateportCity_Harbor_EventScript_DeclineTrade
+	end
+
+SlateportCity_Harbor_EventScript_AcceptTrade::
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_DEEP_SEA_TOOTH::
+	giveitem ITEM_DEEP_SEA_TOOTH
+Archipelago_Target_NPC_Gift_FLAG_RECEIVED_DEEP_SEA_SCALE::
+	giveitem ITEM_DEEP_SEA_SCALE
+	removeitem ITEM_SCANNER
+	msgbox SlateportCity_Harbor_Text_HandedScannerToStern, MSGBOX_DEFAULT
+	setflag FLAG_EXCHANGED_SCANNER
+	setflag FLAG_RECEIVED_DEEP_SEA_TOOTH
+	setflag FLAG_RECEIVED_DEEP_SEA_SCALE
+	goto SlateportCity_Harbor_EventScript_TradedScanner
 	end
 
 SlateportCity_Harbor_EventScript_DeepSeaTooth::
@@ -520,7 +533,7 @@ SlateportCity_Harbor_Text_WouldYouTradeScanner:
 	.string "help us on our explorations.\p"
 	.string "{PLAYER}{KUN}, would you trade your\n"
 	.string "SCANNER for something?\p"
-	.string "Like, say, a DEEPSEATOOTH or\n"
+	.string "Like, say, a DEEPSEATOOTH and\n"
 	.string "a DEEPSEASCALE that I have?$"
 
 SlateportCity_Harbor_Text_IfYouWantToTradeLetMeKnow:
