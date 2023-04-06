@@ -5,19 +5,19 @@
 
 struct ArchipelagoOptions
 {
-    bool8 advanceTextWithHoldA;
-    bool8 isFerryEnabled;
-    bool8 areTrainersBlind;
-    bool8 canFlyWithoutBadge;
-    u16 expMultiplierNumerator;
-    u16 expMultiplierDenominator;
-    u16 birchPokemon;
-    bool8 guaranteedCatch;
-    bool8 betterShopsEnabled;
-    bool8 eliteFourRequiresGyms;
-    u8 eliteFourRequiredCount;
-    bool8 normanRequiresGyms;
-    u8 normanRequiredCount;
+    /* 0x00 */ bool8 advanceTextWithHoldA;
+    /* 0x01 */ bool8 isFerryEnabled;
+    /* 0x02 */ bool8 areTrainersBlind;
+    /* 0x03 */ bool8 canFlyWithoutBadge;
+    /* 0x04 */ u16 expMultiplierNumerator;
+    /* 0x06 */ u16 expMultiplierDenominator;
+    /* 0x08 */ u16 birchPokemon;
+    /* 0x0A */ bool8 guaranteedCatch;
+    /* 0x0B */ bool8 betterShopsEnabled;
+    /* 0x0C */ bool8 eliteFourRequiresGyms;
+    /* 0x0D */ u8 eliteFourRequiredCount;
+    /* 0x0E */ bool8 normanRequiresGyms;
+    /* 0x0F */ u8 normanRequiredCount;
 } __attribute__((packed));
 
 extern const struct ArchipelagoOptions gArchipelagoOptions;
