@@ -14,4 +14,5 @@ const struct ArchipelagoOptions gArchipelagoOptions = {
     .eliteFourRequiredCount = 8,
     .normanRequiresGyms = FALSE,
     .normanRequiredCount = 4,
+    .startingBadges = 0,
 };

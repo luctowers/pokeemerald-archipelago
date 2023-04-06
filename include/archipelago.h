@@ -18,6 +18,7 @@ struct ArchipelagoOptions
     /* 0x0D */ u8 eliteFourRequiredCount;
     /* 0x0E */ bool8 normanRequiresGyms;
     /* 0x0F */ u8 normanRequiredCount;
+    /* 0x10 */ u8 startingBadges;
 } __attribute__((packed));
 
 extern const struct ArchipelagoOptions gArchipelagoOptions;

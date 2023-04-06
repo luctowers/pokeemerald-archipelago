@@ -210,6 +210,14 @@ void NewGameInitData(void)
     {
         FlagSet(FLAG_BETTER_SHOPS_ENABLED);
     }
+    if ((gArchipelagoOptions.startingBadges >> 0) & 1) FlagSet(FLAG_BADGE01_GET);
+    if ((gArchipelagoOptions.startingBadges >> 1) & 1) FlagSet(FLAG_BADGE02_GET);
+    if ((gArchipelagoOptions.startingBadges >> 2) & 1) FlagSet(FLAG_BADGE03_GET);
+    if ((gArchipelagoOptions.startingBadges >> 3) & 1) FlagSet(FLAG_BADGE04_GET);
+    if ((gArchipelagoOptions.startingBadges >> 4) & 1) FlagSet(FLAG_BADGE05_GET);
+    if ((gArchipelagoOptions.startingBadges >> 5) & 1) FlagSet(FLAG_BADGE06_GET);
+    if ((gArchipelagoOptions.startingBadges >> 6) & 1) FlagSet(FLAG_BADGE07_GET);
+    if ((gArchipelagoOptions.startingBadges >> 7) & 1) FlagSet(FLAG_BADGE08_GET);
 }
 
 static void ResetMiniGamesRecords(void)
