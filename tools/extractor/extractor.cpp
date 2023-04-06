@@ -104,6 +104,7 @@ int main (int argc, char *argv[])
         { "sStarterMon", symbol_map["sStarterMon"] - 0x8000000 },
         { "gTMHMLearnsets", symbol_map["gTMHMLearnsets"] - 0x8000000 },
         { "gTrainers", symbol_map["gTrainers"] - 0x8000000 },
+        { "sTMHMMoves", symbol_map["sTMHMMoves"] - 0x8000000 },
     };
 
     // ------------------------------------------------------------------------
