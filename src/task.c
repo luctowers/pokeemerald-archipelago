@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_intro.h"
 #include "task.h"
 
 struct Task gTasks[NUM_TASKS];
@@ -107,6 +108,22 @@ void DestroyTask(u8 taskId)
     }
 }
 
+bool8 IsTaskBattleIntroSlide(u8 taskId)
+{
+	TaskFunc func = gTasks[taskId].func;
+
+	if(
+        func == BattleIntroSlide1 ||
+        func == BattleIntroSlide2 ||
+        func == BattleIntroSlide3 ||
+        func == BattleIntroSlideLink ||
+        func == BattleIntroSlidePartner
+    )
+		return TRUE;
+	else
+		return FALSE;
+}
+
 void RunTasks(void)
 {
     u8 taskId = FindFirstActiveTask();
@@ -115,7 +132,17 @@ void RunTasks(void)
     {
         do
         {
-            gTasks[taskId].func(taskId);
+            // Run battle intro slide at double speed. Everything else runs once.
+            if (IsTaskBattleIntroSlide(taskId))
+            {
+                gTasks[taskId].func(taskId);
+                gTasks[taskId].func(taskId);
+            }
+            else
+            {
+                gTasks[taskId].func(taskId);
+            }
+
             taskId = gTasks[taskId].next;
         } while (taskId != TAIL_SENTINEL);
     }
