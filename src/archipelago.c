@@ -16,4 +16,5 @@ const struct ArchipelagoOptions gArchipelagoOptions = {
     .normanRequiredCount = 4,
     .startingBadges = 0,
     .receivedItemMessageFilter = 0,
+    .reusableTms = FALSE,
 };

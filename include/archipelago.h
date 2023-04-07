@@ -20,6 +20,7 @@ struct ArchipelagoOptions
     /* 0x0F */ u8 normanRequiredCount;
     /* 0x10 */ u8 startingBadges;
     /* 0x11 */ u8 receivedItemMessageFilter; // 0 = Show All; 1 = Show Progression Only; 2 = Show None
+    /* 0x12 */ bool8 reusableTms;
 } __attribute__((packed));
 
 extern const struct ArchipelagoOptions gArchipelagoOptions;
