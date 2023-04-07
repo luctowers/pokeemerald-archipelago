@@ -1,4 +1,5 @@
 #include "global.h"
+#include "archipelago.h"
 #include "battle_setup.h"
 #include "bike.h"
 #include "coord_event_weather.h"
@@ -1035,7 +1036,10 @@ int SetCableClubWarp(void)
 bool8 Archipelago_CheckReceivedItem()
 {
     if (gArchipelagoReceivedItem.isFilled == TRUE) {
-        if (gArchipelagoReceivedItem.shouldDisplayMessage)
+        if (
+            (gArchipelagoOptions.receivedItemMessageFilter == 0) ||
+            (gArchipelagoOptions.receivedItemMessageFilter == 1 && gArchipelagoReceivedItem.isProgression)
+        )
             ScriptContext_SetupScript(ArchipelagoScript_ReceiveRemoteItem);
         else
             ScriptContext_SetupScript(ArchipelagoScript_ReceiveRemoteItemSilent);

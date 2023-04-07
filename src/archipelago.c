@@ -15,4 +15,5 @@ const struct ArchipelagoOptions gArchipelagoOptions = {
     .normanRequiresGyms = FALSE,
     .normanRequiredCount = 4,
     .startingBadges = 0,
+    .receivedItemMessageFilter = 0,
 };
