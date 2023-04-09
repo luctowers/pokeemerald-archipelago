@@ -89,6 +89,16 @@ int main (int argc, char *argv[])
         }
     }
 
+    // Trainer battle scripts
+    std::map<uint16_t, uint32_t> trainer_battle_scripts;
+    for (auto const& [symbol, address] : symbol_map)
+    {
+        if (symbol.substr(0, 26) == "Archipelago_Target_TRAINER")
+        {
+            trainer_battle_scripts[constants_json[symbol.substr(19)]] = address;
+        }
+    }
+
     std::map<std::string, uint32_t> misc_ram_addresses = {
         { "CB2_Overworld", symbol_map["CB2_Overworld"] },
         { "gArchipelagoReceivedItem", symbol_map["gArchipelagoReceivedItem"] },
@@ -490,6 +500,12 @@ int main (int argc, char *argv[])
         rom.read((char*)&(trainer->party_rom_address), 4);
         trainer->party_rom_address -= 0x8000000;
 
+        auto battle_script_address = trainer_battle_scripts.find(i);
+        if (battle_script_address != trainer_battle_scripts.end())
+        {
+            trainer->battle_script_rom_address = battle_script_address->second - 0x8000000;
+        }
+
         switch (party_flags)
         {
             case 0b00:
@@ -867,6 +883,7 @@ json TrainerInfo::to_json ()
     return {
         { "rom_address", this->rom_address },
         { "party_rom_address", this->party_rom_address },
+        { "battle_script_rom_address", this->battle_script_rom_address },
         { "party", party_json },
         { "pokemon_data_type", pokemon_data_type_string },
     };

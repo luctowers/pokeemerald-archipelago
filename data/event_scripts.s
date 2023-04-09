@@ -833,6 +833,10 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/text/obtain_item.inc"
 
 @ The below and surf.inc could be split into some text/notices.inc
+gText_GenericNotEnoughMons:
+	.string "If you want to battle,\n"
+	.string "bring two POKéMON with you.$"
+
 gText_PokemartSign::
 	.string "“Selected items for your convenience!”\n"
 	.string "POKéMON MART$"

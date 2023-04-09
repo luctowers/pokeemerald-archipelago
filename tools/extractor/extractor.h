@@ -77,6 +77,7 @@ class TrainerInfo {
         TrainerPokemonInfoType pokemon_data_type;
         uint32_t rom_address;
         uint32_t party_rom_address;
+        uint32_t battle_script_rom_address;
 
         nlohmann::json to_json ();
 };
