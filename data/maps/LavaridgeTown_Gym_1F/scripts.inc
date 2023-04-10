@@ -96,6 +96,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryRematch::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_Cole::
+Archipelago_Target_TRAINER_COLE::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_COLE, LOCALID_COLE, LavaridgeTown_Gym_1F_Text_ColeIntro, LavaridgeTown_Gym_1F_Text_ColeDefeat, 0, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	msgbox LavaridgeTown_Gym_1F_Text_ColePostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -108,36 +109,43 @@ LavaridgeTown_Gym_EventScript_CheckTrainerScript::
 	end
 
 LavaridgeTown_Gym_1F_EventScript_Axle::
+Archipelago_Target_TRAINER_AXLE::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_AXLE, LOCALID_AXLE, LavaridgeTown_Gym_1F_Text_AxleIntro, LavaridgeTown_Gym_1F_Text_AxleDefeat, 0, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	msgbox LavaridgeTown_Gym_1F_Text_AxlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_Keegan::
+Archipelago_Target_TRAINER_KEEGAN::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_KEEGAN, LOCALID_KEEGAN, LavaridgeTown_Gym_B1F_Text_KeeganIntro, LavaridgeTown_Gym_B1F_Text_KeeganDefeat, 0, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	msgbox LavaridgeTown_Gym_B1F_Text_KeeganPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_Danielle::
+Archipelago_Target_TRAINER_DANIELLE::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_DANIELLE, LOCALID_DANIELLE, LavaridgeTown_Gym_1F_Text_DanielleIntro, LavaridgeTown_Gym_1F_Text_DanielleDefeat, 0, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	msgbox LavaridgeTown_Gym_1F_Text_DaniellePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_1F_EventScript_Gerald::
+Archipelago_Target_TRAINER_GERALD::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_GERALD, LOCALID_GERALD, LavaridgeTown_Gym_1F_Text_GeraldIntro, LavaridgeTown_Gym_1F_Text_GeraldDefeat, 0, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	msgbox LavaridgeTown_Gym_1F_Text_GeraldPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_Jace::
+Archipelago_Target_TRAINER_JACE::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_JACE, LOCALID_JACE, LavaridgeTown_Gym_B1F_Text_JaceIntro, LavaridgeTown_Gym_B1F_Text_JaceDefeat, 0, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	msgbox LavaridgeTown_Gym_B1F_Text_JacePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_Jeff::
+Archipelago_Target_TRAINER_JEFF::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_JEFF, LOCALID_JEFF, LavaridgeTown_Gym_B1F_Text_JeffIntro, LavaridgeTown_Gym_B1F_Text_JeffDefeat, 0, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	msgbox LavaridgeTown_Gym_B1F_Text_JeffPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 LavaridgeTown_Gym_B1F_EventScript_Eli::
+Archipelago_Target_TRAINER_ELI::
 	trainerbattle TRAINER_BATTLE_CONTINUE_SCRIPT, TRAINER_ELI, LOCALID_ELI, LavaridgeTown_Gym_B1F_Text_EliIntro, LavaridgeTown_Gym_B1F_Text_EliDefeat, 0, LavaridgeTown_Gym_EventScript_CheckTrainerScript
 	msgbox LavaridgeTown_Gym_B1F_Text_EliPostBattle, MSGBOX_AUTOCLOSE
 	end
