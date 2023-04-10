@@ -13,16 +13,19 @@ Route110_TrickHousePuzzle4_EventScript_FoundScroll::
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Cora::
+Archipelago_Target_TRAINER_CORA::
 	trainerbattle_single TRAINER_CORA, Route110_TrickHousePuzzle4_Text_CoraIntro, Route110_TrickHousePuzzle4_Text_CoraDefeat
 	msgbox Route110_TrickHousePuzzle4_Text_CoraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Yuji::
+Archipelago_Target_TRAINER_YUJI::
 	trainerbattle_single TRAINER_YUJI, Route110_TrickHousePuzzle4_Text_YujiIntro, Route110_TrickHousePuzzle4_Text_YujiDefeat
 	msgbox Route110_TrickHousePuzzle4_Text_YujiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle4_EventScript_Paula::
+Archipelago_Target_TRAINER_PAULA::
 	trainerbattle_single TRAINER_PAULA, Route110_TrickHousePuzzle4_Text_PaulaIntro, Route110_TrickHousePuzzle4_Text_PaulaDefeat
 	msgbox Route110_TrickHousePuzzle4_Text_PaulaPostBattle, MSGBOX_AUTOCLOSE
 	end

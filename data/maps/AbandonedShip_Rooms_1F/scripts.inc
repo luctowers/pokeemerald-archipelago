@@ -6,11 +6,13 @@ AbandonedShip_Rooms_1F_EventScript_Gentleman::
 	end
 
 AbandonedShip_Rooms_1F_EventScript_Demetrius::
+Archipelago_Target_TRAINER_DEMETRIUS::
 	trainerbattle_single TRAINER_DEMETRIUS, AbandonedShip_Rooms_1F_Text_DemetriusIntro, AbandonedShip_Rooms_1F_Text_DemetriusDefeat
 	msgbox AbandonedShip_Rooms_1F_Text_DemetriusPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms_1F_EventScript_Thalia::
+Archipelago_Target_TRAINER_THALIA_1::
 	trainerbattle_single TRAINER_THALIA_1, AbandonedShip_Rooms_1F_Text_ThaliaIntro, AbandonedShip_Rooms_1F_Text_ThaliaDefeat, AbandonedShip_Rooms_1F_EventScript_RegisterThalia
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, AbandonedShip_Rooms_1F_EventScript_ThaliaRematch

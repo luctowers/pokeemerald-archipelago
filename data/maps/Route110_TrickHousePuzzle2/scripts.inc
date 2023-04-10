@@ -85,16 +85,19 @@ Route110_TrickHousePuzzle2_EventScript_PressButton4::
 	return
 
 Route110_TrickHousePuzzle2_EventScript_Ted::
+Archipelago_Target_TRAINER_TED::
 	trainerbattle_single TRAINER_TED, Route110_TrickHousePuzzle2_Text_TedIntro, Route110_TrickHousePuzzle2_Text_TedDefeat
 	msgbox Route110_TrickHousePuzzle2_Text_TedPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle2_EventScript_Paul::
+Archipelago_Target_TRAINER_PAUL::
 	trainerbattle_single TRAINER_PAUL, Route110_TrickHousePuzzle2_Text_PaulIntro, Route110_TrickHousePuzzle2_Text_PaulDefeat
 	msgbox Route110_TrickHousePuzzle2_Text_PaulPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle2_EventScript_Georgia::
+Archipelago_Target_TRAINER_GEORGIA::
 	trainerbattle_single TRAINER_GEORGIA, Route110_TrickHousePuzzle2_Text_GeorgiaIntro, Route110_TrickHousePuzzle2_Text_GeorgiaDefeat
 	msgbox Route110_TrickHousePuzzle2_Text_GeorgiaPostBattle, MSGBOX_AUTOCLOSE
 	end

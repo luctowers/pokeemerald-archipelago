@@ -84,6 +84,7 @@ VictoryRoad_1F_EventScript_EntranceWally::
 
 @ This Wally appears and remains at the exit after the Hall of Fame is entered
 VictoryRoad_1F_EventScript_ExitWally::
+Archipelago_Target_TRAINER_WALLY_VR_2::
 	trainerbattle_single TRAINER_WALLY_VR_2, VictoryRoad_1F_Text_WallyIntro, VictoryRoad_1F_Text_WallyDefeat
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, VictoryRoad_1F_EventScript_RematchWally
@@ -96,26 +97,31 @@ VictoryRoad_1F_EventScript_RematchWally::
 	end
 
 VictoryRoad_1F_EventScript_Edgar::
+Archipelago_Target_TRAINER_EDGAR::
 	trainerbattle_single TRAINER_EDGAR, VictoryRoad_1F_Text_EdgarIntro, VictoryRoad_1F_Text_EdgarDefeat
 	msgbox VictoryRoad_1F_Text_EdgarPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_Albert::
+Archipelago_Target_TRAINER_ALBERT::
 	trainerbattle_single TRAINER_ALBERT, VictoryRoad_1F_Text_AlbertIntro, VictoryRoad_1F_Text_AlbertDefeat
 	msgbox VictoryRoad_1F_Text_AlbertPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_Hope::
+Archipelago_Target_TRAINER_HOPE::
 	trainerbattle_single TRAINER_HOPE, VictoryRoad_1F_Text_HopeIntro, VictoryRoad_1F_Text_HopeDefeat
 	msgbox VictoryRoad_1F_Text_HopePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_Quincy::
+Archipelago_Target_TRAINER_QUINCY::
 	trainerbattle_single TRAINER_QUINCY, VictoryRoad_1F_Text_QuincyIntro, VictoryRoad_1F_Text_QuincyDefeat
 	msgbox VictoryRoad_1F_Text_QuincyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_1F_EventScript_Katelynn::
+Archipelago_Target_TRAINER_KATELYNN::
 	trainerbattle_single TRAINER_KATELYNN, VictoryRoad_1F_Text_KatelynnIntro, VictoryRoad_1F_Text_KatelynnDefeat
 	msgbox VictoryRoad_1F_Text_KatelynnPostBattle, MSGBOX_AUTOCLOSE
 	end

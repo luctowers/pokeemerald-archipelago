@@ -422,6 +422,7 @@ RusturfTunnel_Movement_PeekoExit:
 	step_end
 
 RusturfTunnel_EventScript_Mike::
+Archipelago_Target_TRAINER_MIKE_2::
 	trainerbattle_single TRAINER_MIKE_2, RusturfTunnel_Text_MikeIntro, RusturfTunnel_Text_MikeDefeat
 	msgbox RusturfTunnel_Text_MikePostBattle, MSGBOX_AUTOCLOSE
 	end

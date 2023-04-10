@@ -102,11 +102,13 @@ JaggedPass_EventScript_GuardDefeated::
 	end
 
 JaggedPass_EventScript_Eric::
+Archipelago_Target_TRAINER_ERIC::
 	trainerbattle_single TRAINER_ERIC, JaggedPass_Text_EricIntro, JaggedPass_Text_EricDefeat
 	msgbox JaggedPass_Text_EricPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Diana::
+Archipelago_Target_TRAINER_DIANA_1::
 	trainerbattle_single TRAINER_DIANA_1, JaggedPass_Text_DianaIntro, JaggedPass_Text_DianaDefeat, JaggedPass_EventScript_RegisterDiana
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_DianaRematch
@@ -127,6 +129,7 @@ JaggedPass_EventScript_DianaRematch::
 	end
 
 JaggedPass_EventScript_Ethan::
+Archipelago_Target_TRAINER_ETHAN_1::
 	trainerbattle_single TRAINER_ETHAN_1, JaggedPass_Text_EthanIntro, JaggedPass_Text_EthanDefeat, JaggedPass_EventScript_RegisterEthan
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, JaggedPass_EventScript_EthanRematch
@@ -147,11 +150,13 @@ JaggedPass_EventScript_EthanRematch::
 	end
 
 JaggedPass_EventScript_Julio::
+Archipelago_Target_TRAINER_JULIO::
 	trainerbattle_single TRAINER_JULIO, JaggedPass_Text_JulioIntro, JaggedPass_Text_JulioDefeat
 	msgbox JaggedPass_Text_JulioPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 JaggedPass_EventScript_Autumn::
+Archipelago_Target_TRAINER_AUTUMN::
 	trainerbattle_single TRAINER_AUTUMN, JaggedPass_Text_AutumnIntro, JaggedPass_Text_AutumnDefeat
 	msgbox JaggedPass_Text_AutumnPostBattle, MSGBOX_AUTOCLOSE
 	end

@@ -7,41 +7,49 @@ Route126_OnTransition:
 	end
 
 Route126_EventScript_Barry::
+Archipelago_Target_TRAINER_BARRY::
 	trainerbattle_single TRAINER_BARRY, Route126_Text_BarryIntro, Route126_Text_BarryDefeat
 	msgbox Route126_Text_BarryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Dean::
+Archipelago_Target_TRAINER_DEAN::
 	trainerbattle_single TRAINER_DEAN, Route126_Text_DeanIntro, Route126_Text_DeanDefeat
 	msgbox Route126_Text_DeanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Nikki::
+Archipelago_Target_TRAINER_NIKKI::
 	trainerbattle_single TRAINER_NIKKI, Route126_Text_NikkiIntro, Route126_Text_NikkiDefeat
 	msgbox Route126_Text_NikkiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Brenda::
+Archipelago_Target_TRAINER_BRENDA::
 	trainerbattle_single TRAINER_BRENDA, Route126_Text_BrendaIntro, Route126_Text_BrendaDefeat
 	msgbox Route126_Text_BrendaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Leonardo::
+Archipelago_Target_TRAINER_LEONARDO::
 	trainerbattle_single TRAINER_LEONARDO, Route126_Text_LeonardoIntro, Route126_Text_LeonardoDefeat
 	msgbox Route126_Text_LeonardoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Isobel::
+Archipelago_Target_TRAINER_ISOBEL::
 	trainerbattle_single TRAINER_ISOBEL, Route126_Text_IsobelIntro, Route126_Text_IsobelDefeat
 	msgbox Route126_Text_IsobelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Sienna::
+Archipelago_Target_TRAINER_SIENNA::
 	trainerbattle_single TRAINER_SIENNA, Route126_Text_SiennaIntro, Route126_Text_SiennaDefeat
 	msgbox Route126_Text_SiennaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route126_EventScript_Pablo::
+Archipelago_Target_TRAINER_PABLO_1::
 	trainerbattle_single TRAINER_PABLO_1, Route126_Text_PabloIntro, Route126_Text_PabloDefeat, Route126_EventScript_RegisterPablo
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route126_EventScript_RematchPablo

@@ -21,41 +21,49 @@ Route127_OnFrame:
 	.2byte 0
 
 Route127_EventScript_Camden::
+Archipelago_Target_TRAINER_CAMDEN::
 	trainerbattle_single TRAINER_CAMDEN, Route127_Text_CamdenIntro, Route127_Text_CamdenDefeat
 	msgbox Route127_Text_CamdenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Donny::
+Archipelago_Target_TRAINER_DONNY::
 	trainerbattle_single TRAINER_DONNY, Route127_Text_DonnyIntro, Route127_Text_DonnyDefeat
 	msgbox Route127_Text_DonnyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Jonah::
+Archipelago_Target_TRAINER_JONAH::
 	trainerbattle_single TRAINER_JONAH, Route127_Text_JonahIntro, Route127_Text_JonahDefeat
 	msgbox Route127_Text_JonahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Henry::
+Archipelago_Target_TRAINER_HENRY::
 	trainerbattle_single TRAINER_HENRY, Route127_Text_HenryIntro, Route127_Text_HenryDefeat
 	msgbox Route127_Text_HenryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Roger::
+Archipelago_Target_TRAINER_ROGER::
 	trainerbattle_single TRAINER_ROGER, Route127_Text_RogerIntro, Route127_Text_RogerDefeat
 	msgbox Route127_Text_RogerPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Aidan::
+Archipelago_Target_TRAINER_AIDAN::
 	trainerbattle_single TRAINER_AIDAN, Route127_Text_AidanIntro, Route127_Text_AidanDefeat
 	msgbox Route127_Text_AidanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Athena::
+Archipelago_Target_TRAINER_ATHENA::
 	trainerbattle_single TRAINER_ATHENA, Route127_Text_AthenaIntro, Route127_Text_AthenaDefeat
 	msgbox Route127_Text_AthenaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route127_EventScript_Koji::
+Archipelago_Target_TRAINER_KOJI_1::
 	trainerbattle_single TRAINER_KOJI_1, Route127_Text_KojiIntro, Route127_Text_KojiDefeat, Route127_EventScript_RegisterKoji
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route127_EventScript_RematchKoji

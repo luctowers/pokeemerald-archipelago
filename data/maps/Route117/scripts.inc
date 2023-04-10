@@ -39,6 +39,7 @@ Route117_EventScript_DayCareSign::
 	end
 
 Route117_EventScript_Isaac::
+Archipelago_Target_TRAINER_ISAAC_1::
 	trainerbattle_single TRAINER_ISAAC_1, Route117_Text_IsaacIntro, Route117_Text_IsaacDefeat, Route117_EventScript_RegisterIsaac
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchIsaac
@@ -60,6 +61,7 @@ Route117_EventScript_RematchIsaac::
 	end
 
 Route117_EventScript_Lydia::
+Archipelago_Target_TRAINER_LYDIA_1::
 	trainerbattle_single TRAINER_LYDIA_1, Route117_Text_LydiaIntro, Route117_Text_LydiaDefeat, Route117_EventScript_RegisterLydia
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchLydia
@@ -81,6 +83,7 @@ Route117_EventScript_RematchLydia::
 	end
 
 Route117_EventScript_Dylan::
+Archipelago_Target_TRAINER_DYLAN_1::
 	trainerbattle_single TRAINER_DYLAN_1, Route117_Text_DylanIntro, Route117_Text_DylanDefeat, Route117_EventScript_RegisterDylan
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchDylan
@@ -102,6 +105,7 @@ Route117_EventScript_RematchDylan::
 	end
 
 Route117_EventScript_Maria::
+Archipelago_Target_TRAINER_MARIA_1::
 	trainerbattle_single TRAINER_MARIA_1, Route117_Text_MariaIntro, Route117_Text_MariaDefeat, Route117_EventScript_RegisterMaria
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route117_EventScript_RematchMaria
@@ -123,6 +127,7 @@ Route117_EventScript_RematchMaria::
 	end
 
 Route117_EventScript_Derek::
+Archipelago_Target_TRAINER_DEREK::
 	trainerbattle_single TRAINER_DEREK, Route117_Text_DerekIntro, Route117_Text_DerekDefeat
 	msgbox Route117_Text_DerekPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -166,16 +171,19 @@ Route117_EventScript_RematchMeg::
 	end
 
 Route117_EventScript_Melina::
+Archipelago_Target_TRAINER_MELINA::
 	trainerbattle_single TRAINER_MELINA, Route117_Text_MelinaIntro, Route117_Text_MelinaDefeat
 	msgbox Route117_Text_MelinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Brandi::
+Archipelago_Target_TRAINER_BRANDI::
 	trainerbattle_single TRAINER_BRANDI, Route117_Text_BrandiIntro, Route117_Text_BrandiDefeat
 	msgbox Route117_Text_BrandiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route117_EventScript_Aisha::
+Archipelago_Target_TRAINER_AISHA::
 	trainerbattle_single TRAINER_AISHA, Route117_Text_AishaIntro, Route117_Text_AishaDefeat
 	msgbox Route117_Text_AishaPostBattle, MSGBOX_AUTOCLOSE
 	end

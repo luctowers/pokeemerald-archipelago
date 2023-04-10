@@ -40,11 +40,13 @@ AbandonedShip_Rooms2_1F_EventScript_KiraRematch::
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_Jani::
+Archipelago_Target_TRAINER_JANI::
 	trainerbattle_single TRAINER_JANI, AbandonedShip_Rooms2_1F_Text_JaniIntro, AbandonedShip_Rooms2_1F_Text_JaniDefeat
 	msgbox AbandonedShip_Rooms2_1F_Text_JaniPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 AbandonedShip_Rooms2_1F_EventScript_Garrison::
+Archipelago_Target_TRAINER_GARRISON::
 	trainerbattle_single TRAINER_GARRISON, AbandonedShip_Rooms2_1F_Text_GarrisonIntro, AbandonedShip_Rooms2_1F_Text_GarrisonDefeat
 	msgbox AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle, MSGBOX_AUTOCLOSE
 	end

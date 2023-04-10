@@ -166,16 +166,19 @@ Route110_EventScript_PlayerRidingAcroBike::
 	end
 
 Route110_EventScript_Edward::
+Archipelago_Target_TRAINER_EDWARD::
 	trainerbattle_single TRAINER_EDWARD, Route110_Text_EdwardIntro, Route110_Text_EdwardDefeated
 	msgbox Route110_Text_EdwardPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Jaclyn::
+Archipelago_Target_TRAINER_JACLYN::
 	trainerbattle_single TRAINER_JACLYN, Route110_Text_JaclynIntro, Route110_Text_JaclynDefeated
 	msgbox Route110_Text_JaclynPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Edwin::
+Archipelago_Target_TRAINER_EDWIN_1::
 	trainerbattle_single TRAINER_EDWIN_1, Route110_Text_EdwinIntro, Route110_Text_EdwinDefeated, Route110_EventScript_EdwinRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_EdwinRematch
@@ -197,21 +200,25 @@ Route110_EventScript_EdwinRematch::
 	end
 
 Route110_EventScript_Dale::
+Archipelago_Target_TRAINER_DALE::
 	trainerbattle_single TRAINER_DALE, Route110_Text_DaleIntro, Route110_Text_DaleDefeated
 	msgbox Route110_Text_DalePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Jacob::
+Archipelago_Target_TRAINER_JACOB::
 	trainerbattle_single TRAINER_JACOB, Route110_Text_JacobIntro, Route110_Text_JacobDefeated
 	msgbox Route110_Text_JacobPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Anthony::
+Archipelago_Target_TRAINER_ANTHONY::
 	trainerbattle_single TRAINER_ANTHONY, Route110_Text_AnthonyIntro, Route110_Text_AnthonyDefeated
 	msgbox Route110_Text_AnthonyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Benjamin::
+Archipelago_Target_TRAINER_BENJAMIN_1::
 	trainerbattle_single TRAINER_BENJAMIN_1, Route110_Text_BenjaminIntro, Route110_Text_BenjaminDefeated, Route110_EventScript_BenjaminRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_BenjaminRematch
@@ -233,11 +240,13 @@ Route110_EventScript_BenjaminRematch::
 	end
 
 Route110_EventScript_Jasmine::
+Archipelago_Target_TRAINER_JASMINE::
 	trainerbattle_single TRAINER_JASMINE, Route110_Text_JasmineIntro, Route110_Text_JasmineDefeated
 	msgbox Route110_Text_JasminePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Abigail::
+Archipelago_Target_TRAINER_ABIGAIL_1::
 	trainerbattle_single TRAINER_ABIGAIL_1, Route110_Text_AbigailIntro, Route110_Text_AbigailDefeated, Route110_EventScript_AbigailRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_AbigailRematch
@@ -259,6 +268,7 @@ Route110_EventScript_AbigailRematch::
 	end
 
 Route110_EventScript_Isabel::
+Archipelago_Target_TRAINER_ISABEL_1::
 	trainerbattle_single TRAINER_ISABEL_1, Route110_Text_IsabelIntro, Route110_Text_IsabelDefeated, Route110_EventScript_IsabelRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route110_EventScript_IsabelRematch
@@ -280,6 +290,7 @@ Route110_EventScript_IsabelRematch::
 	end
 
 Route110_EventScript_Timmy::
+Archipelago_Target_TRAINER_TIMMY::
 	trainerbattle_single TRAINER_TIMMY, Route110_Text_TimmyIntro, Route110_Text_TimmyDefeated
 	msgbox Route110_Text_TimmyPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -288,16 +299,19 @@ Route110_EventScript_Unused::
 	end
 
 Route110_EventScript_Kaleb::
+Archipelago_Target_TRAINER_KALEB::
 	trainerbattle_single TRAINER_KALEB, Route110_Text_KalebIntro, Route110_Text_KalebDefeated
 	msgbox Route110_Text_KalebPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Joseph::
+Archipelago_Target_TRAINER_JOSEPH::
 	trainerbattle_single TRAINER_JOSEPH, Route110_Text_JosephIntro, Route110_Text_JosephDefeated
 	msgbox Route110_Text_JosephPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_EventScript_Alyssa::
+Archipelago_Target_TRAINER_ALYSSA::
 	trainerbattle_single TRAINER_ALYSSA, Route110_Text_AlyssaIntro, Route110_Text_AlyssaDefeated
 	msgbox Route110_Text_AlyssaPostBattle, MSGBOX_AUTOCLOSE
 	end

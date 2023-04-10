@@ -16,21 +16,25 @@ Route131_EventScript_CheckSetAbnormalWeather::
 	return
 
 Route131_EventScript_Richard::
+Archipelago_Target_TRAINER_RICHARD::
 	trainerbattle_single TRAINER_RICHARD, Route131_Text_RichardIntro, Route131_Text_RichardDefeat
 	msgbox Route131_Text_RichardPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_Herman::
+Archipelago_Target_TRAINER_HERMAN::
 	trainerbattle_single TRAINER_HERMAN, Route131_Text_HermanIntro, Route131_Text_HermanDefeat
 	msgbox Route131_Text_HermanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_Susie::
+Archipelago_Target_TRAINER_SUSIE::
 	trainerbattle_single TRAINER_SUSIE, Route131_Text_SusieIntro, Route131_Text_SusieDefeat
 	msgbox Route131_Text_SusiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_Kara::
+Archipelago_Target_TRAINER_KARA::
 	trainerbattle_single TRAINER_KARA, Route131_Text_KaraIntro, Route131_Text_KaraDefeat
 	msgbox Route131_Text_KaraPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -46,11 +50,13 @@ Route131_EventScript_Ian::
 	end
 
 Route131_EventScript_Talia::
+Archipelago_Target_TRAINER_TALIA::
 	trainerbattle_single TRAINER_TALIA, Route131_Text_TaliaIntro, Route131_Text_TaliaDefeat
 	msgbox Route131_Text_TaliaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route131_EventScript_Kevin::
+Archipelago_Target_TRAINER_KEVIN::
 	trainerbattle_single TRAINER_KEVIN, Route131_Text_KevinIntro, Route131_Text_KevinDefeat
 	msgbox Route131_Text_KevinPostBattle, MSGBOX_AUTOCLOSE
 	end

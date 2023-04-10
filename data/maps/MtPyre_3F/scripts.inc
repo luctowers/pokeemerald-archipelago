@@ -2,16 +2,19 @@ MtPyre_3F_MapScripts::
 	.byte 0
 
 MtPyre_3F_EventScript_William::
+Archipelago_Target_TRAINER_WILLIAM::
 	trainerbattle_single TRAINER_WILLIAM, MtPyre_3F_Text_WilliamIntro, MtPyre_3F_Text_WilliamDefeat
 	msgbox MtPyre_3F_Text_WilliamPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_3F_EventScript_Kayla::
+Archipelago_Target_TRAINER_KAYLA::
 	trainerbattle_single TRAINER_KAYLA, MtPyre_3F_Text_KaylaIntro, MtPyre_3F_Text_KaylaDefeat
 	msgbox MtPyre_3F_Text_KaylaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_3F_EventScript_Gabrielle::
+Archipelago_Target_TRAINER_GABRIELLE_1::
 	trainerbattle_single TRAINER_GABRIELLE_1, MtPyre_3F_Text_GabrielleIntro, MtPyre_3F_Text_GabrielleDefeat, MtPyre_3F_EventScript_RegisterGabrielle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MtPyre_3F_EventScript_RematchGabrielle

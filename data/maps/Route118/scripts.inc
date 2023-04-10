@@ -179,6 +179,7 @@ Route118_Movement_StevenExit2:
 	step_end
 
 Route118_EventScript_Rose::
+Archipelago_Target_TRAINER_ROSE_1::
 	trainerbattle_single TRAINER_ROSE_1, Route118_Text_RoseIntro, Route118_Text_RoseDefeat, Route118_EventScript_RegisterRose
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route118_EventScript_RematchRose
@@ -200,16 +201,19 @@ Route118_EventScript_RematchRose::
 	end
 
 Route118_EventScript_Barny::
+Archipelago_Target_TRAINER_BARNY::
 	trainerbattle_single TRAINER_BARNY, Route118_Text_BarnyIntro, Route118_Text_BarnyDefeat
 	msgbox Route118_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Wade::
+Archipelago_Target_TRAINER_WADE::
 	trainerbattle_single TRAINER_WADE, Route118_Text_WadeIntro, Route118_Text_WadeDefeat
 	msgbox Route118_Text_WadePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Dalton::
+Archipelago_Target_TRAINER_DALTON_1::
 	trainerbattle_single TRAINER_DALTON_1, Route118_Text_DaltonIntro, Route118_Text_DaltonDefeat, Route118_EventScript_RegisterDalton
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route118_EventScript_RematchDalton
@@ -231,16 +235,19 @@ Route118_EventScript_RematchDalton::
 	end
 
 Route118_EventScript_Perry::
+Archipelago_Target_TRAINER_PERRY::
 	trainerbattle_single TRAINER_PERRY, Route118_Text_PerryIntro, Route118_Text_PerryDefeat
 	msgbox Route118_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Chester::
+Archipelago_Target_TRAINER_CHESTER::
 	trainerbattle_single TRAINER_CHESTER, Route118_Text_ChesterIntro, Route118_Text_ChesterDefeat
 	msgbox Route118_Text_ChesterPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route118_EventScript_Deandre::
+Archipelago_Target_TRAINER_DEANDRE::
 	trainerbattle_single TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat
 	msgbox Route118_Text_DeandrePostBattle, MSGBOX_AUTOCLOSE
 	end

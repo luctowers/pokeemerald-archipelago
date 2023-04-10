@@ -64,11 +64,13 @@ Route112_EventScript_Hiker::
 	end
 
 Route112_EventScript_Brice::
+Archipelago_Target_TRAINER_BRICE::
 	trainerbattle_single TRAINER_BRICE, Route112_Text_BriceIntro, Route112_Text_BriceDefeat
 	msgbox Route112_Text_BricePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Trent::
+Archipelago_Target_TRAINER_TRENT_1::
 	trainerbattle_single TRAINER_TRENT_1, Route112_Text_TrentIntro, Route112_Text_TrentDefeat, Route112_EventScript_RegisterTrent
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route112_EventScript_RematchTrent
@@ -90,21 +92,25 @@ Route112_EventScript_RematchTrent::
 	end
 
 Route112_EventScript_Larry::
+Archipelago_Target_TRAINER_LARRY::
 	trainerbattle_single TRAINER_LARRY, Route112_Text_LarryIntro, Route112_Text_LarryDefeat
 	msgbox Route112_Text_LarryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Carol::
+Archipelago_Target_TRAINER_CAROL::
 	trainerbattle_single TRAINER_CAROL, Route112_Text_CarolIntro, Route112_Text_CarolDefeat
 	msgbox Route112_Text_CarolPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Bryant::
+Archipelago_Target_TRAINER_BRYANT::
 	trainerbattle_single TRAINER_BRYANT, Route112_Text_BryantIntro, Route112_Text_BryantDefeat
 	msgbox Route112_Text_BryantPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route112_EventScript_Shayla::
+Archipelago_Target_TRAINER_SHAYLA::
 	trainerbattle_single TRAINER_SHAYLA, Route112_Text_ShaylaIntro, Route112_Text_ShaylaDefeat
 	msgbox Route112_Text_ShaylaPostBattle, MSGBOX_AUTOCLOSE
 	end

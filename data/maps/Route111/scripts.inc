@@ -437,26 +437,31 @@ Route111_EventScript_RockSmashTipFatMan::
 	end
 
 Route111_EventScript_Drew::
+Archipelago_Target_TRAINER_DREW::
 	trainerbattle_single TRAINER_DREW, Route111_Text_DrewIntro, Route111_Text_DrewDefeat
 	msgbox Route111_Text_DrewPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Heidi::
+Archipelago_Target_TRAINER_HEIDI::
 	trainerbattle_single TRAINER_HEIDI, Route111_Text_HeidiIntro, Route111_Text_HeidiDefeat
 	msgbox Route111_Text_HeidiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Beau::
+Archipelago_Target_TRAINER_BEAU::
 	trainerbattle_single TRAINER_BEAU, Route111_Text_BeauIntro, Route111_Text_BeauDefeat
 	msgbox Route111_Text_BeauPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Becky::
+Archipelago_Target_TRAINER_BECKY::
 	trainerbattle_single TRAINER_BECKY, Route111_Text_BeckyIntro, Route111_Text_BeckyDefeat
 	msgbox Route111_Text_BeckyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Dusty::
+Archipelago_Target_TRAINER_DUSTY_1::
 	trainerbattle_single TRAINER_DUSTY_1, Route111_Text_DustyIntro, Route111_Text_DustyDefeat, Route111_EventScript_RegisterDusty
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchDusty
@@ -478,21 +483,25 @@ Route111_EventScript_RematchDusty::
 	end
 
 Route111_EventScript_Travis::
+Archipelago_Target_TRAINER_TRAVIS::
 	trainerbattle_single TRAINER_TRAVIS, Route111_Text_TravisIntro, Route111_Text_TravisDefeat
 	msgbox Route111_Text_TravisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Irene::
+Archipelago_Target_TRAINER_IRENE::
 	trainerbattle_single TRAINER_IRENE, Route111_Text_IreneIntro, Route111_Text_IreneDefeat
 	msgbox Route111_Text_IrenePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Daisuke::
+Archipelago_Target_TRAINER_DAISUKE::
 	trainerbattle_single TRAINER_DAISUKE, Route111_Text_DaisukeIntro, Route111_Text_DaisukeDefeat
 	msgbox Route111_Text_DaisukePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Wilton::
+Archipelago_Target_TRAINER_WILTON_1::
 	trainerbattle_single TRAINER_WILTON_1, Route111_Text_WiltonIntro, Route111_Text_WiltonDefeat, Route111_EventScript_RegisterWilton
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchWilton
@@ -514,6 +523,7 @@ Route111_EventScript_RematchWilton::
 	end
 
 Route111_EventScript_Brooke::
+Archipelago_Target_TRAINER_BROOKE_1::
 	trainerbattle_single TRAINER_BROOKE_1, Route111_Text_BrookeIntro, Route111_Text_BrookeDefeat, Route111_EventScript_RegisterBrooke
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route111_EventScript_RematchBrooke
@@ -535,36 +545,43 @@ Route111_EventScript_RematchBrooke::
 	end
 
 Route111_EventScript_Hayden::
+Archipelago_Target_TRAINER_HAYDEN::
 	trainerbattle_single TRAINER_HAYDEN, Route111_Text_HaydenIntro, Route111_Text_HaydenDefeat
 	msgbox Route111_Text_HaydenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Bianca::
+Archipelago_Target_TRAINER_BIANCA::
 	trainerbattle_single TRAINER_BIANCA, Route111_Text_BiancaIntro, Route111_Text_BiancaDefeat
 	msgbox Route111_Text_BiancaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Tyron::
+Archipelago_Target_TRAINER_TYRON::
 	trainerbattle_single TRAINER_TYRON, Route111_Text_TyronIntro, Route111_Text_TyronDefeat
 	msgbox Route111_Text_TyronPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Celina::
+Archipelago_Target_TRAINER_CELINA::
 	trainerbattle_single TRAINER_CELINA, Route111_Text_CelinaIntro, Route111_Text_CelinaDefeat
 	msgbox Route111_Text_CelinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Celia::
+Archipelago_Target_TRAINER_CELIA::
 	trainerbattle_single TRAINER_CELIA, Route111_Text_CeliaIntro, Route111_Text_CeliaDefeat
 	msgbox Route111_Text_CeliaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Bryan::
+Archipelago_Target_TRAINER_BRYAN::
 	trainerbattle_single TRAINER_BRYAN, Route111_Text_BryanIntro, Route111_Text_BryanDefeat
 	msgbox Route111_Text_BryanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Branden::
+Archipelago_Target_TRAINER_BRANDEN::
 	trainerbattle_single TRAINER_BRANDEN, Route111_Text_BrandenIntro, Route111_Text_BrandenDefeat
 	msgbox Route111_Text_BrandenPostBattle, MSGBOX_AUTOCLOSE
 	end

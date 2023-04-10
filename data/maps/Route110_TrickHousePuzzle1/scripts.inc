@@ -22,16 +22,19 @@ Route110_TrickHousePuzzle1_EventScript_FoundScroll::
 	end
 
 Route110_TrickHousePuzzle1_EventScript_Sally::
+Archipelago_Target_TRAINER_SALLY::
 	trainerbattle_single TRAINER_SALLY, Route110_TrickHousePuzzle1_Text_SallyIntro, Route110_TrickHousePuzzle1_Text_SallyDefeat
 	msgbox Route110_TrickHousePuzzle1_Text_SallyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle1_EventScript_Eddie::
+Archipelago_Target_TRAINER_EDDIE::
 	trainerbattle_single TRAINER_EDDIE, Route110_TrickHousePuzzle1_Text_EddieIntro, Route110_TrickHousePuzzle1_Text_EddieDefeat
 	msgbox Route110_TrickHousePuzzle1_Text_EddiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle1_EventScript_Robin::
+Archipelago_Target_TRAINER_ROBIN::
 	trainerbattle_single TRAINER_ROBIN, Route110_TrickHousePuzzle1_Text_RobinIntro, Route110_TrickHousePuzzle1_Text_RobinDefeat
 	msgbox Route110_TrickHousePuzzle1_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
 	end

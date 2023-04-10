@@ -29,16 +29,19 @@ SSTidalRooms_EventScript_Bed::
 	end
 
 SSTidalRooms_EventScript_Colton::
+Archipelago_Target_TRAINER_COLTON::
 	trainerbattle_single TRAINER_COLTON, SSTidalRooms_Text_ColtonIntro, SSTidalRooms_Text_ColtonDefeat
 	msgbox SSTidalRooms_Text_ColtonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Micah::
+Archipelago_Target_TRAINER_MICAH::
 	trainerbattle_single TRAINER_MICAH, SSTidalRooms_Text_MicahIntro, SSTidalRooms_Text_MicahDefeat
 	msgbox SSTidalRooms_Text_MicahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Thomas::
+Archipelago_Target_TRAINER_THOMAS::
 	trainerbattle_single TRAINER_THOMAS, SSTidalRooms_Text_ThomasIntro, SSTidalRooms_Text_ThomasDefeat
 	msgbox SSTidalRooms_Text_ThomasPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -54,11 +57,13 @@ SSTidalRooms_EventScript_Lea::
 	end
 
 SSTidalRooms_EventScript_Garret::
+Archipelago_Target_TRAINER_GARRET::
 	trainerbattle_single TRAINER_GARRET, SSTidalRooms_Text_GarretIntro, SSTidalRooms_Text_GarretDefeat
 	msgbox SSTidalRooms_Text_GarretPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalRooms_EventScript_Naomi::
+Archipelago_Target_TRAINER_NAOMI::
 	trainerbattle_single TRAINER_NAOMI, SSTidalRooms_Text_NaomiIntro, SSTidalRooms_Text_NaomiDefeat
 	msgbox SSTidalRooms_Text_NaomiPostBattle, MSGBOX_AUTOCLOSE
 	end

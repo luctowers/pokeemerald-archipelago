@@ -16,6 +16,7 @@ FortreeCity_Gym_EventScript_InitRotatingGates::
 	end
 
 FortreeCity_Gym_EventScript_Winona::
+Archipelago_Target_TRAINER_WINONA_1::
 	trainerbattle_single TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, FortreeCity_Gym_EventScript_WinonaRematch
@@ -61,31 +62,37 @@ FortreeCity_Gym_EventScript_WinonaRematch::
 	end
 
 FortreeCity_Gym_EventScript_Jared::
+Archipelago_Target_TRAINER_JARED::
 	trainerbattle_single TRAINER_JARED, FortreeCity_Gym_Text_JaredIntro, FortreeCity_Gym_Text_JaredDefeat
 	msgbox FortreeCity_Gym_Text_JaredPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Edwardo::
+Archipelago_Target_TRAINER_EDWARDO::
 	trainerbattle_single TRAINER_EDWARDO, FortreeCity_Gym_Text_EdwardoIntro, FortreeCity_Gym_Text_EdwardoDefeat
 	msgbox FortreeCity_Gym_Text_EdwardoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Flint::
+Archipelago_Target_TRAINER_FLINT::
 	trainerbattle_single TRAINER_FLINT, FortreeCity_Gym_Text_FlintIntro, FortreeCity_Gym_Text_FlintDefeat
 	msgbox FortreeCity_Gym_Text_FlintPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Ashley::
+Archipelago_Target_TRAINER_ASHLEY::
 	trainerbattle_single TRAINER_ASHLEY, FortreeCity_Gym_Text_AshleyIntro, FortreeCity_Gym_Text_AshleyDefeat
 	msgbox FortreeCity_Gym_Text_AshleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Humberto::
+Archipelago_Target_TRAINER_HUMBERTO::
 	trainerbattle_single TRAINER_HUMBERTO, FortreeCity_Gym_Text_HumbertoIntro, FortreeCity_Gym_Text_HumbertoDefeat
 	msgbox FortreeCity_Gym_Text_HumbertoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 FortreeCity_Gym_EventScript_Darius::
+Archipelago_Target_TRAINER_DARIUS::
 	trainerbattle_single TRAINER_DARIUS, FortreeCity_Gym_Text_DariusIntro, FortreeCity_Gym_Text_DariusDefeat
 	msgbox FortreeCity_Gym_Text_DariusPostBattle, MSGBOX_AUTOCLOSE
 	end

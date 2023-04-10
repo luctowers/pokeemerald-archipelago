@@ -7,11 +7,13 @@ MagmaHideout_1F_OnTransition:
 	end
 
 MagmaHideout_1F_EventScript_Grunt1::
+Archipelago_Target_TRAINER_GRUNT_MAGMA_HIDEOUT_1::
 	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_1, MagmaHideout_1F_Text_Grunt1Intro, MagmaHideout_1F_Text_Grunt1Defeat
 	msgbox MagmaHideout_1F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MagmaHideout_1F_EventScript_Grunt2::
+Archipelago_Target_TRAINER_GRUNT_MAGMA_HIDEOUT_2::
 	trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_2, MagmaHideout_1F_Text_Grunt2Intro, MagmaHideout_1F_Text_Grunt2Defeat
 	msgbox MagmaHideout_1F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end

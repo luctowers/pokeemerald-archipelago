@@ -2,6 +2,7 @@ MeteorFalls_1F_2R_MapScripts::
 	.byte 0
 
 MeteorFalls_1F_2R_EventScript_Nicolas::
+Archipelago_Target_TRAINER_NICOLAS_1::
 	trainerbattle_single TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasIntro, MeteorFalls_1F_2R_Text_NicolasDefeat, MeteorFalls_1F_2R_EventScript_RegisterNicolas
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MeteorFalls_1F_2R_EventScript_RematchNicolas

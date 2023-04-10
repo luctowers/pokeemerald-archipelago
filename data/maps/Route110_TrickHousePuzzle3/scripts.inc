@@ -287,16 +287,19 @@ Route110_TrickHousePuzzle3_EventScript_FoundScroll::
 	end
 
 Route110_TrickHousePuzzle3_EventScript_Justin::
+Archipelago_Target_TRAINER_JUSTIN::
 	trainerbattle_single TRAINER_JUSTIN, Route110_TrickHousePuzzle3_Text_JustinIntro, Route110_TrickHousePuzzle3_Text_JustinDefeat
 	msgbox Route110_TrickHousePuzzle3_Text_JustinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle3_EventScript_Martha::
+Archipelago_Target_TRAINER_MARTHA::
 	trainerbattle_single TRAINER_MARTHA, Route110_TrickHousePuzzle3_Text_MarthaIntro, Route110_TrickHousePuzzle3_Text_MarthaDefeat
 	msgbox Route110_TrickHousePuzzle3_Text_MarthaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route110_TrickHousePuzzle3_EventScript_Alan::
+Archipelago_Target_TRAINER_ALAN::
 	trainerbattle_single TRAINER_ALAN, Route110_TrickHousePuzzle3_Text_AlanIntro, Route110_TrickHousePuzzle3_Text_AlanDefeat
 	msgbox Route110_TrickHousePuzzle3_Text_AlanPostBattle, MSGBOX_AUTOCLOSE
 	end

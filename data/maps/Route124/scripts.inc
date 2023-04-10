@@ -11,16 +11,19 @@ Route124_EventScript_HuntersHouseSign::
 	end
 
 Route124_EventScript_Spencer::
+Archipelago_Target_TRAINER_SPENCER::
 	trainerbattle_single TRAINER_SPENCER, Route124_Text_SpencerIntro, Route124_Text_SpencerDefeat
 	msgbox Route124_Text_SpencerPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_Roland::
+Archipelago_Target_TRAINER_ROLAND::
 	trainerbattle_single TRAINER_ROLAND, Route124_Text_RolandIntro, Route124_Text_RolandDefeat
 	msgbox Route124_Text_RolandPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_Jenny::
+Archipelago_Target_TRAINER_JENNY_1::
 	trainerbattle_single TRAINER_JENNY_1, Route124_Text_JennyIntro, Route124_Text_JennyDefeat, Route124_EventScript_RegisterJenny
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route124_EventScript_RematchJenny
@@ -42,11 +45,13 @@ Route124_EventScript_RematchJenny::
 	end
 
 Route124_EventScript_Grace::
+Archipelago_Target_TRAINER_GRACE::
 	trainerbattle_single TRAINER_GRACE, Route124_Text_GraceIntro, Route124_Text_GraceDefeat
 	msgbox Route124_Text_GracePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_Chad::
+Archipelago_Target_TRAINER_CHAD::
 	trainerbattle_single TRAINER_CHAD, Route124_Text_ChadIntro, Route124_Text_ChadDefeat
 	msgbox Route124_Text_ChadPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -90,11 +95,13 @@ Route124_EventScript_RematchRoy::
 	end
 
 Route124_EventScript_Declan::
+Archipelago_Target_TRAINER_DECLAN::
 	trainerbattle_single TRAINER_DECLAN, Route124_Text_DeclanIntro, Route124_Text_DeclanDefeat
 	msgbox Route124_Text_DeclanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route124_EventScript_Isabella::
+Archipelago_Target_TRAINER_ISABELLA::
 	trainerbattle_single TRAINER_ISABELLA, Route124_Text_IsabellaIntro, Route124_Text_IsabellaDefeat
 	msgbox Route124_Text_IsabellaPostBattle, MSGBOX_AUTOCLOSE
 	end

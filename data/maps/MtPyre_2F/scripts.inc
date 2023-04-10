@@ -18,6 +18,7 @@ MtPyre_2F_EventScript_PokefanM::
 	end
 
 MtPyre_2F_EventScript_Mark::
+Archipelago_Target_TRAINER_MARK::
 	trainerbattle_single TRAINER_MARK, MtPyre_2F_Text_MarkIntro, MtPyre_2F_Text_MarkDefeat
 	msgbox MtPyre_2F_Text_MarkPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -33,11 +34,13 @@ MtPyre_2F_EventScript_Dez::
 	end
 
 MtPyre_2F_EventScript_Leah::
+Archipelago_Target_TRAINER_LEAH::
 	trainerbattle_single TRAINER_LEAH, MtPyre_2F_Text_LeahIntro, MtPyre_2F_Text_LeahDefeat
 	msgbox MtPyre_2F_Text_LeahPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtPyre_2F_EventScript_Zander::
+Archipelago_Target_TRAINER_ZANDER::
 	trainerbattle_single TRAINER_ZANDER, MtPyre_2F_Text_ZanderIntro, MtPyre_2F_Text_ZanderDefeat
 	msgbox MtPyre_2F_Text_ZanderPostBattle, MSGBOX_AUTOCLOSE
 	end

@@ -2,11 +2,13 @@ SSTidalLowerDeck_MapScripts::
 	.byte 0
 
 SSTidalLowerDeck_EventScript_Phillip::
+Archipelago_Target_TRAINER_PHILLIP::
 	trainerbattle_single TRAINER_PHILLIP, SSTidalLowerDeck_Text_PhillipIntro, SSTidalLowerDeck_Text_PhillipDefeat
 	msgbox SSTidalLowerDeck_Text_PhillipPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 SSTidalLowerDeck_EventScript_Leonard::
+Archipelago_Target_TRAINER_LEONARD::
 	trainerbattle_single TRAINER_LEONARD, SSTidalLowerDeck_Text_LeonardIntro, SSTidalLowerDeck_Text_LeonardDefeat
 	msgbox SSTidalLowerDeck_Text_LeonardPostBattle, MSGBOX_AUTOCLOSE
 	end

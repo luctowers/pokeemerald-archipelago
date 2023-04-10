@@ -2,31 +2,37 @@ VictoryRoad_B2F_MapScripts::
 	.byte 0
 
 VictoryRoad_B2F_EventScript_Vito::
+Archipelago_Target_TRAINER_VITO::
 	trainerbattle_single TRAINER_VITO, VictoryRoad_B2F_Text_VitoIntro, VictoryRoad_B2F_Text_VitoDefeat
 	msgbox VictoryRoad_B2F_Text_VitoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_Owen::
+Archipelago_Target_TRAINER_OWEN::
 	trainerbattle_single TRAINER_OWEN, VictoryRoad_B2F_Text_OwenIntro, VictoryRoad_B2F_Text_OwenDefeat
 	msgbox VictoryRoad_B2F_Text_OwenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_Caroline::
+Archipelago_Target_TRAINER_CAROLINE::
 	trainerbattle_single TRAINER_CAROLINE, VictoryRoad_B2F_Text_CarolineIntro, VictoryRoad_B2F_Text_CarolineDefeat
 	msgbox VictoryRoad_B2F_Text_CarolinePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_Julie::
+Archipelago_Target_TRAINER_JULIE::
 	trainerbattle_single TRAINER_JULIE, VictoryRoad_B2F_Text_JulieIntro, VictoryRoad_B2F_Text_JulieDefeat
 	msgbox VictoryRoad_B2F_Text_JuliePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_Felix::
+Archipelago_Target_TRAINER_FELIX::
 	trainerbattle_single TRAINER_FELIX, VictoryRoad_B2F_Text_FelixIntro, VictoryRoad_B2F_Text_FelixDefeat
 	msgbox VictoryRoad_B2F_Text_FelixPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 VictoryRoad_B2F_EventScript_Dianne::
+Archipelago_Target_TRAINER_DIANNE::
 	trainerbattle_single TRAINER_DIANNE, VictoryRoad_B2F_Text_DianneIntro, VictoryRoad_B2F_Text_DianneDefeat
 	msgbox VictoryRoad_B2F_Text_DiannePostBattle, MSGBOX_AUTOCLOSE
 	end

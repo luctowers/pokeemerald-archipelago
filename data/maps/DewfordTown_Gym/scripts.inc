@@ -133,6 +133,7 @@ DewfordTown_Gym_EventScript_StopCountingTrainers::
 	return
 
 DewfordTown_Gym_EventScript_Brawly::
+Archipelago_Target_TRAINER_BRAWLY_1::
 	trainerbattle_single TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyIntro, DewfordTown_Gym_Text_BrawlyDefeat, DewfordTown_Gym_EventScript_BrawlyDefeated, NO_MUSIC
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, DewfordTown_Gym_EventScript_BrawlyRematch
@@ -178,6 +179,7 @@ DewfordTown_Gym_EventScript_BrawlyRematch::
 	end
 
 DewfordTown_Gym_EventScript_Takao::
+Archipelago_Target_TRAINER_TAKAO::
 	trainerbattle_single TRAINER_TAKAO, DewfordTown_Gym_Text_TakaoIntro, DewfordTown_Gym_Text_TakaoDefeat, DewfordTown_Gym_EventScript_TakaoBrightenRoom
 	msgbox DewfordTown_Gym_Text_TakaoPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -188,6 +190,7 @@ DewfordTown_Gym_EventScript_TakaoBrightenRoom::
 	end
 
 DewfordTown_Gym_EventScript_Jocelyn::
+Archipelago_Target_TRAINER_JOCELYN::
 	trainerbattle_single TRAINER_JOCELYN, DewfordTown_Gym_Text_JocelynIntro, DewfordTown_Gym_Text_JocelynDefeat, DewfordTown_Gym_EventScript_JocelynBrightenRoom
 	msgbox DewfordTown_Gym_Text_JocelynPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -198,6 +201,7 @@ DewfordTown_Gym_EventScript_JocelynBrightenRoom::
 	end
 
 DewfordTown_Gym_EventScript_Laura::
+Archipelago_Target_TRAINER_LAURA::
 	trainerbattle_single TRAINER_LAURA, DewfordTown_Gym_Text_LauraIntro, DewfordTown_Gym_Text_LauraDefeat, DewfordTown_Gym_EventScript_LauraBrightenRoom
 	msgbox DewfordTown_Gym_Text_LauraPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -208,6 +212,7 @@ DewfordTown_Gym_EventScript_LauraBrightenRoom::
 	end
 
 DewfordTown_Gym_EventScript_Brenden::
+Archipelago_Target_TRAINER_BRENDEN::
 	trainerbattle_single TRAINER_BRENDEN, DewfordTown_Gym_Text_BrendenIntro, DewfordTown_Gym_Text_BrendenDefeat, DewfordTown_Gym_EventScript_BrendenBrightenRoom
 	msgbox DewfordTown_Gym_Text_BrendenPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -218,6 +223,7 @@ DewfordTown_Gym_EventScript_BrendenBrightenRoom::
 	end
 
 DewfordTown_Gym_EventScript_Cristian::
+Archipelago_Target_TRAINER_CRISTIAN::
 	trainerbattle_single TRAINER_CRISTIAN, DewfordTown_Gym_Text_CristianIntro, DewfordTown_Gym_Text_CristianDefeat, DewfordTown_Gym_EventScript_CristianBrightenRoom
 	msgbox DewfordTown_Gym_Text_CristianPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -228,6 +234,7 @@ DewfordTown_Gym_EventScript_CristianBrightenRoom::
 	end
 
 DewfordTown_Gym_EventScript_Lilith::
+Archipelago_Target_TRAINER_LILITH::
 	trainerbattle_single TRAINER_LILITH, DewfordTown_Gym_Text_LilithIntro, DewfordTown_Gym_Text_LilithDefeat, DewfordTown_Gym_EventScript_LilithBrightenRoom
 	msgbox DewfordTown_Gym_Text_LilithPostBattle, MSGBOX_AUTOCLOSE
 	end

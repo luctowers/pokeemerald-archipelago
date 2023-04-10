@@ -49,6 +49,7 @@ AbandonedShip_Corridors_B1F_EventScript_DoorIsUnlocked::
 	end
 
 AbandonedShip_Corridors_B1F_EventScript_Duncan::
+Archipelago_Target_TRAINER_DUNCAN::
 	trainerbattle_single TRAINER_DUNCAN, AbandonedShip_Corridors_B1F_Text_DuncanIntro, AbandonedShip_Corridors_B1F_Text_DuncanDefeat
 	msgbox AbandonedShip_Corridors_B1F_Text_DuncanPostBattle, MSGBOX_AUTOCLOSE
 	end

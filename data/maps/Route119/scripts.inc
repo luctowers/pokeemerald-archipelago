@@ -323,36 +323,43 @@ Route119_EventScript_WeatherInstituteSign::
 	end
 
 Route119_EventScript_Brent::
+Archipelago_Target_TRAINER_BRENT::
 	trainerbattle_single TRAINER_BRENT, Route119_Text_BrentIntro, Route119_Text_BrentDefeat
 	msgbox Route119_Text_BrentPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Donald::
+Archipelago_Target_TRAINER_DONALD::
 	trainerbattle_single TRAINER_DONALD, Route119_Text_DonaldIntro, Route119_Text_DonaldDefeat
 	msgbox Route119_Text_DonaldPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Taylor::
+Archipelago_Target_TRAINER_TAYLOR::
 	trainerbattle_single TRAINER_TAYLOR, Route119_Text_TaylorIntro, Route119_Text_TaylorDefeat
 	msgbox Route119_Text_TaylorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Doug::
+Archipelago_Target_TRAINER_DOUG::
 	trainerbattle_single TRAINER_DOUG, Route119_Text_DougIntro, Route119_Text_DougDefeat
 	msgbox Route119_Text_DougPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Greg::
+Archipelago_Target_TRAINER_GREG::
 	trainerbattle_single TRAINER_GREG, Route119_Text_GregIntro, Route119_Text_GregDefeat
 	msgbox Route119_Text_GregPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Kent::
+Archipelago_Target_TRAINER_KENT::
 	trainerbattle_single TRAINER_KENT, Route119_Text_KentIntro, Route119_Text_KentDefeat
 	msgbox Route119_Text_KentPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Jackson::
+Archipelago_Target_TRAINER_JACKSON_1::
 	trainerbattle_single TRAINER_JACKSON_1, Route119_Text_JacksonIntro, Route119_Text_JacksonDefeat, Route119_EventScript_RegisterJackson
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchJackson
@@ -374,6 +381,7 @@ Route119_EventScript_RematchJackson::
 	end
 
 Route119_EventScript_Catherine::
+Archipelago_Target_TRAINER_CATHERINE_1::
 	trainerbattle_single TRAINER_CATHERINE_1, Route119_Text_CatherineIntro, Route119_Text_CatherineDefeat, Route119_EventScript_RegisterCatherine
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route119_EventScript_RematchCatherine
@@ -395,46 +403,55 @@ Route119_EventScript_RematchCatherine::
 	end
 
 Route119_EventScript_Hugh::
+Archipelago_Target_TRAINER_HUGH::
 	trainerbattle_single TRAINER_HUGH, Route119_Text_HughIntro, Route119_Text_HughDefeat
 	msgbox Route119_Text_HughPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Phil::
+Archipelago_Target_TRAINER_PHIL::
 	trainerbattle_single TRAINER_PHIL, Route119_Text_PhilIntro, Route119_Text_PhilDefeat
 	msgbox Route119_Text_PhilPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Yasu::
+Archipelago_Target_TRAINER_YASU::
 	trainerbattle_single TRAINER_YASU, Route119_Text_YasuIntro, Route119_Text_YasuDefeat
 	msgbox Route119_Text_YasuPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Takashi::
+Archipelago_Target_TRAINER_TAKASHI::
 	trainerbattle_single TRAINER_TAKASHI, Route119_Text_TakashiIntro, Route119_Text_TakashiDefeat
 	msgbox Route119_Text_TakashiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Hideo::
+Archipelago_Target_TRAINER_HIDEO::
 	trainerbattle_single TRAINER_HIDEO, Route119_Text_HideoIntro, Route119_Text_HideoDefeat
 	msgbox Route119_Text_HideoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Chris::
+Archipelago_Target_TRAINER_CHRIS::
 	trainerbattle_single TRAINER_CHRIS, Route119_Text_ChrisIntro, Route119_Text_ChrisDefeat
 	msgbox Route119_Text_ChrisPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Fabian::
+Archipelago_Target_TRAINER_FABIAN::
 	trainerbattle_single TRAINER_FABIAN, Route119_Text_FabianIntro, Route119_Text_FabianDefeat
 	msgbox Route119_Text_FabianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Dayton::
+Archipelago_Target_TRAINER_DAYTON::
 	trainerbattle_single TRAINER_DAYTON, Route119_Text_DaytonIntro, Route119_Text_DaytonDefeat
 	msgbox Route119_Text_DaytonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route119_EventScript_Rachel::
+Archipelago_Target_TRAINER_RACHEL::
 	trainerbattle_single TRAINER_RACHEL, Route119_Text_RachelIntro, Route119_Text_RachelDefeat
 	msgbox Route119_Text_RachelPostBattle, MSGBOX_AUTOCLOSE
 	end

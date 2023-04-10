@@ -47,16 +47,19 @@ Route113_EventScript_TrainerTipsRegisterKeyItems::
 	end
 
 Route113_EventScript_Jaylen::
+Archipelago_Target_TRAINER_JAYLEN::
 	trainerbattle_single TRAINER_JAYLEN, Route113_Text_JaylenIntro, Route113_Text_JaylenDefeat
 	msgbox Route113_Text_JaylenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_Dillon::
+Archipelago_Target_TRAINER_DILLON::
 	trainerbattle_single TRAINER_DILLON, Route113_Text_DillonIntro, Route113_Text_DillonDefeat
 	msgbox Route113_Text_DillonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_Madeline::
+Archipelago_Target_TRAINER_MADELINE_1::
 	trainerbattle_single TRAINER_MADELINE_1, Route113_Text_MadelineIntro, Route113_Text_MadelineDefeat, Route113_EventScript_RegisterMadeline
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route113_EventScript_RematchMadeline
@@ -78,6 +81,7 @@ Route113_EventScript_RematchMadeline::
 	end
 
 Route113_EventScript_Lao::
+Archipelago_Target_TRAINER_LAO_1::
 	trainerbattle_single TRAINER_LAO_1, Route113_Text_LaoIntro, Route113_Text_LaoDefeat, Route113_EventScript_RegisterLao
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route113_EventScript_RematchLao
@@ -99,6 +103,7 @@ Route113_EventScript_RematchLao::
 	end
 
 Route113_EventScript_Lung::
+Archipelago_Target_TRAINER_LUNG::
 	trainerbattle_single TRAINER_LUNG, Route113_Text_LungIntro, Route113_Text_LungDefeat
 	msgbox Route113_Text_LungPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -114,21 +119,25 @@ Route113_EventScript_Tia::
 	end
 
 Route113_EventScript_Sophie::
+Archipelago_Target_TRAINER_SOPHIE::
 	trainerbattle_single TRAINER_SOPHIE, Route113_Text_SophieIntro, Route113_Text_SophieDefeat
 	msgbox Route113_Text_SophiePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_Coby::
+Archipelago_Target_TRAINER_COBY::
 	trainerbattle_single TRAINER_COBY, Route113_Text_CobyIntro, Route113_Text_CobyDefeat
 	msgbox Route113_Text_CobyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_Lawrence::
+Archipelago_Target_TRAINER_LAWRENCE::
 	trainerbattle_single TRAINER_LAWRENCE, Route113_Text_LawrenceIntro, Route113_Text_LawrenceDefeat
 	msgbox Route113_Text_LawrencePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route113_EventScript_Wyatt::
+Archipelago_Target_TRAINER_WYATT::
 	trainerbattle_single TRAINER_WYATT, Route113_Text_WyattIntro, Route113_Text_WyattDefeat
 	msgbox Route113_Text_WyattPostBattle, MSGBOX_AUTOCLOSE
 	end

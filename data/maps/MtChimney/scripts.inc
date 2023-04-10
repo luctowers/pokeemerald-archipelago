@@ -399,11 +399,13 @@ MtChimney_EventScript_BusyAquaGrunt3::
 	end
 
 MtChimney_EventScript_Tabitha::
+Archipelago_Target_TRAINER_TABITHA_MT_CHIMNEY::
 	trainerbattle_single TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat
 	msgbox MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Grunt2::
+Archipelago_Target_TRAINER_GRUNT_MT_CHIMNEY_2::
 	trainerbattle_single TRAINER_GRUNT_MT_CHIMNEY_2, MtChimney_Text_Grunt2Intro, MtChimney_Text_Grunt2Defeat
 	msgbox MtChimney_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -473,6 +475,7 @@ MtChimney_EventScript_RouteSign::
 	end
 
 MtChimney_EventScript_Shelby::
+Archipelago_Target_TRAINER_SHELBY_1::
 	trainerbattle_single TRAINER_SHELBY_1, MtChimney_Text_ShelbyIntro, MtChimney_Text_ShelbyDefeat, MtChimney_EventScript_DefeatedShelby
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_RematchShelby
@@ -494,26 +497,31 @@ MtChimney_EventScript_RematchShelby::
 	end
 
 MtChimney_EventScript_Melissa::
+Archipelago_Target_TRAINER_MELISSA::
 	trainerbattle_single TRAINER_MELISSA, MtChimney_Text_MelissaIntro, MtChimney_Text_MelissaDefeat
 	msgbox MtChimney_Text_MelissaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Sheila::
+Archipelago_Target_TRAINER_SHEILA::
 	trainerbattle_single TRAINER_SHEILA, MtChimney_Text_SheilaIntro, MtChimney_Text_SheilaDefeat
 	msgbox MtChimney_Text_SheilaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Shirley::
+Archipelago_Target_TRAINER_SHIRLEY::
 	trainerbattle_single TRAINER_SHIRLEY, MtChimney_Text_ShirleyIntro, MtChimney_Text_ShirleyDefeat
 	msgbox MtChimney_Text_ShirleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Grunt1::
+Archipelago_Target_TRAINER_GRUNT_MT_CHIMNEY_1::
 	trainerbattle_single TRAINER_GRUNT_MT_CHIMNEY_1, MtChimney_Text_Grunt1Intro, MtChimney_Text_Grunt1Defeat
 	msgbox MtChimney_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
 	end
 
 MtChimney_EventScript_Sawyer::
+Archipelago_Target_TRAINER_SAWYER_1::
 	trainerbattle_single TRAINER_SAWYER_1, MtChimney_Text_SawyerIntro, MtChimney_Text_SawyerDefeat, MtChimney_EventScript_SawyerDefeated
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, MtChimney_EventScript_SawyerRematch

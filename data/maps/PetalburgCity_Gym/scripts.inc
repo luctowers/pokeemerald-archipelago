@@ -876,6 +876,7 @@ PetalburgCity_Gym_EventScript_RightGymLeadersRoomDoor::
 	end
 
 PetalburgCity_Gym_EventScript_Randall::
+Archipelago_Target_TRAINER_RANDALL::
 	trainerbattle_single TRAINER_RANDALL, PetalburgCity_Gym_Text_RandallIntro, PetalburgCity_Gym_Text_RandallDefeat, PetalburgCity_Gym_EventScript_SlideOpenSpeedRoomDoors
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_RandallPostBadge
 	msgbox PetalburgCity_Gym_Text_RandallPostBattle, MSGBOX_AUTOCLOSE
@@ -893,6 +894,7 @@ PetalburgCity_Gym_EventScript_RandallPostBadge::
 	end
 
 PetalburgCity_Gym_EventScript_Parker::
+Archipelago_Target_TRAINER_PARKER::
 	trainerbattle_single TRAINER_PARKER, PetalburgCity_Gym_Text_ParkerIntro, PetalburgCity_Gym_Text_ParkerDefeat, PetalburgCity_Gym_EventScript_SlideOpenConfusionRoomDoors
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_ParkerPostBadge
 	msgbox PetalburgCity_Gym_Text_ParkerPostBattle, MSGBOX_AUTOCLOSE
@@ -910,6 +912,7 @@ PetalburgCity_Gym_EventScript_ParkerPostBadge::
 	end
 
 PetalburgCity_Gym_EventScript_George::
+Archipelago_Target_TRAINER_GEORGE::
 	trainerbattle_single TRAINER_GEORGE, PetalburgCity_Gym_Text_GeorgeIntro, PetalburgCity_Gym_Text_GeorgeDefeat, PetalburgCity_Gym_EventScript_SlideOpenRecoveryRoomDoors
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_GeorgePostBadge
 	msgbox PetalburgCity_Gym_Text_GeorgePostBattle, MSGBOX_AUTOCLOSE
@@ -927,6 +930,7 @@ PetalburgCity_Gym_EventScript_GeorgePostBadge::
 	end
 
 PetalburgCity_Gym_EventScript_Berke::
+Archipelago_Target_TRAINER_BERKE::
 	trainerbattle_single TRAINER_BERKE, PetalburgCity_Gym_Text_BerkeIntro, PetalburgCity_Gym_Text_BerkeDefeat, PetalburgCity_Gym_EventScript_SlideOpenOHKORoomDoors
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_BerkePostBadge
 	msgbox PetalburgCity_Gym_Text_BerkePostBattle, MSGBOX_AUTOCLOSE
@@ -944,6 +948,7 @@ PetalburgCity_Gym_EventScript_BerkePostBadge::
 	end
 
 PetalburgCity_Gym_EventScript_Mary::
+Archipelago_Target_TRAINER_MARY::
 	trainerbattle_single TRAINER_MARY, PetalburgCity_Gym_Text_MaryIntro, PetalburgCity_Gym_Text_MaryDefeat, PetalburgCity_Gym_EventScript_SlideOpenAccuracyRoomDoors
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_MaryPostBadge
 	msgbox PetalburgCity_Gym_Text_MaryPostBattle, MSGBOX_AUTOCLOSE
@@ -961,6 +966,7 @@ PetalburgCity_Gym_EventScript_MaryPostBadge::
 	end
 
 PetalburgCity_Gym_EventScript_Alexia::
+Archipelago_Target_TRAINER_ALEXIA::
 	trainerbattle_single TRAINER_ALEXIA, PetalburgCity_Gym_Text_AlexiaIntro, PetalburgCity_Gym_Text_AlexiaDefeat, PetalburgCity_Gym_EventScript_SlideOpenDefenseRoomDoors
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_AlexiaPostBadge
 	msgbox PetalburgCity_Gym_Text_AlexiaPostBattle, MSGBOX_AUTOCLOSE
@@ -978,6 +984,7 @@ PetalburgCity_Gym_EventScript_AlexiaPostBadge::
 	end
 
 PetalburgCity_Gym_EventScript_Jody::
+Archipelago_Target_TRAINER_JODY::
 	trainerbattle_single TRAINER_JODY, PetalburgCity_Gym_Text_JodyIntro, PetalburgCity_Gym_Text_JodyDefeat, PetalburgCity_Gym_EventScript_SlideOpenStrengthRoomDoors
 	goto_if_set FLAG_DEFEATED_PETALBURG_GYM, PetalburgCity_Gym_EventScript_JodyPostBadge
 	msgbox PetalburgCity_Gym_Text_JodyPostBattle, MSGBOX_AUTOCLOSE

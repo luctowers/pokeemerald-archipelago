@@ -202,6 +202,7 @@ Route103_EventScript_RouteSign::
 	end
 
 Route103_EventScript_Daisy::
+Archipelago_Target_TRAINER_DAISY::
 	trainerbattle_single TRAINER_DAISY, Route103_Text_DaisyIntro, Route103_Text_DaisyDefeated
 	msgbox Route103_Text_DaisyPostBattle, MSGBOX_AUTOCLOSE
 	end
@@ -243,11 +244,13 @@ Route102_EventScript_LivRematch::
 	end
 
 Route103_EventScript_Andrew::
+Archipelago_Target_TRAINER_ANDREW::
 	trainerbattle_single TRAINER_ANDREW, Route103_Text_AndrewIntro, Route103_Text_AndrewDefeated
 	msgbox Route103_Text_AndrewPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Miguel::
+Archipelago_Target_TRAINER_MIGUEL_1::
 	trainerbattle_single TRAINER_MIGUEL_1, Route103_Text_MiguelIntro, Route103_Text_MiguelDefeated, Route102_EventScript_MiguelRegisterMatchCallAfterBattle
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route103_EventScript_MiguelRematch
@@ -269,21 +272,25 @@ Route103_EventScript_MiguelRematch::
 	end
 
 Route103_EventScript_Marcos::
+Archipelago_Target_TRAINER_MARCOS::
 	trainerbattle_single TRAINER_MARCOS, Route103_Text_MarcosIntro, Route103_Text_MarcosDefeated
 	msgbox Route103_Text_MarcosPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Rhett::
+Archipelago_Target_TRAINER_RHETT::
 	trainerbattle_single TRAINER_RHETT, Route103_Text_RhettIntro, Route103_Text_RhettDefeated
 	msgbox Route103_Text_RhettPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Pete::
+Archipelago_Target_TRAINER_PETE::
 	trainerbattle_single TRAINER_PETE, Route103_Text_PeteIntro, Route103_Text_PeteDefeated
 	msgbox Route103_Text_PetePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route103_EventScript_Isabelle::
+Archipelago_Target_TRAINER_ISABELLE::
 	trainerbattle_single TRAINER_ISABELLE, Route103_Text_IsabelleIntro, Route103_Text_IsabelleDefeated
 	msgbox Route103_Text_IsabellePostBattle, MSGBOX_AUTOCLOSE
 	end

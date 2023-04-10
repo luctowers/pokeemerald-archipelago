@@ -284,11 +284,13 @@ Route120_EventScript_RouteSign121::
 	end
 
 Route120_EventScript_Colin::
+Archipelago_Target_TRAINER_COLIN::
 	trainerbattle_single TRAINER_COLIN, Route120_Text_ColinIntro, Route120_Text_ColinDefeat
 	msgbox Route120_Text_ColinPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Robert::
+Archipelago_Target_TRAINER_ROBERT_1::
 	trainerbattle_single TRAINER_ROBERT_1, Route120_Text_RobertIntro, Route120_Text_RobertDefeat, Route120_EventScript_RegisterRobert
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route120_EventScript_RematchRobert
@@ -310,16 +312,19 @@ Route120_EventScript_RematchRobert::
 	end
 
 Route120_EventScript_Lorenzo::
+Archipelago_Target_TRAINER_LORENZO::
 	trainerbattle_single TRAINER_LORENZO, Route120_Text_LorenzoIntro, Route120_Text_LorenzoDefeat
 	msgbox Route120_Text_LorenzoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Jenna::
+Archipelago_Target_TRAINER_JENNA::
 	trainerbattle_single TRAINER_JENNA, Route120_Text_JennaIntro, Route120_Text_JennaDefeat
 	msgbox Route120_Text_JennaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Jeffrey::
+Archipelago_Target_TRAINER_JEFFREY_1::
 	trainerbattle_single TRAINER_JEFFREY_1, Route120_Text_JeffreyIntro, Route120_Text_JeffreyDefeat, Route120_EventScript_RegisterJeffrey
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route120_EventScript_RematchJeffrey
@@ -341,41 +346,49 @@ Route120_EventScript_RematchJeffrey::
 	end
 
 Route120_EventScript_Jennifer::
+Archipelago_Target_TRAINER_JENNIFER::
 	trainerbattle_single TRAINER_JENNIFER, Route120_Text_JenniferIntro, Route120_Text_JenniferDefeat
 	msgbox Route120_Text_JenniferPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Chip::
+Archipelago_Target_TRAINER_CHIP::
 	trainerbattle_single TRAINER_CHIP, Route120_Text_ChipIntro, Route120_Text_ChipDefeat
 	msgbox Route120_Text_ChipPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Clarissa::
+Archipelago_Target_TRAINER_CLARISSA::
 	trainerbattle_single TRAINER_CLARISSA, Route120_Text_ClarissaIntro, Route120_Text_ClarissaDefeat
 	msgbox Route120_Text_ClarissaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Angelica::
+Archipelago_Target_TRAINER_ANGELICA::
 	trainerbattle_single TRAINER_ANGELICA, Route120_Text_AngelicaIntro, Route120_Text_AngelicaDefeat
 	msgbox Route120_Text_AngelicaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Keigo::
+Archipelago_Target_TRAINER_KEIGO::
 	trainerbattle_single TRAINER_KEIGO, Route120_Text_KeigoIntro, Route120_Text_KeigoDefeat
 	msgbox Route120_Text_KeigoPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Riley::
+Archipelago_Target_TRAINER_RILEY::
 	trainerbattle_single TRAINER_RILEY, Route120_Text_RileyIntro, Route120_Text_RileyDefeat
 	msgbox Route120_Text_RileyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Leonel::
+Archipelago_Target_TRAINER_LEONEL::
 	trainerbattle_single TRAINER_LEONEL, Route120_Text_LeonelIntro, Route120_Text_LeonelDefeat
 	msgbox Route120_Text_LeonelPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route120_EventScript_Callie::
+Archipelago_Target_TRAINER_CALLIE::
 	trainerbattle_single TRAINER_CALLIE, Route120_Text_CallieIntro, Route120_Text_CallieDefeat
 	msgbox Route120_Text_CalliePostBattle, MSGBOX_AUTOCLOSE
 	end

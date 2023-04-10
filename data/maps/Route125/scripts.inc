@@ -21,26 +21,31 @@ Route125_OnFrame:
 	.2byte 0
 
 Route125_EventScript_Nolen::
+Archipelago_Target_TRAINER_NOLEN::
 	trainerbattle_single TRAINER_NOLEN, Route125_Text_NolenIntro, Route125_Text_NolenDefeat
 	msgbox Route125_Text_NolenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Stan::
+Archipelago_Target_TRAINER_STAN::
 	trainerbattle_single TRAINER_STAN, Route125_Text_StanIntro, Route125_Text_StanDefeat
 	msgbox Route125_Text_StanPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Tanya::
+Archipelago_Target_TRAINER_TANYA::
 	trainerbattle_single TRAINER_TANYA, Route125_Text_TanyaIntro, Route125_Text_TanyaDefeat
 	msgbox Route125_Text_TanyaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Sharon::
+Archipelago_Target_TRAINER_SHARON::
 	trainerbattle_single TRAINER_SHARON, Route125_Text_SharonIntro, Route125_Text_SharonDefeat
 	msgbox Route125_Text_SharonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Ernest::
+Archipelago_Target_TRAINER_ERNEST_1::
 	trainerbattle_single TRAINER_ERNEST_1, Route125_Text_ErnestIntro, Route125_Text_ErnestDefeat, Route125_EventScript_RegisterErnest
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route125_EventScript_RematchErnest
@@ -72,11 +77,13 @@ Route125_EventScript_Iris::
 	end
 
 Route125_EventScript_Presley::
+Archipelago_Target_TRAINER_PRESLEY::
 	trainerbattle_single TRAINER_PRESLEY, Route125_Text_PresleyIntro, Route125_Text_PresleyDefeat
 	msgbox Route125_Text_PresleyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route125_EventScript_Auron::
+Archipelago_Target_TRAINER_AURON::
 	trainerbattle_single TRAINER_AURON, Route125_Text_AuronIntro, Route125_Text_AuronDefeat
 	msgbox Route125_Text_AuronPostBattle, MSGBOX_AUTOCLOSE
 	end

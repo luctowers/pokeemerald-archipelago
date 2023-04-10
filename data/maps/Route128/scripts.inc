@@ -179,6 +179,7 @@ Route128_Movement_MaxieApproachPlayer:
 	step_end
 
 Route128_EventScript_Isaiah::
+Archipelago_Target_TRAINER_ISAIAH_1::
 	trainerbattle_single TRAINER_ISAIAH_1, Route128_Text_IsaiahIntro, Route128_Text_IsaiahDefeat, Route128_EventScript_RegisterIsaiah
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route128_EventScript_RematchIsaiah
@@ -200,6 +201,7 @@ Route128_EventScript_RematchIsaiah::
 	end
 
 Route128_EventScript_Katelyn::
+Archipelago_Target_TRAINER_KATELYN_1::
 	trainerbattle_single TRAINER_KATELYN_1, Route128_Text_KatelynIntro, Route128_Text_KatelynDefeat, Route128_EventScript_RegisterKatelyn
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route128_EventScript_RematchKatelyn
@@ -221,26 +223,31 @@ Route128_EventScript_RematchKatelyn::
 	end
 
 Route128_EventScript_Alexa::
+Archipelago_Target_TRAINER_ALEXA::
 	trainerbattle_single TRAINER_ALEXA, Route128_Text_AlexaIntro, Route128_Text_AlexaDefeat
 	msgbox Route128_Text_AlexaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Ruben::
+Archipelago_Target_TRAINER_RUBEN::
 	trainerbattle_single TRAINER_RUBEN, Route128_Text_RubenIntro, Route128_Text_RubenDefeat
 	msgbox Route128_Text_RubenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Wayne::
+Archipelago_Target_TRAINER_WAYNE::
 	trainerbattle_single TRAINER_WAYNE, Route128_Text_WayneIntro, Route128_Text_WayneDefeat
 	msgbox Route128_Text_WaynePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Harrison::
+Archipelago_Target_TRAINER_HARRISON::
 	trainerbattle_single TRAINER_HARRISON, Route128_Text_HarrisonIntro, Route128_Text_HarrisonDefeat
 	msgbox Route128_Text_HarrisonPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route128_EventScript_Carlee::
+Archipelago_Target_TRAINER_CARLEE::
 	trainerbattle_single TRAINER_CARLEE, Route128_Text_CarleeIntro, Route128_Text_CarleeDefeat
 	msgbox Route128_Text_CarleePostBattle, MSGBOX_AUTOCLOSE
 	end

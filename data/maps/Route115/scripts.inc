@@ -32,6 +32,7 @@ Route115_EventScript_MeteorFallsSign::
 	end
 
 Route115_EventScript_Timothy::
+Archipelago_Target_TRAINER_TIMOTHY_1::
 	trainerbattle_single TRAINER_TIMOTHY_1, Route115_Text_TimothyIntro, Route115_Text_TimothyDefeat, Route115_EventScript_RegisterTimothy
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route115_EventScript_RematchTimothy
@@ -53,11 +54,13 @@ Route115_EventScript_RematchTimothy::
 	end
 
 Route115_EventScript_Koichi::
+Archipelago_Target_TRAINER_KOICHI::
 	trainerbattle_single TRAINER_KOICHI, Route115_Text_KoichiIntro, Route115_Text_KoichiDefeat
 	msgbox Route115_Text_KoichiPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Nob::
+Archipelago_Target_TRAINER_NOB_1::
 	trainerbattle_single TRAINER_NOB_1, Route115_Text_NobIntro, Route115_Text_NobDefeat, Route115_EventScript_RegisterNob
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route115_EventScript_RematchNob
@@ -79,6 +82,7 @@ Route115_EventScript_RematchNob::
 	end
 
 Route115_EventScript_Cyndy::
+Archipelago_Target_TRAINER_CYNDY_1::
 	trainerbattle_single TRAINER_CYNDY_1, Route115_Text_CyndyIntro, Route115_Text_CyndyDefeat, Route115_EventScript_RegisterCyndy
 	specialvar VAR_RESULT, ShouldTryRematchBattle
 	goto_if_eq VAR_RESULT, TRUE, Route115_EventScript_RematchCyndy
@@ -100,31 +104,37 @@ Route115_EventScript_RematchCyndy::
 	end
 
 Route115_EventScript_Hector::
+Archipelago_Target_TRAINER_HECTOR::
 	trainerbattle_single TRAINER_HECTOR, Route115_Text_HectorIntro, Route115_Text_HectorDefeat
 	msgbox Route115_Text_HectorPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Kyra::
+Archipelago_Target_TRAINER_KYRA::
 	trainerbattle_single TRAINER_KYRA, Route115_Text_KyraIntro, Route115_Text_KyraDefeat
 	msgbox Route115_Text_KyraPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Jaiden::
+Archipelago_Target_TRAINER_JAIDEN::
 	trainerbattle_single TRAINER_JAIDEN, Route115_Text_JaidenIntro, Route115_Text_JaidenDefeat
 	msgbox Route115_Text_JaidenPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Alix::
+Archipelago_Target_TRAINER_ALIX::
 	trainerbattle_single TRAINER_ALIX, Route115_Text_AlixIntro, Route115_Text_AlixDefeat
 	msgbox Route115_Text_AlixPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Helene::
+Archipelago_Target_TRAINER_HELENE::
 	trainerbattle_single TRAINER_HELENE, Route115_Text_HeleneIntro, Route115_Text_HeleneDefeat
 	msgbox Route115_Text_HelenePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route115_EventScript_Marlene::
+Archipelago_Target_TRAINER_MARLENE::
 	trainerbattle_single TRAINER_MARLENE, Route115_Text_MarleneIntro, Route115_Text_MarleneDefeat
 	msgbox Route115_Text_MarlenePostBattle, MSGBOX_AUTOCLOSE
 	end
