@@ -8,7 +8,7 @@ ArchipelagoScript_ReceiveRemoteItem::
 
 ArchipelagoScript_ReceiveRemoteItemSilent::
 	specialvar VAR_RESULT, ArchipelagoSpecial_ConsumeReceivedItem
-	additem VAR_RESULT, AMOUNT
+	additem VAR_RESULT, 1
 	end
 
 ArchipelagoScript_FoundArchipelagoItem::
