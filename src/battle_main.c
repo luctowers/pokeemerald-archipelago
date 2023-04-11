@@ -3823,9 +3823,25 @@ static void TryDoEventsBeforeFirstTurn(void)
     s32 i;
     s32 j;
     u8 effect = 0;
+    struct Pokemon *party_mon;
 
     if (gBattleControllerExecFlags)
         return;
+
+    // Set invalid mons as absent
+    if (!(gBattleTypeFlags & BATTLE_TYPE_SAFARI))
+    {
+        for (i = 0; i < gBattlersCount; i++)
+        {
+            if (GetBattlerSide(i) == B_SIDE_PLAYER)
+                party_mon = &gPlayerParty[gBattlerPartyIndexes[i]];
+            else
+                party_mon = &gEnemyParty[gBattlerPartyIndexes[i]];
+
+            if (gBattleMons[i].hp == 0 || gBattleMons[i].species == SPECIES_NONE || GetMonData(party_mon, MON_DATA_IS_EGG))
+                gAbsentBattlerFlags |= gBitTable[i];
+        }
+    }
 
     if (gBattleStruct->switchInAbilitiesCounter == 0)
     {

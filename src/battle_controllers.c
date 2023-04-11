@@ -617,7 +617,7 @@ static void SetBattlePartyIds(void)
                     if (GET_BATTLER_SIDE2(i) == B_SIDE_PLAYER)
                     {
                         if (GetMonData(&gPlayerParty[j], MON_DATA_HP) != 0
-                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES) != SPECIES_NONE  // Probably a typo by Game Freak. The rest use SPECIES2.
+                         && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_NONE
                          && GetMonData(&gPlayerParty[j], MON_DATA_SPECIES2) != SPECIES_EGG
                          && !GetMonData(&gPlayerParty[j], MON_DATA_IS_EGG)
                          && gBattlerPartyIndexes[i - 2] != j)
@@ -638,6 +638,14 @@ static void SetBattlePartyIds(void)
                             break;
                         }
                     }
+
+                    // If a valid second usable mon was found, it will be set and break out of the loop
+                    // Otherwise, fall to here and set the index for the second mon to something invalid
+                    // (i.e. any slot except the one containing the only valid mon in the party, in this case 0 or 1)
+                    if (gBattlerPartyIndexes[i - 2] == 0)
+                        gBattlerPartyIndexes[i] = 1;
+                    else
+                        gBattlerPartyIndexes[i] = 0;
                 }
             }
         }
