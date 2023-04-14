@@ -32,6 +32,7 @@
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/field_poison.h"
+#include "constants/items.h"
 #include "constants/map_types.h"
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
@@ -1038,7 +1039,8 @@ bool8 Archipelago_CheckReceivedItem()
     if (gArchipelagoReceivedItem.isFilled == TRUE) {
         if (
             (gArchipelagoOptions.receivedItemMessageFilter == 0) ||
-            (gArchipelagoOptions.receivedItemMessageFilter == 1 && gArchipelagoReceivedItem.isProgression)
+            (gArchipelagoOptions.receivedItemMessageFilter == 1 && gArchipelagoReceivedItem.isProgression) ||
+            (gArchipelagoReceivedItem.itemId >= ITEM_BADGE_1 && gArchipelagoReceivedItem.itemId <= ITEM_BADGE_8)
         )
             ScriptContext_SetupScript(ArchipelagoScript_ReceiveRemoteItem);
         else
