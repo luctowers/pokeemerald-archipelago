@@ -27,6 +27,7 @@ Archipelago_Target_NPC_Gift_FLAG_RECEIVED_MACH_BIKE::
 	setflag FLAG_RECEIVED_ACRO_BIKE
 Archipelago_Target_NPC_Gift_FLAG_RECEIVED_ACRO_BIKE::
 	giveitem ITEM_ACRO_BIKE
+	msgbox MauvilleCity_BikeShop_Text_EnjoyYourNewBikes, MSGBOX_DEFAULT
 	release
 	end
 
@@ -213,6 +214,10 @@ MauvilleCity_BikeShop_Text_ExplainBikes:
 	.string "prefer technical rides!\p"
 	.string "I'm a real sweetheart, so you can\n"
 	.string "have both!$"
+
+MauvilleCity_BikeShop_Text_EnjoyYourNewBikes:
+	.string "RYDEL: I hope you enjoy riding around\n"
+	.string "on your new BIKES!$"
 
 MauvilleCity_BikeShop_Text_ChoseMachBike:
 	.string "{PLAYER} chose the MACH BIKE.$"
