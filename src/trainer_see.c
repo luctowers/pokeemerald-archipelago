@@ -286,7 +286,8 @@ static u8 CheckTrainer(u8 objectEventId)
             || scriptPtr[1] == TRAINER_BATTLE_REMATCH_DOUBLE
             || scriptPtr[1] == TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE)
         {
-            if (GetMonsStateToDoubles_2() != PLAYER_HAS_TWO_USABLE_MONS)
+            // Do not approach if player doesn't have 2 pokemon, or if any other trainer is already approaching
+            if (GetMonsStateToDoubles_2() != PLAYER_HAS_TWO_USABLE_MONS || gNoOfApproachingTrainers > 0)
                 return 0;
 
             numTrainers = 2;
