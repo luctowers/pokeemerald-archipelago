@@ -253,6 +253,8 @@
 #define ITEM_METAL_POWDER 223
 #define ITEM_THICK_CLUB 224
 #define ITEM_STICK 225
+
+// Badge placeholder items
 #define ITEM_BADGE_1 226
 #define ITEM_BADGE_2 227
 #define ITEM_BADGE_3 228
@@ -261,6 +263,7 @@
 #define ITEM_BADGE_6 231
 #define ITEM_BADGE_7 232
 #define ITEM_BADGE_8 233
+
 #define ITEM_0EA 234
 #define ITEM_0EB 235
 #define ITEM_0EC 236
@@ -536,6 +539,7 @@
 #define ITEM_B_USE_OTHER    2
 
 // Check if the item is one that can be used on a Pokemon.
-#define ITEM_HAS_EFFECT(item) ((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX)
+#define ITEM_IS_CONVERTED_TRADE_EVO_ITEM(item) ((item) == ITEM_KINGS_ROCK || (item) == ITEM_DEEP_SEA_TOOTH || (item) == ITEM_DEEP_SEA_SCALE || (item) == ITEM_METAL_COAT || (item) == ITEM_DRAGON_SCALE || (item) == ITEM_UP_GRADE)
+#define ITEM_HAS_EFFECT(item) (((item) >= ITEM_POTION && (item) <= MAX_BERRY_INDEX) || ITEM_IS_CONVERTED_TRADE_EVO_ITEM(item))
 
 #endif  // GUARD_CONSTANTS_ITEMS_H
