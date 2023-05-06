@@ -68,6 +68,7 @@ enum TrainerPokemonInfoType {
 class TrainerPokemonInfo {
     public:
         uint16_t species;
+        uint8_t level;
         uint8_t moves[4];
 };
 

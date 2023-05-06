@@ -561,6 +561,9 @@ int main (int argc, char *argv[])
 
             uint32_t address = trainer->party_rom_address + (j * pokemon_data_size);
 
+            rom.seekg(address + 2, rom.beg);
+            rom.read((char*)&(pokemon.level), 1);
+
             rom.seekg(address + 4, rom.beg);
             rom.read((char*)&(pokemon.species), 2);
 
@@ -859,6 +862,7 @@ json TrainerInfo::to_json ()
     {
         party_json.push_back({
             { "species", pokemon.species },
+            { "level", pokemon.level },
             { "moves", pokemon.moves },
         });
     }
