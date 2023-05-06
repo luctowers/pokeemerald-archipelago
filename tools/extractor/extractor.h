@@ -75,6 +75,7 @@ class SpeciesInfo {
         uint8_t catch_rate;
         uint8_t abilities[2];
         uint8_t types[2];
+        uint64_t tmhm_learnset;
 
         LearnsetInfo learnset_info;
         std::vector<EvolutionInfo> evolutions;

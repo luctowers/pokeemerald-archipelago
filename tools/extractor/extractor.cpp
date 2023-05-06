@@ -480,6 +480,15 @@ int main (int argc, char *argv[])
         while (move != 0xFFFF);
     }
 
+    // Reading TM/HM learnsets
+    for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
+    {
+        const auto &species = all_species[i];
+
+        rom.seekg(misc_rom_addresses["gTMHMLearnsets"] + (i * 2), rom.beg);
+        rom.read((char*)&(species->tmhm_learnset), 8);
+    }
+
     // Reading evolutions
     for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
     {
@@ -937,6 +946,10 @@ json SpeciesInfo::to_json ()
         });
     }
 
+    std::stringstream ss;
+    ss << std::setfill('0') << std::setw(16) << std::hex << std::uppercase << this->tmhm_learnset;
+    std::string tmhm_learnset_str = ss.str();
+
     return {
         { "rom_address", this->rom_address },
         { "id", this->id },
@@ -958,6 +971,7 @@ json SpeciesInfo::to_json ()
         } },
         { "catch_rate", this->catch_rate },
         { "learnset", this->learnset_info.to_json() },
+        { "tmhm_learnset", tmhm_learnset_str },
         { "evolutions", evolutions_json },
     };
 }
