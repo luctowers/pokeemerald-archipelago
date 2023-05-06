@@ -115,6 +115,7 @@ int main (int argc, char *argv[])
         { "gTMHMLearnsets", symbol_map["gTMHMLearnsets"] - 0x8000000 },
         { "gTrainers", symbol_map["gTrainers"] - 0x8000000 },
         { "sTMHMMoves", symbol_map["sTMHMMoves"] - 0x8000000 },
+        { "gEvolutionTable", symbol_map["gEvolutionTable"] - 0x8000000 },
     };
 
     // ------------------------------------------------------------------------
@@ -449,7 +450,6 @@ int main (int argc, char *argv[])
     }
 
     // Reading learnsets
-    std::vector<std::shared_ptr<LearnsetInfo>> learnsets;
     for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
     {
         const auto &species = all_species[i];
@@ -478,6 +478,77 @@ int main (int argc, char *argv[])
             ++move_i;
         }
         while (move != 0xFFFF);
+    }
+
+    // Reading evolutions
+    for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
+    {
+        const size_t NUM_EVOS_PER_MON = 5;
+        const auto &species = all_species[i];
+
+        species->evolutions_rom_address = misc_rom_addresses["gEvolutionTable"] + (i * (8 * 5));
+
+        for (size_t j = 0; j < NUM_EVOS_PER_MON; ++j)
+        {
+            uint16_t method = 0;
+            rom.seekg(species->evolutions_rom_address + (j * 8) + 0, rom.beg);
+            rom.read((char*)&(method), 2);
+
+            if (method == 0) continue;
+
+            EvolutionInfo evolution;
+
+            switch (method)
+            {
+                case 1:
+                    evolution.method = FRIENDSHIP;
+                    break;
+                case 2:
+                    evolution.method = FRIENDSHIP_DAY;
+                    break;
+                case 3:
+                    evolution.method = FRIENDSHIP_NIGHT;
+                    break;
+                case 4:
+                    evolution.method = LEVEL;
+                    break;
+                case 7:
+                    evolution.method = ITEM;
+                    break;
+                case 8:
+                    evolution.method = LEVEL_ATK_GT_DEF;
+                    break;
+                case 9:
+                    evolution.method = LEVEL_ATK_EQ_DEF;
+                    break;
+                case 10:
+                    evolution.method = LEVEL_ATK_LT_DEF;
+                    break;
+                case 11:
+                    evolution.method = LEVEL_SILCOON;
+                    break;
+                case 12:
+                    evolution.method = LEVEL_CASCOON;
+                    break;
+                case 13:
+                    evolution.method = LEVEL_NINJASK;
+                    break;
+                case 14:
+                    evolution.method = LEVEL_SHEDINJA;
+                    break;
+                default:
+                    std::cerr << "Unknown evolution method: " << method << std::endl;
+                    throw new std::exception();
+            }
+            
+            rom.seekg(species->evolutions_rom_address + (j * 8) + 2, rom.beg);
+            rom.read((char*)&(evolution.param), 2);
+            
+            rom.seekg(species->evolutions_rom_address + (j * 8) + 4, rom.beg);
+            rom.read((char*)&(evolution.species), 2);
+
+            species->evolutions.push_back(evolution);
+        }
     }
 
     // Reading trainers
@@ -814,6 +885,49 @@ json EncounterTableInfo::to_json ()
 
 json SpeciesInfo::to_json ()
 {
+    const auto evolution_method_to_string = [](EvolutionMethod method) {
+        switch (method)
+        {
+            case LEVEL:
+                return "LEVEL";
+            case LEVEL_ATK_LT_DEF:
+                return "LEVEL_ATK_LT_DEF";
+            case LEVEL_ATK_EQ_DEF:
+                return "LEVEL_ATK_EQ_DEF";
+            case LEVEL_ATK_GT_DEF:
+                return "LEVEL_ATK_GT_DEF";
+            case LEVEL_SILCOON:
+                return "LEVEL_SILCOON";
+            case LEVEL_CASCOON:
+                return "LEVEL_CASCOON";
+            case LEVEL_NINJASK:
+                return "LEVEL_NINJASK";
+            case LEVEL_SHEDINJA:
+                return "LEVEL_SHEDINJA";
+            case ITEM:
+                return "ITEM";
+            case FRIENDSHIP:
+                return "FRIENDSHIP";
+            case FRIENDSHIP_DAY:
+                return "FRIENDSHIP_DAY";
+            case FRIENDSHIP_NIGHT:
+                return "FRIENDSHIP_NIGHT";
+            default:
+                throw new std::exception();
+        }
+    };
+
+
+    json evolutions_json = json::array();
+    for (const auto &evolution: this->evolutions)
+    {
+        evolutions_json.push_back({
+            { "species", evolution.species },
+            { "param", evolution.param },
+            { "method", evolution_method_to_string(evolution.method) },
+        });
+    }
+
     return {
         { "rom_address", this->rom_address },
         { "id", this->id },
@@ -835,6 +949,7 @@ json SpeciesInfo::to_json ()
         } },
         { "catch_rate", this->catch_rate },
         { "learnset", this->learnset_info.to_json() },
+        { "evolutions", evolutions_json },
     };
 }
 

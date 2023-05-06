@@ -44,9 +44,32 @@ class LearnsetInfo {
         nlohmann::json to_json ();
 };
 
+enum EvolutionMethod {
+    LEVEL,
+    LEVEL_ATK_LT_DEF,
+    LEVEL_ATK_EQ_DEF,
+    LEVEL_ATK_GT_DEF,
+    LEVEL_SILCOON,
+    LEVEL_CASCOON,
+    LEVEL_NINJASK,
+    LEVEL_SHEDINJA,
+    ITEM,
+    FRIENDSHIP,
+    FRIENDSHIP_DAY,
+    FRIENDSHIP_NIGHT
+};
+
+class EvolutionInfo {
+    public:
+        EvolutionMethod method;
+        uint16_t param;
+        uint16_t species;
+};
+
 class SpeciesInfo {
     public:
         uint32_t rom_address;
+        uint32_t evolutions_rom_address;
         uint16_t id;
         uint8_t base_stats[6];
         uint8_t catch_rate;
@@ -54,6 +77,7 @@ class SpeciesInfo {
         uint8_t types[2];
 
         LearnsetInfo learnset_info;
+        std::vector<EvolutionInfo> evolutions;
 
         nlohmann::json to_json ();
 };

@@ -350,6 +350,7 @@ struct Evolution
     u16 method;
     u16 param;
     u16 targetSpecies;
+    // u8 padding[2]
 };
 
 #define NUM_UNOWN_FORMS 28
