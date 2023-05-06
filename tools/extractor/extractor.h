@@ -44,6 +44,14 @@ class LearnsetInfo {
         nlohmann::json to_json ();
 };
 
+class EvolutionTable {
+    public:
+        uint32_t rom_address;
+        std::vector<std::tuple<uint16_t, uint16_t, uint16_t>> evolutions;
+
+        nlohmann::json to_json ();
+};
+
 class SpeciesInfo {
     public:
         uint32_t rom_address;
@@ -54,6 +62,7 @@ class SpeciesInfo {
         uint8_t types[2];
 
         LearnsetInfo learnset_info;
+        EvolutionTable evolution_table;
 
         nlohmann::json to_json ();
 };

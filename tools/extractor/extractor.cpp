@@ -113,6 +113,7 @@ int main (int argc, char *argv[])
         { "gSpeciesInfo", symbol_map["gSpeciesInfo"] - 0x8000000 },
         { "sStarterMon", symbol_map["sStarterMon"] - 0x8000000 },
         { "gTMHMLearnsets", symbol_map["gTMHMLearnsets"] - 0x8000000 },
+        { "gEvolutionTable", symbol_map["gEvolutionTable"] - 0x8000000 },
         { "gTrainers", symbol_map["gTrainers"] - 0x8000000 },
         { "sTMHMMoves", symbol_map["sTMHMMoves"] - 0x8000000 },
     };
@@ -480,6 +481,30 @@ int main (int argc, char *argv[])
         while (move != 0xFFFF);
     }
 
+    // Reading evolutions
+    std::vector<std::shared_ptr<EvolutionTable>> evolutions;
+    for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
+    {
+        const auto &species = all_species[i];
+
+        species->evolution_table.rom_address = misc_rom_addresses["gEvolutionTable"] + i * 40;
+
+        uint16_t method;
+        uint16_t parameter;
+        uint16_t target_species;
+        for (size_t e = 0; e < 5; ++e)
+        {
+            rom.seekg(species->evolution_table.rom_address + (e * 8), rom.beg);
+            rom.read((char*)&(method), 2);
+            if (method == 0) {
+                break;
+            }
+            rom.read((char*)&(parameter), 2);
+            rom.read((char*)&(target_species), 2);
+            species->evolution_table.evolutions.push_back(std::tuple<uint16_t, uint16_t, uint16_t>(method, parameter, target_species));
+        }
+    }
+
     // Reading trainers
     std::vector<std::shared_ptr<TrainerInfo>> trainers;
     for (size_t i = 0; i < constants_json["TRAINERS_COUNT"]; ++i)
@@ -832,6 +857,7 @@ json SpeciesInfo::to_json ()
         } },
         { "catch_rate", this->catch_rate },
         { "learnset", this->learnset_info.to_json() },
+        { "evolution_table", this->evolution_table.to_json() },
     };
 }
 
@@ -849,6 +875,24 @@ json LearnsetInfo::to_json ()
     return {
         { "rom_address", this->rom_address },
         { "moves", moves_json },
+    };
+}
+
+json EvolutionTable::to_json ()
+{
+    json evolutions_json = json::array();
+    for (const auto& evolution: this->evolutions)
+    {
+        evolutions_json.push_back({
+            { "method", std::get<0>(evolution) },
+            { "parameter", std::get<1>(evolution) },
+            { "target_species", std::get<2>(evolution) },
+        });
+    }
+
+    return {
+        { "rom_address", this->rom_address },
+        { "evolutions", evolutions_json },
     };
 }
 
