@@ -663,6 +663,14 @@ int main (int argc, char *argv[])
         trainers.push_back(trainer);
     }
 
+    // Reading TM moves
+    uint16_t tm_moves[50];
+    for (size_t i = 0; i < 50; ++i)
+    {
+        rom.seekg(misc_rom_addresses["sTMHMMoves"] + (i * 2), rom.beg);
+        rom.read((char*)&(tm_moves[i]), 2);
+    }
+
     // Reading default items
     for (const auto& item: ball_items)
     {
@@ -738,6 +746,7 @@ int main (int argc, char *argv[])
         { "warps", encoded_warps },
         { "species", species_json },
         { "trainers", trainers_json },
+        { "tm_moves", tm_moves },
         { "constants", constants_json },
     };
 
