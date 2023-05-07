@@ -485,7 +485,7 @@ int main (int argc, char *argv[])
     {
         const auto &species = all_species[i];
 
-        rom.seekg(misc_rom_addresses["gTMHMLearnsets"] + (i * 2), rom.beg);
+        rom.seekg(misc_rom_addresses["gTMHMLearnsets"] + (i * 8), rom.beg);
         rom.read((char*)&(species->tmhm_learnset), 8);
     }
 
