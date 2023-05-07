@@ -673,11 +673,11 @@ int main (int argc, char *argv[])
     }
 
     // Reading TM moves
-    uint16_t tm_moves[50];
-    for (size_t i = 0; i < 50; ++i)
+    uint16_t tmhm_moves[58];
+    for (size_t i = 0; i < 58; ++i)
     {
         rom.seekg(misc_rom_addresses["sTMHMMoves"] + (i * 2), rom.beg);
-        rom.read((char*)&(tm_moves[i]), 2);
+        rom.read((char*)&(tmhm_moves[i]), 2);
     }
 
     // Reading default items
@@ -755,7 +755,7 @@ int main (int argc, char *argv[])
         { "warps", encoded_warps },
         { "species", species_json },
         { "trainers", trainers_json },
-        { "tm_moves", tm_moves },
+        { "tmhm_moves", tmhm_moves },
         { "constants", constants_json },
     };
 
