@@ -29,6 +29,7 @@ AquaHideout_B1F_EventScript_ShowElectrode2::
 AquaHideout_B1F_EventScript_Electrode1::
 	lock
 	faceplayer
+StaticEncounter_Electrode1::
 	setwildbattle SPECIES_ELECTRODE, 30
 	waitse
 	playmoncry SPECIES_ELECTRODE, CRY_MODE_ENCOUNTER
@@ -53,6 +54,7 @@ AquaHideout_B1F_EventScript_DefeatedElectrode1::
 AquaHideout_B1F_EventScript_Electrode2::
 	lock
 	faceplayer
+StaticEncounter_Electrode2::
 	setwildbattle SPECIES_ELECTRODE, 30
 	waitse
 	playmoncry SPECIES_ELECTRODE, CRY_MODE_ENCOUNTER
