@@ -117,6 +117,29 @@ int main (int argc, char *argv[])
         { "sTMHMMoves", symbol_map["sTMHMMoves"] - 0x8000000 },
     };
 
+    std::vector<std::string> static_encounter_symbols = {
+        "StaticEncounter_Registeel",
+        "StaticEncounter_Regirock",
+        "StaticEncounter_Regice",
+        "StaticEncounter_Rayquaza",
+        "StaticEncounter_Groudon",
+        "StaticEncounter_Kyogre",
+        "StaticEncounter_Sudowoodo",
+        "StaticEncounter_Voltorb1",
+        "StaticEncounter_Voltorb2",
+        "StaticEncounter_Voltorb3",
+        "StaticEncounter_Electrode1",
+        "StaticEncounter_Electrode2",
+        "StaticEncounter_Kecleon1",
+        "StaticEncounter_Kecleon2",
+        "StaticEncounter_Kecleon3",
+        "StaticEncounter_Kecleon4",
+        "StaticEncounter_Kecleon5",
+        "StaticEncounter_Kecleon6",
+        "StaticEncounter_Kecleon7",
+        "StaticEncounter_Kecleon8",
+    };
+
     // ------------------------------------------------------------------------
     // Reading map.json files
     // ------------------------------------------------------------------------
@@ -406,6 +429,21 @@ int main (int argc, char *argv[])
         exit(1);
     }
 
+    // Reading static encounters
+    std::map<std::string, std::shared_ptr<StaticEncounterInfo>> static_encounters;
+    for (const auto& symbol: static_encounter_symbols)
+    {
+        std::shared_ptr<StaticEncounterInfo> static_encounter(new StaticEncounterInfo());
+
+        // + 1 skips the scripts opcode
+        static_encounter->rom_address = symbol_map[symbol] + 1 - 0x8000000;
+        rom.seekg(static_encounter->rom_address, rom.beg);
+        rom.read((char*)&(static_encounter->species), 2);
+        rom.read((char*)&(static_encounter->level), 1);
+
+        static_encounters[symbol] = static_encounter;
+    }
+
     // Reading species info
     std::vector<std::shared_ptr<SpeciesInfo>> all_species;
     for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
@@ -618,6 +656,12 @@ int main (int argc, char *argv[])
         maps_json[map_tuple.first] = map_tuple.second->to_json();
     }
 
+    json static_encounters_json;
+    for (const auto& static_ecounter_tuple: static_encounters)
+    {
+        static_encounters_json[static_ecounter_tuple.first] = static_ecounter_tuple.second->to_json();
+    }
+
     json species_json = json::array();
     for (const auto& species: all_species)
     {
@@ -658,6 +702,7 @@ int main (int argc, char *argv[])
     json output_json = {
         { "_comment", "DO NOT MODIFY. This file was auto-generated. Your changes will likely be overwritten." },
         { "maps", maps_json },
+        { "static_encounters", static_encounters_json },
         { "misc_ram_addresses", misc_ram_addresses },
         { "misc_rom_addresses", misc_rom_addresses },
         { "locations", locations_json },
@@ -805,6 +850,15 @@ json EncounterTableInfo::to_json ()
 
     return {
         { "encounter_slots", slots_json },
+        { "rom_address", this->rom_address },
+    };
+}
+
+json StaticEncounterInfo::to_json ()
+{
+    return {
+        { "species", this->species },
+        { "level", this->level },
         { "rom_address", this->rom_address },
     };
 }

@@ -98,6 +98,15 @@ class EncounterTableInfo {
         nlohmann::json to_json ();
 };
 
+class StaticEncounterInfo {
+    public:
+        uint32_t rom_address;
+        uint16_t species;
+        uint8_t level;
+
+        nlohmann::json to_json ();
+};
+
 class MapInfo {
     public:
         std::string name;
