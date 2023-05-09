@@ -206,10 +206,15 @@ void NewGameInitData(void)
     ResetTrainerHillResults();
     ResetContestLinkResults();
 
-    if (gArchipelagoOptions.betterShopsEnabled)
-    {
-        FlagSet(FLAG_BETTER_SHOPS_ENABLED);
-    }
+    if (gArchipelagoOptions.betterShopsEnabled) FlagSet(FLAG_BETTER_SHOPS_ENABLED);
+
+    if (gArchipelagoOptions.removedBlockers & (1 << 0)) FlagSet(gBlockerBitToFlagMap[0]);
+    if (gArchipelagoOptions.removedBlockers & (1 << 1)) FlagSet(gBlockerBitToFlagMap[1]);
+    if (gArchipelagoOptions.removedBlockers & (1 << 2)) FlagSet(gBlockerBitToFlagMap[2]);
+    if (gArchipelagoOptions.removedBlockers & (1 << 3)) FlagSet(gBlockerBitToFlagMap[3]);
+    if (gArchipelagoOptions.removedBlockers & (1 << 4)) FlagSet(gBlockerBitToFlagMap[4]);
+    if (gArchipelagoOptions.removedBlockers & (1 << 5)) FlagSet(gBlockerBitToFlagMap[5]);
+
     if ((gArchipelagoOptions.startingBadges >> 0) & 1) FlagSet(FLAG_BADGE01_GET);
     if ((gArchipelagoOptions.startingBadges >> 1) & 1) FlagSet(FLAG_BADGE02_GET);
     if ((gArchipelagoOptions.startingBadges >> 2) & 1) FlagSet(FLAG_BADGE03_GET);
