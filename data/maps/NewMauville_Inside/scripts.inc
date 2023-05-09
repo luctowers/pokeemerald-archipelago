@@ -176,7 +176,7 @@ NewMauville_Inside_EventScript_GeneratorOff::
 NewMauville_Inside_EventScript_Voltorb1::
 	lock
 	faceplayer
-StaticEncounter_Voltorb1::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_NEW_MAUVILLE_VOLTORB_1::
 	setwildbattle SPECIES_VOLTORB, 25
 	waitse
 	playmoncry SPECIES_VOLTORB, CRY_MODE_ENCOUNTER
@@ -201,7 +201,7 @@ NewMauville_Inside_EventScript_DefeatedVoltorb1::
 NewMauville_Inside_EventScript_Voltorb2::
 	lock
 	faceplayer
-StaticEncounter_Voltorb2::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_NEW_MAUVILLE_VOLTORB_2::
 	setwildbattle SPECIES_VOLTORB, 25
 	waitse
 	playmoncry SPECIES_VOLTORB, CRY_MODE_ENCOUNTER
@@ -226,7 +226,7 @@ NewMauville_Inside_EventScript_DefeatedVoltorb2::
 NewMauville_Inside_EventScript_Voltorb3::
 	lock
 	faceplayer
-StaticEncounter_Voltorb3::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_NEW_MAUVILLE_VOLTORB_3::
 	setwildbattle SPECIES_VOLTORB, 25
 	waitse
 	playmoncry SPECIES_VOLTORB, CRY_MODE_ENCOUNTER

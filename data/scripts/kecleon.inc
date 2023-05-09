@@ -2,7 +2,7 @@ Route120_EventScript_Kecleon1::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 1
-StaticEncounter_Kecleon1::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_ROUTE_120_KECLEON_1::
 	setwildbattle SPECIES_KECLEON, 30
 	goto EventScript_Kecleon
 	end
@@ -11,7 +11,7 @@ Route120_EventScript_Kecleon2::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 2
-StaticEncounter_Kecleon2::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_ROUTE_120_KECLEON_2::
 	setwildbattle SPECIES_KECLEON, 30
 	goto EventScript_Kecleon
 	end
@@ -20,7 +20,7 @@ Route120_EventScript_Kecleon3::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 3
-StaticEncounter_Kecleon3::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_ROUTE_120_KECLEON_3::
 	setwildbattle SPECIES_KECLEON, 30
 	goto EventScript_Kecleon
 	end
@@ -29,7 +29,7 @@ Route120_EventScript_Kecleon4::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 4
-StaticEncounter_Kecleon4::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_ROUTE_120_KECLEON_4::
 	setwildbattle SPECIES_KECLEON, 30
 	goto EventScript_Kecleon
 	end
@@ -38,7 +38,7 @@ Route120_EventScript_Kecleon5::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 5
-StaticEncounter_Kecleon5::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_ROUTE_120_KECLEON_5::
 	setwildbattle SPECIES_KECLEON, 30
 	goto EventScript_Kecleon
 	end
@@ -47,7 +47,7 @@ Route119_EventScript_Kecleon1::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 6
-StaticEncounter_Kecleon6::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_ROUTE_119_KECLEON_1::
 	setwildbattle SPECIES_KECLEON, 30
 	goto EventScript_Kecleon
 	end
@@ -56,7 +56,7 @@ Route119_EventScript_Kecleon2::
 	lock
 	faceplayer
 	setvar VAR_0x8009, 7
-StaticEncounter_Kecleon7::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_ROUTE_119_KECLEON_2::
 	setwildbattle SPECIES_KECLEON, 30
 	goto EventScript_Kecleon
 	end
