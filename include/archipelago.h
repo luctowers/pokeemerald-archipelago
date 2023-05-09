@@ -21,7 +21,8 @@ struct ArchipelagoOptions
     /* 0x10 */ u8 startingBadges;
     /* 0x11 */ u8 receivedItemMessageFilter; // 0 = Show All; 1 = Show Progression Only; 2 = Show None
     /* 0x12 */ bool8 reusableTms;
-    /* 0x13 */ u16 removedBlockers;
+    /* 0x13 */ bool8 addRoute115Boulders;
+    /* 0x14 */ u16 removedBlockers;
 } __attribute__((packed));
 
 extern const struct ArchipelagoOptions gArchipelagoOptions;

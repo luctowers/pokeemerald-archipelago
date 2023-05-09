@@ -17,6 +17,7 @@ const struct ArchipelagoOptions gArchipelagoOptions = {
     .startingBadges = 0,
     .receivedItemMessageFilter = 0,
     .reusableTms = FALSE,
+    .addRoute115Boulders = FALSE,
     .removedBlockers = 0,
 };
 
