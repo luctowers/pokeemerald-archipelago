@@ -62,6 +62,7 @@ MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes::
 
 MauvilleCity_BikeShop_EventScript_AskSwitchBikes::
 	msgbox MauvilleCity_BikeShop_Text_WantToSwitchBikes, MSGBOX_DEFAULT
+	release
 	end
 
 @ If the player does not have a bike on them Rydel assumes its stored in the PC
