@@ -94,6 +94,7 @@ IslandCave_EventScript_Regice::
 	playmoncry SPECIES_REGICE, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
+Archipelago_Target_Static_Encounter_FLAG_HIDE_REGICE::
 	setwildbattle SPECIES_REGICE, 40
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle

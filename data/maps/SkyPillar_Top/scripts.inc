@@ -48,6 +48,7 @@ SkyPillar_Top_EventScript_Rayquaza::
 	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
+Archipelago_Target_Static_Encounter_FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL::
 	setwildbattle SPECIES_RAYQUAZA, 70
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle
