@@ -407,6 +407,24 @@ int main (int argc, char *argv[])
         exit(1);
     }
 
+    // Reading static encounters
+    std::vector<std::shared_ptr<StaticEncounterInfo>> static_encounters;
+    for (auto const& [symbol, address] : symbol_map)
+    {
+        if (symbol.substr(0, 36) == "Archipelago_Target_Static_Encounter_")
+        {
+            std::shared_ptr<StaticEncounterInfo> static_encounter(new StaticEncounterInfo());
+
+            // + 1 skips the scripts opcode
+            static_encounter->rom_address = address + 1 - 0x8000000;
+            rom.seekg(static_encounter->rom_address, rom.beg);
+            rom.read((char*)&(static_encounter->species), 2);
+            rom.read((char*)&(static_encounter->level), 1);
+            static_encounter->flag = constants_json[symbol.substr(36)];
+            static_encounters.push_back(static_encounter);
+        }
+    }
+
     // Reading species info
     std::vector<std::shared_ptr<SpeciesInfo>> all_species;
     for (size_t i = 0; i < constants_json["NUM_SPECIES"]; ++i)
@@ -709,6 +727,12 @@ int main (int argc, char *argv[])
         maps_json[map_tuple.first] = map_tuple.second->to_json();
     }
 
+    json static_encounters_json = json::array();
+    for (const auto& static_encounter: static_encounters)
+    {
+        static_encounters_json.push_back(static_encounter->to_json());
+    }
+
     json species_json = json::array();
     for (const auto& species: all_species)
     {
@@ -749,6 +773,7 @@ int main (int argc, char *argv[])
     json output_json = {
         { "_comment", "DO NOT MODIFY. This file was auto-generated. Your changes will likely be overwritten." },
         { "maps", maps_json },
+        { "static_encounters", static_encounters_json },
         { "misc_ram_addresses", misc_ram_addresses },
         { "misc_rom_addresses", misc_rom_addresses },
         { "locations", locations_json },
@@ -898,6 +923,16 @@ json EncounterTableInfo::to_json ()
     return {
         { "encounter_slots", slots_json },
         { "rom_address", this->rom_address },
+    };
+}
+
+json StaticEncounterInfo::to_json ()
+{
+    return {
+        { "species", this->species },
+        { "level", this->level },
+        { "rom_address", this->rom_address },
+        { "flag", this->flag }
     };
 }
 

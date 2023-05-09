@@ -61,6 +61,7 @@ DesertRuins_EventScript_Regirock::
 	playmoncry SPECIES_REGIROCK, CRY_MODE_ENCOUNTER
 	delay 40
 	waitmoncry
+Archipelago_Target_Static_Encounter_FLAG_HIDE_REGIROCK::
 	setwildbattle SPECIES_REGIROCK, 40
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special StartRegiBattle
