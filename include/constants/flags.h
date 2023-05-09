@@ -516,7 +516,7 @@
 #define FLAG_UNUSED_0x1E0                    0x1E0 // Unused Flag
 #define FLAG_UNUSED_0x1E1                    0x1E1 // Unused Flag
 
-#define FLAG_SHOW_ROUTE_115_BOULDERS         0x1E2
+#define FLAG_HIDE_ROUTE_115_BOULDERS         0x1E2
 #define FLAG_BETTER_SHOPS_ENABLED            0x1E3
 
 // Mystery Gift Flags (Unknown)

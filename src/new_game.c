@@ -207,7 +207,7 @@ void NewGameInitData(void)
     ResetContestLinkResults();
 
     if (gArchipelagoOptions.betterShopsEnabled) FlagSet(FLAG_BETTER_SHOPS_ENABLED);
-    if (gArchipelagoOptions.addRoute115Boulders) FlagSet(FLAG_SHOW_ROUTE_115_BOULDERS);
+    if (!gArchipelagoOptions.addRoute115Boulders) FlagSet(FLAG_HIDE_ROUTE_115_BOULDERS);
 
     if (gArchipelagoOptions.removedBlockers & (1 << 0)) FlagSet(gBlockerBitToFlagMap[0]);
     if (gArchipelagoOptions.removedBlockers & (1 << 1)) FlagSet(gBlockerBitToFlagMap[1]);

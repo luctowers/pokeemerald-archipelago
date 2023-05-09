@@ -335,7 +335,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
-      "flag": "FLAG_SHOW_ROUTE_115_BOULDERS"
+      "flag": "FLAG_HIDE_ROUTE_115_BOULDERS"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_PUSHABLE_BOULDER",
@@ -348,7 +348,7 @@
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "EventScript_StrengthBoulder",
-      "flag": "FLAG_SHOW_ROUTE_115_BOULDERS"
+      "flag": "FLAG_HIDE_ROUTE_115_BOULDERS"
     }
   ],
   "warp_events": [
