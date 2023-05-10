@@ -224,25 +224,6 @@ void NewGameInitData(void)
     if ((gArchipelagoOptions.startingBadges >> 5) & 1) FlagSet(FLAG_BADGE06_GET);
     if ((gArchipelagoOptions.startingBadges >> 6) & 1) FlagSet(FLAG_BADGE07_GET);
     if ((gArchipelagoOptions.startingBadges >> 7) & 1) FlagSet(FLAG_BADGE08_GET);
-
-    if (gArchipelagoOptions.freeFlyLocation ==  0) FlagSet(FLAG_VISITED_LITTLEROOT_TOWN);
-    if (gArchipelagoOptions.freeFlyLocation ==  1) FlagSet(FLAG_VISITED_OLDALE_TOWN);
-    if (gArchipelagoOptions.freeFlyLocation ==  2) FlagSet(FLAG_VISITED_PETALBURG_CITY);
-    if (gArchipelagoOptions.freeFlyLocation ==  3) FlagSet(FLAG_VISITED_RUSTBORO_CITY);
-    if (gArchipelagoOptions.freeFlyLocation ==  4) FlagSet(FLAG_VISITED_DEWFORD_TOWN);
-    if (gArchipelagoOptions.freeFlyLocation ==  5) FlagSet(FLAG_VISITED_SLATEPORT_CITY);
-    if (gArchipelagoOptions.freeFlyLocation ==  6) FlagSet(FLAG_VISITED_MAUVILLE_CITY);
-    if (gArchipelagoOptions.freeFlyLocation ==  7) FlagSet(FLAG_VISITED_VERDANTURF_TOWN);
-    if (gArchipelagoOptions.freeFlyLocation ==  8) FlagSet(FLAG_VISITED_FALLARBOR_TOWN);
-    if (gArchipelagoOptions.freeFlyLocation ==  9) FlagSet(FLAG_VISITED_LAVARIDGE_TOWN);
-    if (gArchipelagoOptions.freeFlyLocation == 10) FlagSet(FLAG_VISITED_FORTREE_CITY);
-    if (gArchipelagoOptions.freeFlyLocation == 11) FlagSet(FLAG_VISITED_LILYCOVE_CITY);
-    if (gArchipelagoOptions.freeFlyLocation == 12) FlagSet(FLAG_VISITED_MOSSDEEP_CITY);
-    if (gArchipelagoOptions.freeFlyLocation == 13) FlagSet(FLAG_VISITED_SOOTOPOLIS_CITY);
-    if (gArchipelagoOptions.freeFlyLocation == 14) FlagSet(FLAG_VISITED_PACIFIDLOG_TOWN);
-    if (gArchipelagoOptions.freeFlyLocation == 15) FlagSet(FLAG_VISITED_EVER_GRANDE_CITY);
-    if (gArchipelagoOptions.freeFlyLocation == 16) FlagSet(FLAG_LANDMARK_BATTLE_FRONTIER);
-    if (gArchipelagoOptions.freeFlyLocation == 17) FlagSet(FLAG_LANDMARK_SOUTHERN_ISLAND);
 }
 
 static void ResetMiniGamesRecords(void)

@@ -474,6 +474,7 @@ LittlerootTown_EventScript_GiveRunningShoesTrigger::
 	call LittlerootTown_EventScript_SetSkipWallyTutorial
 	call LittlerootTown_EventScript_EnableDisableFerry
 	call LittlerootTown_EventScript_GiveNationalDexEarly
+	call LittlerootTown_EventScript_SetFreeFlyLocation
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomNoticePlayerMale
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomNoticePlayerFemale
@@ -510,6 +511,100 @@ LittlerootTown_EventScript_EnableDisableFerry::
 LittlerootTown_EventScript_GiveNationalDexEarly::
 	setflag FLAG_SYS_NATIONAL_DEX
 	special EnableNationalPokedex
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation::
+	specialvar VAR_RESULT, ArchipelagoSpecial_GetFreeFlyLocation
+	call_if_eq VAR_RESULT, 0, LittlerootTown_EventScript_SetFreeFlyLocation_Littleroot
+	call_if_eq VAR_RESULT, 1, LittlerootTown_EventScript_SetFreeFlyLocation_Oldale
+	call_if_eq VAR_RESULT, 2, LittlerootTown_EventScript_SetFreeFlyLocation_Petalburg
+	call_if_eq VAR_RESULT, 3, LittlerootTown_EventScript_SetFreeFlyLocation_Rustboro
+	call_if_eq VAR_RESULT, 4, LittlerootTown_EventScript_SetFreeFlyLocation_Dewford
+	call_if_eq VAR_RESULT, 5, LittlerootTown_EventScript_SetFreeFlyLocation_Slateport
+	call_if_eq VAR_RESULT, 6, LittlerootTown_EventScript_SetFreeFlyLocation_Mauville
+	call_if_eq VAR_RESULT, 7, LittlerootTown_EventScript_SetFreeFlyLocation_Verdanturf
+	call_if_eq VAR_RESULT, 8, LittlerootTown_EventScript_SetFreeFlyLocation_Fallarbor
+	call_if_eq VAR_RESULT, 9, LittlerootTown_EventScript_SetFreeFlyLocation_Lavaridge
+	call_if_eq VAR_RESULT, 10, LittlerootTown_EventScript_SetFreeFlyLocation_Fortree
+	call_if_eq VAR_RESULT, 11, LittlerootTown_EventScript_SetFreeFlyLocation_Lilycove
+	call_if_eq VAR_RESULT, 12, LittlerootTown_EventScript_SetFreeFlyLocation_Mossdeep
+	call_if_eq VAR_RESULT, 13, LittlerootTown_EventScript_SetFreeFlyLocation_Sootopolis
+	call_if_eq VAR_RESULT, 14, LittlerootTown_EventScript_SetFreeFlyLocation_Pacifidlog
+	call_if_eq VAR_RESULT, 15, LittlerootTown_EventScript_SetFreeFlyLocation_EverGrande
+	call_if_eq VAR_RESULT, 16, LittlerootTown_EventScript_SetFreeFlyLocation_BattleFrontier
+	call_if_eq VAR_RESULT, 17, LittlerootTown_EventScript_SetFreeFlyLocation_SouthernIsland
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Littleroot::
+	setflag FLAG_VISITED_LITTLEROOT_TOWN
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Oldale::
+	setflag FLAG_VISITED_OLDALE_TOWN
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Petalburg::
+	setflag FLAG_VISITED_PETALBURG_CITY
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Rustboro::
+	setflag FLAG_VISITED_RUSTBORO_CITY
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Dewford::
+	setflag FLAG_VISITED_DEWFORD_TOWN
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Slateport::
+	setflag FLAG_VISITED_SLATEPORT_CITY
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Mauville::
+	setflag FLAG_VISITED_MAUVILLE_CITY
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Verdanturf::
+	setflag FLAG_VISITED_VERDANTURF_TOWN
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Fallarbor::
+	setflag FLAG_VISITED_FALLARBOR_TOWN
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Lavaridge::
+	setflag FLAG_VISITED_LAVARIDGE_TOWN
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Fortree::
+	setflag FLAG_VISITED_FORTREE_CITY
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Lilycove::
+	setflag FLAG_VISITED_LILYCOVE_CITY
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Mossdeep::
+	setflag FLAG_VISITED_MOSSDEEP_CITY
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Sootopolis::
+	setflag FLAG_VISITED_SOOTOPOLIS_CITY
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_Pacifidlog::
+	setflag FLAG_VISITED_PACIFIDLOG_TOWN
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_EverGrande::
+	setflag FLAG_VISITED_EVER_GRANDE_CITY
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_BattleFrontier::
+	setflag FLAG_LANDMARK_BATTLE_FRONTIER
+	return
+
+LittlerootTown_EventScript_SetFreeFlyLocation_SouthernIsland::
+	setflag FLAG_LANDMARK_SOUTHERN_ISLAND
 	return
 
 LittlerootTown_EventScript_EnableFerry::
