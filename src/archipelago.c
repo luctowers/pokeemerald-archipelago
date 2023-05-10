@@ -19,6 +19,7 @@ const struct ArchipelagoOptions gArchipelagoOptions = {
     .reusableTms = FALSE,
     .addRoute115Boulders = FALSE,
     .removedBlockers = 0,
+    .freeFlyLocation = 0,
 };
 
 const u16 gBlockerBitToFlagMap[16] = {

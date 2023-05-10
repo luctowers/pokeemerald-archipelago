@@ -23,6 +23,7 @@ struct ArchipelagoOptions
     /* 0x12 */ bool8 reusableTms;
     /* 0x13 */ bool8 addRoute115Boulders;
     /* 0x14 */ u16 removedBlockers;
+    /* 0x16 */ u8 freeFlyLocation;
 } __attribute__((packed));
 
 extern const struct ArchipelagoOptions gArchipelagoOptions;
