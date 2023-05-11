@@ -512,6 +512,21 @@ void BattleSetup_StartLatiBattle(void)
     TryUpdateGymLeaderRematchFromWild();
 }
 
+const u8 lengendary_transitions[] = {
+    B_TRANSITION_GROUDON,
+    B_TRANSITION_KYOGRE,
+    B_TRANSITION_RAYQUAZA,
+    B_TRANSITION_BLUR,
+    B_TRANSITION_GRID_SQUARES
+};
+const u16 lengendary_music[] = {
+    MUS_VS_KYOGRE_GROUDON,
+    MUS_VS_RAYQUAZA,
+    MUS_RG_VS_DEOXYS,
+    MUS_RG_VS_LEGEND,
+    MUS_VS_MEW
+};
+
 void BattleSetup_StartLegendaryBattle(void)
 {
     LockPlayerFieldControls();
@@ -520,7 +535,6 @@ void BattleSetup_StartLegendaryBattle(void)
 
     switch (GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, NULL))
     {
-    default:
     case SPECIES_GROUDON:
         gBattleTypeFlags |= BATTLE_TYPE_GROUDON;
         CreateBattleStartTask(B_TRANSITION_GROUDON, MUS_VS_KYOGRE_GROUDON);
@@ -543,6 +557,8 @@ void BattleSetup_StartLegendaryBattle(void)
     case SPECIES_MEW:
         CreateBattleStartTask(B_TRANSITION_GRID_SQUARES, MUS_VS_MEW);
         break;
+    default:
+        CreateBattleStartTask(lengendary_transitions[Random2()%5], lengendary_music[Random2()%5]);
     }
 
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);

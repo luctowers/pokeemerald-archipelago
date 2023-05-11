@@ -57,6 +57,7 @@ NavelRock_Top_EventScript_HoOh::
 	applymovement LOCALID_HO_OH, NavelRock_Top_Movement_HoOhApproach
 	waitmovement 0
 	special RemoveCameraObject
+Archipelago_Target_Static_Encounter_FLAG_HIDE_HO_OH::
 	seteventmon SPECIES_HO_OH, 70
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	special BattleSetup_StartLegendaryBattle

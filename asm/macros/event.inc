@@ -1891,8 +1891,8 @@
 
 	@ Creates an "event legal" Pokémon for an encounter
 	.macro seteventmon species:req, level:req, item=ITEM_NONE
-	setvar VAR_0x8004, \species
-	setvar VAR_0x8005, \level
-	setvar VAR_0x8006, \item
-	special CreateEventLegalEnemyMon
+	.byte 0xe3
+	.2byte \species
+	.byte \level
+	.2byte \item
 	.endm

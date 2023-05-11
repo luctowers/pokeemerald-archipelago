@@ -105,10 +105,12 @@ SouthernIsland_Interior_EventScript_Sign::
 	end
 
 SouthernIsland_Interior_EventScript_SetLatiosBattleVars::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON_LATIOS::
 	seteventmon SPECIES_LATIOS, 50, ITEM_SOUL_DEW
 	return
 
 SouthernIsland_Interior_EventScript_SetLatiasBattleVars::
+Archipelago_Target_Static_Encounter_FLAG_HIDE_SOUTHERN_ISLAND_UNCHOSEN_EON_DUO_MON_LATIAS::
 	seteventmon SPECIES_LATIAS, 50, ITEM_SOUL_DEW
 	return
 
