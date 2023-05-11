@@ -22,6 +22,10 @@ const struct ArchipelagoOptions gArchipelagoOptions = {
     .freeFlyLocation = 0,
 };
 
+const struct ArchipelagoInfo gArchipelagoInfo = {
+    .slotName = {0},
+};
+
 const u16 gBlockerBitToFlagMap[16] = {
     [0] = FLAG_HIDE_SAFARI_ZONE_SOUTH_CONSTRUCTION_WORKERS,
     [1] = FLAG_HIDE_LILYCOVE_CITY_WAILMER,

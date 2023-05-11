@@ -108,6 +108,7 @@ int main (int argc, char *argv[])
 
     std::map<std::string, uint32_t> misc_rom_addresses = {
         { "gArchipelagoOptions", symbol_map["gArchipelagoOptions"] - 0x8000000 },
+        { "gArchipelagoInfo", symbol_map["gArchipelagoInfo"] - 0x8000000 },
         { "gLevelUpLearnsets", symbol_map["gLevelUpLearnsets"] - 0x8000000 },
         { "sNewGamePCItems", symbol_map["sNewGamePCItems"] - 0x8000000 },
         { "gSpeciesInfo", symbol_map["gSpeciesInfo"] - 0x8000000 },

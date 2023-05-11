@@ -26,7 +26,13 @@ struct ArchipelagoOptions
     /* 0x16 */ u8 freeFlyLocation;
 } __attribute__((packed));
 
+struct ArchipelagoInfo
+{
+    u8 slotName[64];
+};
+
 extern const struct ArchipelagoOptions gArchipelagoOptions;
+extern const struct ArchipelagoInfo gArchipelagoInfo;
 extern const u16 gBlockerBitToFlagMap[];
 
 #endif // GUARD_ARCHIPELAGO_H
