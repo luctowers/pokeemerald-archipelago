@@ -7,6 +7,7 @@
 #include <set>
 #include <string>
 #include <regex>
+#include <sstream>
 
 #include <json.hpp>
 using json = nlohmann::json;
@@ -46,6 +47,11 @@ int main (int argc, char *argv[])
     // ------------------------------------------------------------------------
     std::cout << "Reading symbols..." << std::endl;
     std::ifstream symbol_map_file(root_dir / "pokeemerald-archipelago.sym");
+    if (symbol_map_file.fail())
+    {
+        fprintf(stderr, "Could not find pokeemerald-archipelago.sym\n");
+        exit(1);
+    }
     std::regex symbol_map_regex("^([0-9a-fA-F]+) [lg] [0-9a-fA-F]+ ([a-zA-Z0-9_]+)$");
     std::map<std::string, uint32_t> symbol_map;
 
